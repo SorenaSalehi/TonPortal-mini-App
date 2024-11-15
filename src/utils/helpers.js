@@ -37,7 +37,10 @@ export function convertWalletAddress(address) {
 
 export function filterJettons(data) {
   const results = data.filter(
-    (token) => token.balance !== "0" && token.jetton.verification !== "whitlist"
+    (token) =>
+      token.balance !== "0" &&
+      token.jetton.verification !== "whitlist" &&
+      token.price.prices.USD !== 0
   );
   return results;
 }

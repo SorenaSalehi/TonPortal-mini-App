@@ -30,7 +30,6 @@ export async function getTonPrice() {
 
     if (data) {
       const price = parseFloat(data.rates?.TON?.prices?.USD).toFixed(2);
-      console.log(price);
       return price;
     } else {
       throw new Error("ton price can not fetch");

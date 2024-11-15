@@ -46,7 +46,9 @@ export default function Navbar() {
       >
         <h1>logo</h1>
 
-        <p>do you want to disconnect your wallet?</p>
+        <p>
+          do you want to disconnect <br /> your wallet?
+        </p>
         <Button onClick={handleDisconnectedWallet}>
           <span className="text-xl font-semibold text-rose-600">
             <TbPlugConnectedX />

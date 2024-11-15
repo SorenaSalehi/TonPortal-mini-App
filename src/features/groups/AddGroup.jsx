@@ -38,7 +38,7 @@ export default function AddGroup() {
         <h1>logo</h1>
         <div className="flex flex-col items-start gap-2 px-4 py-2 border-2 rounded-lg border-indigo-950/85">
           <p className="text-rose-400/85 animate-pulse">Prompt</p>
-          <h1 className="">Copy Robot Address , then Add it to Groups</h1>
+          <p>Copy Robot Address , then Add it to Groups</p>
         </div>
 
         <div className="px-3 py-2 rounded-lg bg-indigo-900/35">

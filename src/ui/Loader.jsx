@@ -2,8 +2,7 @@ import React from "react";
 
 export default function Loader() {
   return (
-    <div className="flex flex-col items-center justify-center bg-slate-800 h-dvh text-slate-100">
-      <h1>logo</h1>
+    <div className="flex items-center justify-center h-dvh text-slate-100   bg-black bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-indigo-900/35 via-black to-black">
       <div className="loader">
         <div className="loader__bar"></div>
         <div className="loader__bar"></div>
