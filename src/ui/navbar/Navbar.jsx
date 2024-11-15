@@ -7,6 +7,7 @@ import { convertWalletAddress } from "../../utils/helpers";
 import { walletActions, walletDisconnected } from "./navbarSlice";
 import ModalWindow from "../ModalWindow";
 import Button from "../Button";
+import { TbPlugConnectedX } from "react-icons/tb";
 
 export default function Navbar() {
   const { isWalletModalOpen, isWalletConnected } = useSelector(
@@ -27,7 +28,9 @@ export default function Navbar() {
 
   return (
     <div className="flex justify-between px-2 py-4 text-2xl">
-      <p>logo</p>
+      <p className="text-2xl font-extrabold tracking-widest text-transparent uppercase bg-gradient-to-b from-indigo-800 to-purple-900 bg-clip-text">
+        PROFILE-AI
+      </p>
       <button
         onClick={() => dispatch(walletActions())}
         className="flex items-center gap-2 p-2 rounded-lg bg-glass"
@@ -44,7 +47,12 @@ export default function Navbar() {
         <h1>logo</h1>
 
         <p>do you want to disconnect your wallet?</p>
-        <Button onClick={handleDisconnectedWallet}>Disconnect Wallet</Button>
+        <Button onClick={handleDisconnectedWallet}>
+          <span className="text-xl font-semibold text-rose-600">
+            <TbPlugConnectedX />
+          </span>
+          Disconnect Wallet
+        </Button>
       </ModalWindow>
     </div>
   );

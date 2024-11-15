@@ -15,11 +15,10 @@ export default function AssetAnalyze() {
   }
 
   return (
-    <div className=" text-slate-100 flex flex-col justify-between items-center mx-auto w-9/12 h-32 bg-[url('/public/analyzeBg.jpg')]  p-1  rounded-lg overflow-hidden">
-      
+    <div className=" text-slate-100 flex flex-col justify-between items-center mx-auto w-9/12 h-32 bg-[url('/public/analyze4.jpg')]  bg-contain   p-1  rounded-lg overflow-hidden">
       <p className="mt-4 text-xs">Get All Your Assets News in a Glass</p>
 
-      <Button onClick={openModal}>Click</Button>
+      <Button onClick={openModal}>Open</Button>
 
       <ModalWindow
         isOpen={isOpen}
@@ -28,7 +27,7 @@ export default function AssetAnalyze() {
       >
         <h1>logo</h1>
         <main>context</main>
-        <Button onClick={closeModal}>Close Modal</Button>
+        <Button onClick={closeModal}>Close</Button>
       </ModalWindow>
     </div>
   );

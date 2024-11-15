@@ -50,7 +50,7 @@ export default function AssetItem({
               className="animate-pulse"
             />
           </p>
-          <p className="justify-self-start">
+          <p className="font-semibold uppercase text-slate-300 justify-self-start">
             {type === "ton" ? "Toncoin" : symbol}
           </p>
           <p className="tracking-wider text-slate-100/55">
@@ -65,7 +65,9 @@ export default function AssetItem({
         </Button>
         <div className="flex flex-col items-end gap-2">
           <p>{type === "ton" ? balance : convertedBalance}</p>
-          <p>{type === "ton" ? tonTotalPrice : jettonTotalPrice}</p>
+          <p className="text-orange-300/85">
+            {type === "ton" ? tonTotalPrice : jettonTotalPrice}
+          </p>
         </div>
       </div>
 

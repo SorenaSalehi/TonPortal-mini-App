@@ -4,7 +4,7 @@ export default function Button({ children, onClick, type }) {
   if (type === "asset")
     return (
       <button
-        className="grid w-32 grid-cols-2 grid-rows-2 gap-2 cursor-progress"
+        className="grid w-32 grid-cols-2 grid-rows-2 gap-2 cursor-pointer"
         onClick={onClick}
       >
         {children}
@@ -20,7 +20,7 @@ export default function Button({ children, onClick, type }) {
 
   return (
     <button
-      className="px-4 py-2 text-sm font-extrabold rounded-lg bg-slate-100 text-slate-800 btn-shadow max-w-max"
+      className="flex items-center gap-2 px-4 py-2 text-sm font-extrabold uppercase rounded-lg bg-slate-100 text-slate-800 btn-shadow max-w-max"
       onClick={onClick}
     >
       {children}

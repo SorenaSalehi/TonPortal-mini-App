@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../ui/Loader";
 import AssetItem from "./AssetItem";
 import getTonData, { getJettons, getTonPrice } from "../../services/apiTon";
+import { AiFillPropertySafety } from "react-icons/ai";
 
 export default function Assets() {
   //ton data
@@ -40,7 +41,10 @@ export default function Assets() {
 
   return (
     <>
-      <p className="font-semibold">🔝 Assets</p>
+      <p className="flex items-center gap-2 font-semibold uppercase">
+        <AiFillPropertySafety />
+        Assets
+      </p>
       <div className="flex flex-col gap-2 overflow-auto no-scrollbar">
         {tonDataLoading || tonPriceLoading || jettonsLoading ? (
           <Loader />

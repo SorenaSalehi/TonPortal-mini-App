@@ -1,6 +1,7 @@
 import React, { lazy, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import { FaCopy } from "react-icons/fa";
 
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 const Button = lazy(() => import("../../ui/Button"));
@@ -35,12 +36,18 @@ export default function AddGroup() {
         label="add group modal"
       >
         <h1>logo</h1>
-        <main>Add bot to group for starting</main>
-        <div className="text-center">
-          <h1 role="button" onClick={copyToClipboard}>
+        <div className="flex flex-col items-start gap-2 px-4 py-2 border-2 rounded-lg border-indigo-950/85">
+          <p className="text-rose-400/85 animate-pulse">Prompt</p>
+          <h1 className="">Copy Robot Address , then Add it to Groups</h1>
+        </div>
+
+        <div className="px-3 py-2 rounded-lg bg-indigo-900/35">
+          <button className="flex items-center gap-2" onClick={copyToClipboard}>
             a3s1ascasc3a51ac3a5c1
-          </h1>
-          <p className="text-sm text-slate-100/75">copy Address</p>
+            <span className="text-sm text-green-500/55 animate-pulse">
+              <FaCopy />
+            </span>
+          </button>
         </div>
         <Button onClick={handleCloseModal}>Close</Button>
       </ModalWindow>
