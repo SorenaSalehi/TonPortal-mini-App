@@ -4,6 +4,7 @@ const initialState = {
   walletConnectLoading: false,
   isWalletModalOpen: false,
   isWalletConnected: true,
+  walletAddress:''
 };
 
 const navbarSlice = createSlice({

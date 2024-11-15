@@ -8,6 +8,16 @@ import GroupsPage from "./pages/GroupsPage";
 import WalletNotConnected from "./pages/WalletNotConnected";
 import { isMobile } from "react-device-detect";
 import NotMobileUser from "./pages/NotMobileUser";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
 
 export default function App() {
   const { isWalletConnected } = useSelector((store) => store.navbar);
@@ -35,14 +45,23 @@ export default function App() {
         },
       ],
     },
+    {
+      future: {
+        v7_skipActionStatusRevalidation: true,
+      },
+    },
   ]);
 
   return (
-    <RouterProvider
-      router={router}
-      future={{
-        v7_skipActionErrorRevalidation: true,
-      }}
-    />
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+
+      <RouterProvider
+        router={router}
+        future={{
+          v7_skipActionErrorRevalidation: true,
+        }}
+      />
+    </QueryClientProvider>
   );
 }

@@ -3,7 +3,10 @@ import React, { Children } from "react";
 export default function Button({ children, onClick, type }) {
   if (type === "asset")
     return (
-      <button className="grid grid-cols-2" onClick={onClick}>
+      <button
+        className="grid w-32 grid-cols-2 grid-rows-2 gap-2"
+        onClick={onClick}
+      >
         {children}
       </button>
     );

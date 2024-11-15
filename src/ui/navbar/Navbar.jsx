@@ -1,9 +1,10 @@
 import React from "react";
 import { FaWallet } from "react-icons/fa";
-import ReactModal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { walletActions, walletDisconnected } from "./navbarSlice";
 import { useNavigate } from "react-router";
+
+import { convertWalletAddress } from "../../utils/helpers";
+import { walletActions, walletDisconnected } from "./navbarSlice";
 import ModalWindow from "../ModalWindow";
 import Button from "../Button";
 
@@ -13,6 +14,10 @@ export default function Navbar() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const wallet = convertWalletAddress(
+    "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc"
+  );
 
   function handleDisconnectedWallet() {
     dispatch(walletDisconnected());
@@ -27,7 +32,7 @@ export default function Navbar() {
         onClick={() => dispatch(walletActions())}
         className="flex items-center gap-2 p-2 rounded-lg bg-glass"
       >
-        <span className="text-sm">SBHG...27SJ</span>
+        <span className="text-sm">{wallet}</span>
         <FaWallet />
       </button>
 
