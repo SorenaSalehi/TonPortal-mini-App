@@ -15,8 +15,17 @@ export function convertJettonBalance(balance, decimal = 9) {
   const seconde = String(balance).slice(first.length, first.length + 2);
 
   const results = `${first}.${seconde}`;
-
   return results;
+}
+
+function cleanNumString(str) {
+  return typeof str === "string" ? str.replaceAll(",", "") : str;
+}
+
+export function calcJettonTotalPrice(amount, price) {
+  const totalPrice = cleanNumString(amount) * cleanNumString(price);
+
+  return totalPrice.toFixed(2);
 }
 
 export function convertWalletAddress(address) {

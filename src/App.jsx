@@ -1,13 +1,14 @@
-import React, { lazy, useEffect, useState } from "react";
+import React, { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import AppLayout from "./pages/AppLayout";
-import Home from "./pages/Home";
-import GroupsPage from "./pages/GroupsPage";
-import WalletNotConnected from "./pages/WalletNotConnected";
+import Loader from "./ui/Loader";
 import { isMobile } from "react-device-detect";
 import NotMobileUser from "./pages/NotMobileUser";
+import WalletNotConnected from "./pages/WalletNotConnected";
+import AppLayout from "./pages/AppLayout";
+const Home = lazy(() => import("./pages/Home"));
+const GroupsPage = lazy(() => import("./pages/GroupsPage"));
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -25,7 +26,9 @@ export default function App() {
 
   const router = createBrowserRouter([
     {
+      //*if user are mobile user then display page
       element: userUsingMobile ? (
+        //*if wallet connected display appLayout
         isWalletConnected ? (
           <AppLayout />
         ) : (
@@ -53,15 +56,16 @@ export default function App() {
   ]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-
-      <RouterProvider
-        router={router}
-        future={{
-          v7_skipActionErrorRevalidation: true,
-        }}
-      />
-    </QueryClientProvider>
+    <React.Suspense fallback={<Loader />}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <RouterProvider
+          router={router}
+          future={{
+            v7_skipActionErrorRevalidation: true,
+          }}
+        />
+      </QueryClientProvider>
+    </React.Suspense>
   );
 }

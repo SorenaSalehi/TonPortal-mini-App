@@ -4,7 +4,7 @@ export default function Button({ children, onClick, type }) {
   if (type === "asset")
     return (
       <button
-        className="grid w-32 grid-cols-2 grid-rows-2 gap-2"
+        className="grid w-32 grid-cols-2 grid-rows-2 gap-2 cursor-progress"
         onClick={onClick}
       >
         {children}

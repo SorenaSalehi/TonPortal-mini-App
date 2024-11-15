@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { lazy, useState } from "react";
 
-import ModalWindow from "../../ui/ModalWindow";
-import Button from "../../ui/Button";
-import getTonData from "../../services/apiTon";
-import { useQuery } from "@tanstack/react-query";
-import { convertJettonBalance } from "../../utils/helpers";
+const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
+const Button = lazy(() => import("../../ui/Button"));
+
+import {
+  calcJettonTotalPrice,
+  convertJettonBalance,
+} from "../../utils/helpers";
 
 export default function AssetItem({
   type,
@@ -16,10 +18,17 @@ export default function AssetItem({
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const totalPrice =
-    balance && tokenPrice
+  const tonTotalPrice =
+    type === "ton" && balance && tokenPrice
       ? `$${(balance * tokenPrice).toFixed(2)}`
-      : "Uncertain";
+      : "Uncertain!";
+
+  const convertedBalance = convertJettonBalance(+balance, decimals);
+
+  const jettonTotalPrice =
+    type !== "ton" && balance && tokenPrice
+      ? `$${calcJettonTotalPrice(convertedBalance, tokenPrice)}`
+      : "0.00";
 
   function openModal() {
     setIsOpen(true);
@@ -28,7 +37,6 @@ export default function AssetItem({
   function closeModal() {
     setIsOpen(false);
   }
-  const convertedBalance = convertJettonBalance(+balance, decimals);
 
   return (
     <>
@@ -39,18 +47,25 @@ export default function AssetItem({
               src={type === "ton" ? "ton_symbol.png" : icon}
               alt="icon"
               loading="lazy"
+              className="animate-pulse"
             />
           </p>
           <p className="justify-self-start">
             {type === "ton" ? "Toncoin" : symbol}
           </p>
           <p className="tracking-wider text-slate-100/55">
-            {tokenPrice ? `$${tokenPrice}` : "Uncertain!!"}
+            {tokenPrice === 0
+              ? `$0.00`
+              : `$${
+                  type === "ton"
+                    ? tokenPrice
+                    : parseFloat(tokenPrice).toFixed(10)
+                }`}
           </p>
         </Button>
         <div className="flex flex-col items-end gap-2">
           <p>{type === "ton" ? balance : convertedBalance}</p>
-          <p>{totalPrice}</p>
+          <p>{type === "ton" ? tonTotalPrice : jettonTotalPrice}</p>
         </div>
       </div>
 

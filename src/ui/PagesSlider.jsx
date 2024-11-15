@@ -9,7 +9,9 @@ export default function PagesSlider() {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          isActive ? "scale-125 text-slate-800/50 hover:cursor-none" : ""
+          isActive
+            ? "scale-125 delay-200 text-slate-800/50 hover:cursor-none"
+            : ""
         }
       >
         <FaHome />
@@ -17,7 +19,9 @@ export default function PagesSlider() {
       <NavLink
         to="/groups"
         className={({ isActive }) =>
-          isActive ? "scale-125 text-slate-800/50 hover:cursor-none" : ""
+          isActive
+            ? "scale-125 delay-200 text-slate-800/50 hover:cursor-none"
+            : ""
         }
       >
         <FaPeopleGroup />

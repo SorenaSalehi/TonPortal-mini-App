@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { lazy, useState } from "react";
 import { FaUserGroup } from "react-icons/fa6";
-import Button from "../../ui/Button";
-import ModalWindow from "../../ui/ModalWindow";
+
+const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
+const Button = lazy(() => import("../../ui/Button"));
 
 export default function GroupsItem() {
   const [isOpen, setIsOpen] = useState(false);

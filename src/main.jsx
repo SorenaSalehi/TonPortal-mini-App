@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import React, { lazy, StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 
@@ -12,7 +12,9 @@ ReactModal.setAppElement("#root");
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      <React.Suspense fallback={<Suspense />}>
+        <App />
+      </React.Suspense>
     </Provider>
   </StrictMode>
 );

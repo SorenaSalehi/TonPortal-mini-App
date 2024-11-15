@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { lazy, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 
-import ModalWindow from "../../ui/ModalWindow";
-import Button from "../../ui/Button";
+const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
+const Button = lazy(() => import("../../ui/Button"));
 
 export default function AddGroup() {
   const [isOpen, setIsOpen] = useState(false);

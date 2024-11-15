@@ -1,6 +1,6 @@
-import React from "react";
+import React, { lazy } from "react";
 import AssetAnalyze from "../features/assets/AssetAnalyze";
-import Assets from "../features/assets/Assets";
+const Assets = lazy(() => import("../features/assets/Assets"));
 
 export default function Home() {
   return (
