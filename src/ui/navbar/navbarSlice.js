@@ -23,16 +23,11 @@ const navbarSlice = createSlice({
       state.isWalletConnected = false;
     },
     walletSettingClicked(state) {
-      state.isWalletSettingOpen = state.isWalletSettingOpen ? false : true;
+      state.isWalletSettingOpen = !state.isWalletSettingOpen;
     },
-    // closeWalletSetting(state, action) {
-    //   console.log(action.payload.animVal);
-
-    //   state.isWalletSettingOpen =
-    //     action.payload.animVal !== "walletSetting"
-    //       ? false
-    //       : state.isWalletSettingOpen;
-    // },
+    closeWalletSetting(state) {
+      state.isWalletSettingOpen = false;
+    },
   },
 });
 

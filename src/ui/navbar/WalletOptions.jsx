@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { SlOptionsVertical } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { walletSettingClicked } from "./navbarSlice";
+import { closeWalletSetting, walletSettingClicked } from "./navbarSlice";
 
 export default function WalletOptions({ onClick }) {
   const { isWalletSettingOpen } = useSelector((store) => store.navbar);
   const dispatch = useDispatch();
 
+  function handleWalletSetting() {
+    dispatch(walletSettingClicked());
+    setTimeout(() => dispatch(closeWalletSetting()), 3000);
+  }
+
   return (
     <div class="relative inline-block text-left ">
       <button
-        onClick={() => dispatch(walletSettingClicked())}
+        onClick={handleWalletSetting}
         type="button"
         className="inline-flex w-full justify-center gap-x-1.5 rounded-md  p-1 text-sm font-semibold text-stone-300 shadow-sm hover:text-lg transition-all delay-500"
         id="menu-button"

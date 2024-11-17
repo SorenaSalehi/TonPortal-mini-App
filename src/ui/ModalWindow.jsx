@@ -22,6 +22,7 @@ export default function ModalWindow({
           margin: "0 auto",
           width: "max-content",
           minWidth: "20rem",
+
           height: "max-content",
           display: "flex",
           flexDirection: "column",
@@ -34,8 +35,8 @@ export default function ModalWindow({
           outline: "none",
           border: "none",
           borderRadius: "2rem",
-
           transition: "all 0.8s ease-in-out",
+          overflow: "hidden",
         },
       }}
     >

@@ -47,7 +47,6 @@ export default function AssetItem({
               src={type === "ton" ? "ton_symbol.png" : icon}
               alt="icon"
               loading="lazy"
-              className="animate-pulse"
             />
           </p>
           <p className="font-semibold uppercase text-slate-300 justify-self-start">
