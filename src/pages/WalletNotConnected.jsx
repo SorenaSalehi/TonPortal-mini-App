@@ -5,14 +5,52 @@ import Loader from "../ui/Loader";
 import { walletConnected } from "../ui/navbar/navbarSlice";
 import Button from "../ui/Button";
 import { TbPlugConnected } from "react-icons/tb";
+import { useTonConnectUI } from "@tonconnect/ui-react";
 
 export default function WalletNotConnected() {
+  // Correctly destructure the hook
+  const [tonConnectUI, setOptions] = useTonConnectUI();
   const { walletConnectLoading } = useSelector((store) => store.navbar);
   const dispatch = useDispatch();
 
-  function handleConnectWallet() {
-    dispatch(walletConnected());
+  async function handleConnectWallet() {
+    try {
+      // Open connection modal
+      await tonConnectUI.connectWallet();
+
+      // Get wallet info after connection
+      const walletInfo = tonConnectUI.wallet;
+
+      if (walletInfo) {
+        dispatch(
+          walletConnected({
+            address: walletInfo.account.address,
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Wallet connection error:", error);
+    }
   }
+
+  // Listen for wallet connection changes
+  React.useEffect(() => {
+    if (!tonConnectUI) return;
+
+    const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
+      if (wallet) {
+        dispatch(
+          walletConnected({
+            address: wallet.account.address,
+          })
+        );
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [tonConnectUI, dispatch]);
 
   if (walletConnectLoading) return <Loader />;
 

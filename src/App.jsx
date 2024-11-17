@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
 import Loader from "./ui/Loader";
 import { isMobile } from "react-device-detect";
@@ -22,6 +23,7 @@ const queryClient = new QueryClient({
 
 export default function App() {
   const { isWalletConnected } = useSelector((store) => store.navbar);
+
   const userUsingMobile = true;
 
   const router = createBrowserRouter([
@@ -55,17 +57,33 @@ export default function App() {
     },
   ]);
 
+  // Configuration object for development
+  const manifestConfiguration = {
+    manifestUrl: "http://localhost:5173/manifest.json", // or your hosted manifest URL
+    widgetConfiguration: {
+      walletsList: {
+        includeWallets: ["tonkeeper", "tonhub", "mytonwallet"],
+      },
+      retryConfig: {
+        maxRetryCount: 3,
+        retryDelay: 1000,
+      },
+    },
+  };
+
   return (
     <React.Suspense fallback={<Loader />}>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <RouterProvider
-          router={router}
-          future={{
-            v7_skipActionErrorRevalidation: true,
-          }}
-        />
-      </QueryClientProvider>
+      <TonConnectUIProvider {...manifestConfiguration}>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <RouterProvider
+            router={router}
+            future={{
+              v7_skipActionErrorRevalidation: true,
+            }}
+          />
+        </QueryClientProvider>
+      </TonConnectUIProvider>
     </React.Suspense>
   );
 }
