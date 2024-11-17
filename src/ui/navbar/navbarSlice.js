@@ -4,7 +4,8 @@ const initialState = {
   walletConnectLoading: false,
   isWalletModalOpen: false,
   isWalletConnected: true,
-  walletAddress:''
+  walletAddress: "",
+  isWalletSettingOpen: false,
 };
 
 const navbarSlice = createSlice({
@@ -21,10 +22,26 @@ const navbarSlice = createSlice({
     walletDisconnected(state) {
       state.isWalletConnected = false;
     },
+    walletSettingClicked(state) {
+      state.isWalletSettingOpen = state.isWalletSettingOpen ? false : true;
+    },
+    // closeWalletSetting(state, action) {
+    //   console.log(action.payload.animVal);
+
+    //   state.isWalletSettingOpen =
+    //     action.payload.animVal !== "walletSetting"
+    //       ? false
+    //       : state.isWalletSettingOpen;
+    // },
   },
 });
 
-export const { walletConnected, walletDisconnected, walletActions } =
-  navbarSlice.actions;
+export const {
+  walletConnected,
+  walletDisconnected,
+  walletActions,
+  walletSettingClicked,
+  closeWalletSetting,
+} = navbarSlice.actions;
 
 export default navbarSlice.reducer;

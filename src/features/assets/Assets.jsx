@@ -5,6 +5,7 @@ import Loader from "../../ui/Loader";
 import AssetItem from "./AssetItem";
 import getTonData, { getJettons, getTonPrice } from "../../services/apiTon";
 import { AiFillPropertySafety } from "react-icons/ai";
+import Error from "../../ui/Error";
 
 export default function Assets() {
   //ton data
@@ -36,8 +37,11 @@ export default function Assets() {
     queryFn: getJettons,
   });
 
+
+  if (tonDataLoading || tonPriceLoading || jettonsLoading) return <Loader />;
+
   if (tonDataError || tonPriceError || jettonsError)
-    return <div>Something went wrong</div>;
+    return <Error error={tonDataError || tonPriceError || jettonsError} />;
 
   return (
     <>

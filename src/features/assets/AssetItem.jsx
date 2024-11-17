@@ -6,6 +6,7 @@ const Button = lazy(() => import("../../ui/Button"));
 import {
   calcJettonTotalPrice,
   convertJettonBalance,
+  sortJettonsByTotalPrice,
 } from "../../utils/helpers";
 
 export default function AssetItem({
@@ -16,7 +17,14 @@ export default function AssetItem({
   balance,
   decimals,
 }) {
+  //modal state
   const [isOpen, setIsOpen] = useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const tonTotalPrice =
     type === "ton" && balance && tokenPrice
@@ -29,14 +37,6 @@ export default function AssetItem({
     type !== "ton" && balance && tokenPrice
       ? `$${calcJettonTotalPrice(convertedBalance, tokenPrice)}`
       : "0.00";
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   return (
     <>

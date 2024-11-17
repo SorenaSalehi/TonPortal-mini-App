@@ -8,6 +8,7 @@ import { walletActions, walletDisconnected } from "./navbarSlice";
 import ModalWindow from "../ModalWindow";
 import Button from "../Button";
 import { TbPlugConnectedX } from "react-icons/tb";
+import WalletOptions from "./WalletOptions";
 
 export default function Navbar() {
   const { isWalletModalOpen, isWalletConnected } = useSelector(
@@ -27,18 +28,19 @@ export default function Navbar() {
   }
 
   return (
-    <div className="flex justify-between px-2 py-4 text-2xl">
+    <div role="navbar" className="flex justify-between px-2 py-4 text-2xl ">
       <p className="text-2xl font-extrabold tracking-widest text-transparent uppercase bg-gradient-to-b from-indigo-800 to-purple-900 bg-clip-text">
         PROFILE-AI
       </p>
-      <button
-        onClick={() => dispatch(walletActions())}
-        className="flex items-center gap-2 p-2 rounded-lg bg-glass"
-      >
+      <div className="flex items-center gap-2 p-2 rounded-lg bg-glass">
         <span className="text-sm">{wallet}</span>
         <FaWallet />
-      </button>
+        <span>
+          <WalletOptions onClick={() => dispatch(walletActions())} />
+        </span>
+      </div>
 
+      {/* //*modal */}
       <ModalWindow
         isOpen={isWalletModalOpen}
         label="walletModal"
