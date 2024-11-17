@@ -30,7 +30,7 @@ export default function Navbar() {
   return (
     <div role="navbar" className="flex justify-between px-2 py-4 text-2xl ">
       <p className="text-2xl font-extrabold tracking-widest text-transparent uppercase bg-gradient-to-b from-indigo-800 to-purple-900 bg-clip-text">
-        PROFILE-AI
+        PORTFOLIO-AI
       </p>
       <div className="flex items-center gap-2 p-2 rounded-lg bg-glass">
         <span className="text-sm">{wallet}</span>
