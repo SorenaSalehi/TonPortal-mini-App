@@ -57,23 +57,9 @@ export default function App() {
     },
   ]);
 
-  // Configuration object for development
-  const manifestConfiguration = {
-    manifestUrl: "http://localhost:5173/manifest.json", // or your hosted manifest URL
-    widgetConfiguration: {
-      walletsList: {
-        includeWallets: ["tonkeeper", "tonhub", "mytonwallet"],
-      },
-      retryConfig: {
-        maxRetryCount: 3,
-        retryDelay: 1000,
-      },
-    },
-  };
-
   return (
     <React.Suspense fallback={<Loader />}>
-      <TonConnectUIProvider {...manifestConfiguration}>
+      <TonConnectUIProvider manifestUrl="https://portfolio-ai-tel-mini-app.netlify.app//tonconnect-manifest.json">
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <RouterProvider

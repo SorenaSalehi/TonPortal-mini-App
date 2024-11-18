@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  userAddress: "",
   walletConnectLoading: false,
   isWalletModalOpen: false,
   isWalletConnected: true,
@@ -16,7 +17,8 @@ const navbarSlice = createSlice({
       state.isWalletModalOpen = state.isWalletModalOpen ? false : true;
     },
 
-    walletConnected(state) {
+    walletConnected(state, action) {
+      state.userAddress = action.payload;
       state.isWalletConnected = true;
     },
     walletDisconnected(state) {

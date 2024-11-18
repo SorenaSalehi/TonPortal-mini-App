@@ -11,12 +11,12 @@ import { TbPlugConnectedX } from "react-icons/tb";
 import WalletOptions from "./WalletOptions";
 
 export default function Navbar() {
-  const { isWalletModalOpen, isWalletConnected } = useSelector(
+  const { isWalletModalOpen, isWalletConnected, userAddress } = useSelector(
     (store) => store.navbar
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  console.log(userAddress);
   const wallet = convertWalletAddress(
     "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc"
   );

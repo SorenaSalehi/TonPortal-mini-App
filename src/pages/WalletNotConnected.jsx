@@ -1,56 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "../ui/Loader";
 import { walletConnected } from "../ui/navbar/navbarSlice";
 import Button from "../ui/Button";
 import { TbPlugConnected } from "react-icons/tb";
-import { useTonConnectUI } from "@tonconnect/ui-react";
+import {
+  TonConnectButton,
+  useTonAddress,
+  useTonWallet,
+} from "@tonconnect/ui-react";
 
 export default function WalletNotConnected() {
-  // Correctly destructure the hook
-  const [tonConnectUI, setOptions] = useTonConnectUI();
+  const wallet = useTonWallet();
+  const userAddress = useTonAddress();
+  console.log(wallet, userAddress);
   const { walletConnectLoading } = useSelector((store) => store.navbar);
   const dispatch = useDispatch();
 
-  async function handleConnectWallet() {
-    try {
-      // Open connection modal
-      await tonConnectUI.connectWallet();
-
-      // Get wallet info after connection
-      const walletInfo = tonConnectUI.wallet;
-
-      if (walletInfo) {
-        dispatch(
-          walletConnected({
-            address: walletInfo.account.address,
-          })
-        );
-      }
-    } catch (error) {
-      console.error("Wallet connection error:", error);
+  useEffect(() => {
+    if (wallet) {
+      dispatch(walletConnected(userAddress));
     }
-  }
+  }, [wallet, dispatch]);
 
-  // Listen for wallet connection changes
-  React.useEffect(() => {
-    if (!tonConnectUI) return;
-
-    const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
-      if (wallet) {
-        dispatch(
-          walletConnected({
-            address: wallet.account.address,
-          })
-        );
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [tonConnectUI, dispatch]);
+  // function handleConnectWallet() {
+  //   dispatch(walletConnected());
+  // }
 
   if (walletConnectLoading) return <Loader />;
 
@@ -63,12 +39,20 @@ export default function WalletNotConnected() {
         <p className="text-rose-400/85 ">Prompt</p>
         <h1 className="">Getting Started by Connecting Your Wallet.</h1>
       </div>
-      <Button onClick={handleConnectWallet}>
+      {/* <Button onClick={handleConnectWallet}>
         <span className="text-xl font-semibold text-green-500">
           <TbPlugConnected />
         </span>
         Connecting
-      </Button>
+      </Button> */}
+      <TonConnectButton />
+
+      {/* Display user's address if connected */}
+      {userAddress && (
+        <p className="text-green-500">
+          Connected: {userAddress.slice(0, 6)}...{userAddress.slice(-4)}
+        </p>
+      )}
     </div>
   );
 }

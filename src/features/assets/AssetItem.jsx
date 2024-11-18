@@ -40,8 +40,11 @@ export default function AssetItem({
 
   return (
     <>
-      <div className="border-[0.01rem] border-slate-700 rounded-xl p-2 flex justify-between primary-shadow">
-        <Button type="asset" onClick={openModal}>
+      <div
+        onClick={openModal}
+        className="border-[0.01rem] border-slate-700 rounded-xl p-2 flex justify-between primary-shadow cursor-pointer"
+      >
+        <div className="grid w-32 grid-cols-2 grid-rows-2 gap-2 cursor-pointer">
           <p className="w-12 row-span-2 overflow-hidden rounded-full">
             <img
               src={type === "ton" ? "ton_symbol.png" : icon}
@@ -61,7 +64,7 @@ export default function AssetItem({
                     : parseFloat(tokenPrice).toFixed(10)
                 }`}
           </p>
-        </Button>
+        </div>
         <div className="flex flex-col items-end gap-2">
           <p>{type === "ton" ? balance : convertedBalance}</p>
           <p className="text-orange-300/85">
