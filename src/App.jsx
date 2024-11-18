@@ -59,7 +59,7 @@ export default function App() {
 
   return (
     <React.Suspense fallback={<Loader />}>
-      <TonConnectUIProvider manifestUrl="https://portfolio-ai-tel-mini-app.netlify.app//tonconnect-manifest.json">
+      <TonConnectUIProvider manifestUrl="https://portfolio-ai-tel-mini-app.netlify.app/tonconnect-manifest.json">
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <RouterProvider
