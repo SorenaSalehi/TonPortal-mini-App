@@ -24,10 +24,6 @@ export default function WalletNotConnected() {
     }
   }, [wallet, dispatch]);
 
-  // function handleConnectWallet() {
-  //   dispatch(walletConnected());
-  // }
-
   if (walletConnectLoading) return <Loader />;
 
   return (

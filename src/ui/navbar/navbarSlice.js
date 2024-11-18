@@ -4,7 +4,7 @@ const initialState = {
   userAddress: "",
   walletConnectLoading: false,
   isWalletModalOpen: false,
-  isWalletConnected: true,
+  isWalletConnected: false,
   walletAddress: "",
   isWalletSettingOpen: false,
 };
@@ -22,6 +22,7 @@ const navbarSlice = createSlice({
       state.isWalletConnected = true;
     },
     walletDisconnected(state) {
+      state.userAddress = "";
       state.isWalletConnected = false;
     },
     walletSettingClicked(state) {

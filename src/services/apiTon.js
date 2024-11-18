@@ -1,15 +1,15 @@
 //ton number
-// https://tonapi.io/v2/accounts/walletAddress
+// https://tonapi.io/v2/accounts/userAddress
 //jetton data
 // https://tonapi.io/v2/accounts/walletAddress/jettons?currencies=usd
 
 import { convertTonBalance, filterJettons } from "../utils/helpers";
 
-const walletAddress = "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc";
+// const walletAddress = "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc";
 
-export default async function getTonData() {
+export default async function getTonData(userAddress) {
   try {
-    const res = await fetch(`https://tonapi.io/v2/accounts/${walletAddress}`);
+    const res = await fetch(`https://tonapi.io/v2/accounts/${userAddress}`);
     const data = await res.json();
 
     if (!data) throw new Error("Wallet ton balance can not fetch!!");
@@ -39,10 +39,10 @@ export async function getTonPrice() {
   }
 }
 
-export async function getJettons() {
+export async function getJettons(userAddress) {
   try {
     const res = await fetch(
-      `https://tonapi.io/v2/accounts/${walletAddress}/jettons?currencies=usd`
+      `https://tonapi.io/v2/accounts/${userAddress}/jettons?currencies=usd`
     );
     const data = await res.json();
 

@@ -17,10 +17,10 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log(userAddress);
-  const wallet = convertWalletAddress(
-    "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc"
-  );
-
+  // const wallet = convertWalletAddress(
+  //   "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc"
+  // );
+  const wallet = convertWalletAddress(userAddress || "");
   function handleDisconnectedWallet() {
     dispatch(walletDisconnected());
     dispatch(walletActions());
@@ -33,7 +33,7 @@ export default function Navbar() {
         PORTFOLIO-AI
       </p>
       <div className="flex items-center gap-2 p-2 rounded-lg bg-glass">
-        <span className="text-sm">{wallet}</span>
+        <span className="text-sm">{wallet || "wallet Address"}</span>
         <FaWallet />
         <span>
           <WalletOptions onClick={() => dispatch(walletActions())} />

@@ -6,8 +6,11 @@ import AssetItem from "./AssetItem";
 import getTonData, { getJettons, getTonPrice } from "../../services/apiTon";
 import { AiFillPropertySafety } from "react-icons/ai";
 import Error from "../../ui/Error";
+import { useSelector } from "react-redux";
 
 export default function Assets() {
+  const { userAddress } = useSelector((store) => store.navbar);
+
   //ton data
   const {
     data: tonData,
@@ -15,7 +18,7 @@ export default function Assets() {
     isError: tonDataError,
   } = useQuery({
     queryKey: ["userTonBalance"],
-    queryFn: getTonData,
+    queryFn: () => getTonData(userAddress),
   });
   //ton price
   const {
@@ -34,9 +37,8 @@ export default function Assets() {
     isError: jettonsError,
   } = useQuery({
     queryKey: ["jettons"],
-    queryFn: getJettons,
+    queryFn: () => getJettons(userAddress),
   });
-
 
   if (tonDataLoading || tonPriceLoading || jettonsLoading) return <Loader />;
 
