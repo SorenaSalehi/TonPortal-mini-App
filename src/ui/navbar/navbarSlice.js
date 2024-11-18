@@ -22,8 +22,13 @@ const navbarSlice = createSlice({
       state.isWalletConnected = true;
     },
     walletDisconnected(state) {
-      state.userAddress = "";
+      state.userAddress = null;
       state.isWalletConnected = false;
+      Object.keys(localStorage).forEach((key) => {
+        if (key.startsWith("ton-connect")) {
+          localStorage.removeItem(key);
+        }
+      });
     },
     walletSettingClicked(state) {
       state.isWalletSettingOpen = !state.isWalletSettingOpen;

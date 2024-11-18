@@ -9,6 +9,7 @@ import ModalWindow from "../ModalWindow";
 import Button from "../Button";
 import { TbPlugConnectedX } from "react-icons/tb";
 import WalletOptions from "./WalletOptions";
+import { useTonWallet } from "@tonconnect/ui-react";
 
 export default function Navbar() {
   const { isWalletModalOpen, isWalletConnected, userAddress } = useSelector(
@@ -16,24 +17,23 @@ export default function Navbar() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(userAddress);
-  // const wallet = convertWalletAddress(
-  //   "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc"
-  // );
-  const wallet = convertWalletAddress(userAddress || "");
+  const walletAddress = convertWalletAddress(userAddress || "");
   function handleDisconnectedWallet() {
+    navigate("/");
     dispatch(walletDisconnected());
     dispatch(walletActions());
-    navigate("/");
   }
 
   return (
-    <div role="navbar" className="flex justify-between px-2 py-4 text-2xl ">
-      <p className="text-2xl font-extrabold tracking-widest text-transparent uppercase bg-gradient-to-b from-indigo-800 to-purple-900 bg-clip-text">
-        PORTFOLIO-AI
+    <div role="navbar" className="flex justify-between px-2 py-4 text-2xl">
+      <p className="flex items-center gap-1 text-2xl font-extrabold tracking-widest text-transparent uppercase bg-gradient-to-b from-indigo-800 to-purple-900 bg-clip-text">
+        <div className="w-8">
+          <img src="Webp.png" className="w-full h-auto" />
+        </div>
+        <p className="text-lg">Portal</p>
       </p>
       <div className="flex items-center gap-2 p-2 rounded-lg bg-glass">
-        <span className="text-sm">{wallet || "wallet Address"}</span>
+        <span className="text-sm">{walletAddress || "wallet Address"}</span>
         <FaWallet />
         <span>
           <WalletOptions onClick={() => dispatch(walletActions())} />
