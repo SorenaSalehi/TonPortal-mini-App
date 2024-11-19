@@ -37,12 +37,13 @@ export default function ModalWindow({
         style={{
           margin: "0 auto",
           width: "max-content",
-          minWidth: "20rem",
+          
           height: "max-content",
 
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
+          alignItems: "center",
           gap: "2rem",
           alignItems: "center",
           zIndex: "10",
