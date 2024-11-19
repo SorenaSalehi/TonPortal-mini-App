@@ -4,24 +4,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 import { convertWalletAddress } from "../../utils/helpers";
-import { walletActions, walletDisconnected } from "./navbarSlice";
+import { walletModal, walletDisconnected } from "./navbarSlice";
 import ModalWindow from "../ModalWindow";
 import Button from "../Button";
 import { TbPlugConnectedX } from "react-icons/tb";
 import WalletOptions from "./WalletOptions";
-import { useTonWallet } from "@tonconnect/ui-react";
+import { useTonConnectUI } from "@tonconnect/ui-react";
 
 export default function Navbar() {
+  const [tonConnectUI] = useTonConnectUI();
   const { isWalletModalOpen, isWalletConnected, userAddress } = useSelector(
     (store) => store.navbar
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const walletAddress = convertWalletAddress(userAddress || "");
-  function handleDisconnectedWallet() {
+  async function handleDisconnectedWallet() {
+    await tonConnectUI.disconnect();
     navigate("/");
     dispatch(walletDisconnected());
-    dispatch(walletActions());
+    dispatch(walletModal());
   }
 
   return (
@@ -36,7 +38,7 @@ export default function Navbar() {
         <span className="text-sm">{walletAddress || "wallet Address"}</span>
         <FaWallet />
         <span>
-          <WalletOptions onClick={() => dispatch(walletActions())} />
+          <WalletOptions onClick={() => dispatch(walletModal())} />
         </span>
       </div>
 
@@ -44,7 +46,7 @@ export default function Navbar() {
       <ModalWindow
         isOpen={isWalletModalOpen}
         label="walletModal"
-        onRequestClose={() => dispatch(walletActions())}
+        onRequestClose={() => dispatch(walletModal())}
       >
         <h1>logo</h1>
 
