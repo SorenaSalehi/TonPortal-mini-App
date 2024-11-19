@@ -12,6 +12,7 @@ export default function AddGroup() {
   const botAddress = "a3s1ascasc3a51ac3a5c1";
 
   const copyToClipboard = async () => {
+    setIsOpen(false);
     await navigator.clipboard.writeText(botAddress);
     toast.success("Address cpoied to Clipboard");
   };
@@ -35,8 +36,7 @@ export default function AddGroup() {
         onRequestClose={handleCloseModal}
         label="add group modal"
       >
-        <h1>logo</h1>
-        <div className="flex flex-col items-start gap-2 px-4 py-2 border-2 rounded-lg border-indigo-950/85">
+        <div className="flex flex-col items-start px-3 py-2 border-2 rounded-lg border-indigo-950/85">
           <p className="text-rose-400/85 animate-pulse">Prompt</p>
           <p>
             Copy Robot Address,
@@ -44,8 +44,11 @@ export default function AddGroup() {
           </p>
         </div>
 
-        <div className="px-3 py-2 rounded-lg bg-indigo-900/35">
-          <button className="flex items-center gap-2" onClick={copyToClipboard}>
+        <div className="px-3 rounded-lg bg-indigo-900/35">
+          <button
+            className="flex items-center gap-2 p-1"
+            onClick={copyToClipboard}
+          >
             a3s1ascasc3a51ac3a5c1
             <span className="text-sm text-green-500/55 animate-pulse">
               <FaCopy />

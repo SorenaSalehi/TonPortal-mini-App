@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactModal from "react-modal";
 import ModalWindow from "../../ui/ModalWindow";
 import Button from "../../ui/Button";
+import AppName from "../../ui/AppName";
 
 export default function AssetAnalyze() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,6 @@ export default function AssetAnalyze() {
         onRequestClose={closeModal}
         label="assets modal"
       >
-        <h1>logo</h1>
         <main>context</main>
         <Button onClick={closeModal}>Close</Button>
       </ModalWindow>

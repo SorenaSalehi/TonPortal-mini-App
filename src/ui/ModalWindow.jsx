@@ -1,6 +1,8 @@
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import React from "react";
 import ReactModal from "react-modal";
+
+import AppName from "./AppName";
 
 export default function ModalWindow({
   isOpen,
@@ -20,17 +22,7 @@ export default function ModalWindow({
           zIndex: "90",
         },
         content: {
-          margin: "0 auto",
-          width: "max-content",
-          minWidth: "20rem",
-
-          height: "max-content",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-evenly",
-          gap: "2rem",
-          alignItems: "center",
-          zIndex: "100",
+          maxHeight: "20rem",
           color: "rgb(241,245,279)",
           background: "linear-gradient(120deg, #13022abb, #111111, #0c021b86)",
           outline: "none",
@@ -41,7 +33,26 @@ export default function ModalWindow({
         },
       }}
     >
-      {children}
+      <motion.div
+        style={{
+          margin: "0 auto",
+          width: "max-content",
+          minWidth: "20rem",
+          height: "max-content",
+
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          gap: "2rem",
+          alignItems: "center",
+          zIndex: "10",
+        }}
+        initial={{ opacity: 0, y: -100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+      >
+        <AppName />
+        {children}
+      </motion.div>
     </ReactModal>
   );
 }

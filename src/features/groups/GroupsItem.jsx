@@ -21,8 +21,9 @@ export default function GroupsItem() {
       <motion.div
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}
+        whileTap={{ scale: 0.9 }}
         onClick={openModal}
-        className="border-[0.01rem] border-slate-700 rounded-xl p-2 flex justify-between primary-shadow cursor-pointer"
+        className="border-[0.01rem] border-slate-700 rounded-xl px-4 py-6 flex justify-between primary-shadow cursor-pointer"
       >
         <div className="flex items-baseline gap-2">
           <FaUserGroup className="text-2xl" />
@@ -32,7 +33,6 @@ export default function GroupsItem() {
       </motion.div>
 
       <ModalWindow isOpen={isOpen} label="group" onRequestClose={closeModal}>
-        <h1>logo</h1>
         <main>context</main>
         <Button onClick={closeModal}>Close</Button>
       </ModalWindow>

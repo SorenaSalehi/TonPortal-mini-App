@@ -24,9 +24,8 @@ export default function GroupsAnalyzeBox() {
         onRequestClose={closeModal}
         label="assets modal"
       >
-        <div className="flex flex-col items-center justify-center max-w-24 ">
-          <h1>logo</h1>
-          <main className="w-[14rem] py-4 overflow-auto text-wrap max-h-80 no-scrollbar">
+        <div className="flex flex-col items-center justify-between max-w-24">
+          <main className="w-[22rem] border-y-[0.01rem] border-slate-500/75 py-1 mb-2 overflow-scroll text-wrap max-h-48 no-scrollbar ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
             nostrum facilis quis provident iste culpa maxime ea pariatur
             corporis, dolores ab, cum vitae laudantium, saepe voluptatum at hic.

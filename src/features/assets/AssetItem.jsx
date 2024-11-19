@@ -78,7 +78,6 @@ export default function AssetItem({
       </motion.div>
 
       <ModalWindow isOpen={isOpen} label="asset" onRequestClose={closeModal}>
-        <h1>logo</h1>
         <main>context</main>
         <Button onClick={closeModal}>Close</Button>
       </ModalWindow>

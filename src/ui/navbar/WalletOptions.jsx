@@ -39,11 +39,11 @@ export default function WalletOptions({ onClick }) {
       >
         <motion.ul role="menu">
           <motion.li
-            transition={{ duration: 0.2, delay: 1, ease: "linear" }}
+            transition={{ duration: 0.1, delay: 0.3, ease: "linear" }}
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             href="#"
-            className="block px-3 py-2 text-xs font-semibold text-center text-slate-900"
+            className="block px-3 py-2 text-xs font-semibold text-center cursor-pointer text-slate-900"
             role="menuitem"
             tabindex="-1"
             id="menu-item-0"

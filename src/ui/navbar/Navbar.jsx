@@ -2,6 +2,7 @@ import React from "react";
 import { FaWallet } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { motion } from "motion/react";
 
 import { convertWalletAddress } from "../../utils/helpers";
 import { walletModal, walletDisconnected } from "./navbarSlice";
@@ -10,6 +11,7 @@ import Button from "../Button";
 import { TbPlugConnectedX } from "react-icons/tb";
 import WalletOptions from "./WalletOptions";
 import { useTonConnectUI } from "@tonconnect/ui-react";
+import AppName from "../AppName";
 
 export default function Navbar() {
   const [tonConnectUI] = useTonConnectUI();
@@ -28,12 +30,9 @@ export default function Navbar() {
 
   return (
     <div role="navbar" className="flex justify-between px-2 py-4 text-2xl">
-      <p className="flex items-center gap-1 text-2xl font-extrabold tracking-widest text-transparent uppercase bg-gradient-to-b from-indigo-800 to-purple-900 bg-clip-text">
-        <div className="w-8">
-          <img src="Webp.png" className="w-full h-auto" />
-        </div>
-        <p className="text-lg">Portal</p>
-      </p>
+      <motion.button onClick={() => navigate("/")} whileTap={{ scale: 0.9 }}>
+        <AppName />
+      </motion.button>
       <div className="flex items-center gap-2 p-2 rounded-lg bg-glass">
         <span className="text-sm">{walletAddress || "wallet Address"}</span>
         <FaWallet />
@@ -48,9 +47,7 @@ export default function Navbar() {
         label="walletModal"
         onRequestClose={() => dispatch(walletModal())}
       >
-        <h1>logo</h1>
-
-        <p>
+        <p className="mb-16">
           do you want to disconnect <br /> your wallet?
         </p>
         <Button onClick={handleDisconnectedWallet}>
