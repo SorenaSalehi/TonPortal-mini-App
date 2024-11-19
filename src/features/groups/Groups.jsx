@@ -5,7 +5,7 @@ import AddGroup from "./AddGroup";
 export default function Groups() {
   return (
     <>
-      <div className="flex justify-between text-2xl font-semibold ">
+      <div className="flex justify-between text-2xl font-semibold backdrop-blur-lg">
         <p className="text-sm text-slate-100/75">Groups</p>
         <AddGroup />
       </div>

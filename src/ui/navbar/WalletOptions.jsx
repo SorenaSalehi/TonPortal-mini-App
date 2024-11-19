@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { SlOptionsVertical } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "motion/react";
+
 import { closeWalletSetting, walletSettingClicked } from "./navbarSlice";
 
 export default function WalletOptions({ onClick }) {
@@ -14,7 +16,7 @@ export default function WalletOptions({ onClick }) {
 
   return (
     <div class="relative inline-block text-left ">
-      <button
+      <motion.button
         onClick={handleWalletSetting}
         type="button"
         className="inline-flex w-full justify-center gap-x-1.5 rounded-md  p-1 text-sm font-semibold text-stone-300 shadow-sm hover:text-lg transition-all delay-500"
@@ -23,7 +25,7 @@ export default function WalletOptions({ onClick }) {
         aria-haspopup="true"
       >
         <SlOptionsVertical />
-      </button>
+      </motion.button>
 
       <div
         onClick={onClick}
@@ -35,8 +37,11 @@ export default function WalletOptions({ onClick }) {
         aria-labelledby="menu-button"
         tabindex="-1"
       >
-        <div role="none">
-          <a
+        <motion.ul role="menu">
+          <motion.li
+            transition={{ duration: 0.2, delay: 1, ease: "linear" }}
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
             href="#"
             className="block px-3 py-2 text-xs font-semibold text-center text-slate-900"
             role="menuitem"
@@ -44,8 +49,8 @@ export default function WalletOptions({ onClick }) {
             id="menu-item-0"
           >
             Disconnect Wallet
-          </a>
-        </div>
+          </motion.li>
+        </motion.ul>
       </div>
     </div>
   );

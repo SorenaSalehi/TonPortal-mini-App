@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "motion/react";
 import React from "react";
 import ReactModal from "react-modal";
 
