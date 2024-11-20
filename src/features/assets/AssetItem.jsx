@@ -76,18 +76,17 @@ export default function AssetItem({
           </p>
           <p className="tracking-wider text-slate-100/55">{TokenPrice}</p>
         </div>
-        {Balance !== "0.00" && (
-          <div className="flex flex-col items-end gap-2">
-            <div className="flex items-center gap-1">
-              <span className="text-xs text-slate-200/25">Balance</span>
-              <p>{Balance}</p>
-            </div>
-            <div className="flex items-center gap-1">
-              <span className="text-xs text-slate-200/25">Total</span>
-              <p className="text-orange-300/85">{TotalPrice}</p>
-            </div>
+
+        <div className="flex flex-col items-end gap-2">
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-slate-200/25">Balance</span>
+            <p>{Balance}</p>
           </div>
-        )}
+          <div className="flex items-center gap-1">
+            <span className="text-xs text-slate-200/25">Total</span>
+            <p className="text-orange-300/85">{TotalPrice}</p>
+          </div>
+        </div>
       </motion.div>
 
       <ModalWindow

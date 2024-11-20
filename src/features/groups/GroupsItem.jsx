@@ -32,7 +32,7 @@ export default function GroupsItem() {
         whileInView={{ opacity: 1, x: 0 }}
         whileTap={{ scale: 0.9 }}
         onClick={openModal}
-        className="border-[0.01rem] border-slate-700 rounded-xl px-4 py-6 flex justify-between primary-shadow cursor-pointer"
+        className="flex justify-between px-4 py-6 cursor-pointer rounded-xl bg-blue-950/35 backdrop-blur-2xl  border-b-[0.01rem] border-slate-800"
       >
         <div className="flex items-baseline gap-2">
           <FaUserGroup className="text-2xl" />
