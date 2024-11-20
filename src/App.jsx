@@ -24,6 +24,7 @@ const queryClient = new QueryClient({
 
 export default function App() {
   const { isWalletConnected } = useSelector((store) => store.navbar);
+  console.log(isWalletConnected);
 
   const userUsingMobile = true;
 
@@ -51,7 +52,7 @@ export default function App() {
 
   return (
     <React.Suspense fallback={<Loader />}>
-      <TonConnectUIProvider manifestUrl="https://portfolio-ai-tel-mini-app.netlify.app/tonconnect-manifest.json">
+      <TonConnectUIProvider manifestUrl="https://portal-mini-app.netlify.app/tonconnect-manifest.json">
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <RouterProvider
