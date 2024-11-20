@@ -39,6 +39,16 @@ export default function AssetItem({
       ? `$${calcJettonTotalPrice(convertedBalance, tokenPrice)}`
       : "0.00";
 
+  const Icon = type === "ton" ? "ton_symbol.png" : icon;
+  const Symbol = type === "ton" ? "Toncoin" : symbol;
+  const TokenPrice =
+    tokenPrice === 0
+      ? ``
+      : `$${type === "ton" ? tokenPrice : parseFloat(tokenPrice).toFixed(10)}`;
+
+  const Balance = type === "ton" ? balance : convertedBalance;
+  const TotalPrice = type === "ton" ? tonTotalPrice : jettonTotalPrice;
+
   return (
     <>
       <motion.div
@@ -50,36 +60,41 @@ export default function AssetItem({
       >
         <div className="grid w-32 grid-cols-2 grid-rows-2 gap-2 cursor-pointer">
           <p className="w-12 row-span-2 overflow-hidden rounded-full">
-            <img
-              src={type === "ton" ? "ton_symbol.png" : icon}
-              alt="icon"
-              loading="lazy"
-            />
+            <img src={Icon} alt="icon" loading="lazy" />
           </p>
           <p className="font-semibold uppercase text-slate-300 justify-self-start">
-            {type === "ton" ? "Toncoin" : symbol}
+            {Symbol}
           </p>
-          <p className="tracking-wider text-slate-100/55">
-            {tokenPrice === 0
-              ? `$0.00`
-              : `$${
-                  type === "ton"
-                    ? tokenPrice
-                    : parseFloat(tokenPrice).toFixed(10)
-                }`}
-          </p>
+          <p className="tracking-wider text-slate-100/55">{TokenPrice}</p>
         </div>
-        <div className="flex flex-col items-end gap-2">
-          <p>{type === "ton" ? balance : convertedBalance}</p>
-          <p className="text-orange-300/85">
-            {type === "ton" ? tonTotalPrice : jettonTotalPrice}
-          </p>
-        </div>
+        {Balance !== "0.00" && (
+          <div className="flex flex-col items-end gap-2">
+            <div className="flex items-center gap-1">
+              <span className="text-xs text-slate-200/25">Balance</span>
+              <p>{Balance}</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="text-xs text-slate-200/25">Total</span>
+              <p className="text-orange-300/85">{TotalPrice}</p>
+            </div>
+          </div>
+        )}
       </motion.div>
 
-      <ModalWindow isOpen={isOpen} label="asset" onRequestClose={closeModal}>
-        <main>context</main>
-        <Button onClick={closeModal}>Close</Button>
+      <ModalWindow
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        label="assets modal"
+      >
+        <div className="flex flex-col items-center justify-between max-w-24">
+          <main className="w-[15rem] border-y-[0.01rem] border-slate-500/75 py-1  mb-2 overflow-scroll text-wrap max-h-44 no-scrollbar ">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            nostrum facilis quis provident iste culpa maxime ea pariatur
+            corporis, dolores ab, cum vitae laudantium, saepe voluptatum at hic.
+            Necessitatibus, molestias?
+          </main>
+          <Button onClick={closeModal}>Close</Button>
+        </div>
       </ModalWindow>
     </>
   );

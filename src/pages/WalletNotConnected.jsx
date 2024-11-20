@@ -10,7 +10,7 @@ import {
 } from "@tonconnect/ui-react";
 import AppName from "../ui/AppName";
 
-export default function WalletNotConnected() {
+export default function WalletNotConnectedPage() {
   const wallet = useTonWallet();
   const userAddress = useTonAddress();
   const dispatch = useDispatch();
@@ -23,15 +23,6 @@ export default function WalletNotConnected() {
 
   return (
     <div className="flex flex-col items-center bg-black bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-indigo-900/35 via-black to-black text-slate-100 h-dvh justify-evenly p-4">
-      <motion.div
-        transition={{ duration: 1, delay: 1, ease: "circIn" }}
-        initial={{ opacity: 0 }}
-        whileInView={{
-          opacity: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-        }}
-      >
-        <AppName />
-      </motion.div>
       <motion.div
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}

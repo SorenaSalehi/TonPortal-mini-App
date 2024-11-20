@@ -34,11 +34,15 @@ export default function Navbar() {
         <AppName />
       </motion.button>
       <div className="flex items-center gap-2 p-2 rounded-lg bg-glass">
-        <span className="text-sm">{walletAddress || "wallet Address"}</span>
-        <FaWallet />
-        <span>
-          <WalletOptions onClick={() => dispatch(walletModal())} />
+        <span className="text-sm">
+          {walletAddress === "..." ? "wallet Not Connected" : walletAddress}
         </span>
+        <FaWallet />
+        {isWalletConnected && (
+          <span>
+            <WalletOptions onClick={() => dispatch(walletModal())} />
+          </span>
+        )}
       </div>
 
       {/* //*modal */}

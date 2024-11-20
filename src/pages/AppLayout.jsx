@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router";
-import { motion } from "motion/react";
 
 import PagesSlider from "../ui/PagesSlider";
 import Navbar from "../ui/navbar/Navbar";

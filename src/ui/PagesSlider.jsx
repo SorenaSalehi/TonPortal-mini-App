@@ -31,9 +31,9 @@ export default function PagesSlider() {
           <FaPeopleGroup />
         </NavLink>
       </motion.li>
-      <motion.li>
+      {/* <motion.li>
         <FaMoneyBillTransfer />
-      </motion.li>
+      </motion.li> */}
     </motion.ul>
   );
 }

@@ -37,7 +37,7 @@ export default function ModalWindow({
         style={{
           margin: "0 auto",
           width: "max-content",
-          
+
           height: "max-content",
 
           display: "flex",

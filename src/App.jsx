@@ -12,6 +12,7 @@ const Home = lazy(() => import("./pages/Home"));
 const GroupsPage = lazy(() => import("./pages/GroupsPage"));
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import WalletNotConnectedPage from "./pages/WalletNotConnected";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,20 +30,11 @@ export default function App() {
   const router = createBrowserRouter([
     {
       //*if user are mobile user then display page
-      element: userUsingMobile ? (
-        //*if wallet connected display appLayout
-        isWalletConnected ? (
-          <AppLayout />
-        ) : (
-          <WalletNotConnected />
-        )
-      ) : (
-        <NotMobileUser />
-      ),
+      element: userUsingMobile ? <AppLayout /> : <NotMobileUser />,
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: isWalletConnected ? <Home /> : <WalletNotConnectedPage />,
         },
         {
           path: "/groups",

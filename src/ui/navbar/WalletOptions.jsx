@@ -17,9 +17,10 @@ export default function WalletOptions({ onClick }) {
   return (
     <div class="relative inline-block text-left ">
       <motion.button
+        whileTap={{ rotate: 90 }}
         onClick={handleWalletSetting}
         type="button"
-        className="inline-flex w-full justify-center gap-x-1.5 rounded-md  p-1 text-sm font-semibold text-stone-300 shadow-sm hover:text-lg transition-all delay-500"
+        className="text-lg"
         id="menu-button"
         aria-expanded="true"
         aria-haspopup="true"

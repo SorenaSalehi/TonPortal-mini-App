@@ -1,6 +1,9 @@
 import React, { lazy } from "react";
-import GroupsAnalyzeBox from "../features/groups/GroupsAnalyzeBox";
+
 const Groups = lazy(() => import("../features/groups/Groups"));
+const GroupsAnalyzeBox = lazy(() =>
+  import("../features/groups/GroupsAnalyzeBox")
+);
 
 export default function GroupsPage() {
   return (

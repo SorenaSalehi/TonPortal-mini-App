@@ -40,10 +40,10 @@ export default function Assets() {
     queryFn: () => getJettons(userAddress),
   });
 
-  if (tonDataLoading || tonPriceLoading || jettonsLoading) return <Loader />;
-
   if (tonDataError || tonPriceError || jettonsError)
     return <Error error={tonDataError || tonPriceError || jettonsError} />;
+
+  if (tonDataLoading || tonPriceLoading || jettonsLoading) return <Loader />;
 
   return (
     <>
@@ -52,27 +52,23 @@ export default function Assets() {
         Assets
       </p>
       <div className="flex flex-col gap-2 overflow-auto no-scrollbar">
-        {tonDataLoading || tonPriceLoading || jettonsLoading ? (
-          <Loader />
-        ) : (
-          <>
+        <>
+          <AssetItem
+            type="ton"
+            balance={tonData.balance}
+            tokenPrice={tonPrice}
+          />
+          {jettonsData.map((token) => (
             <AssetItem
-              type="ton"
-              balance={tonData.balance}
-              tokenPrice={tonPrice}
+              balance={token.balance}
+              tokenPrice={token.price.prices.USD}
+              decimals={token.jetton.decimals}
+              icon={token.jetton.image}
+              symbol={token.jetton.symbol}
+              key={token.jetton.name}
             />
-            {jettonsData.map((token) => (
-              <AssetItem
-                balance={token.balance}
-                tokenPrice={token.price.prices.USD}
-                decimals={token.jetton.decimals}
-                icon={token.jetton.image}
-                symbol={token.jetton.symbol}
-                key={token.jetton.name}
-              />
-            ))}
-          </>
-        )}
+          ))}
+        </>
       </div>
     </>
   );

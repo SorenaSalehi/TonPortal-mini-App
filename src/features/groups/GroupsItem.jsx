@@ -32,9 +32,20 @@ export default function GroupsItem() {
         <p className="text-rose-500">+99</p>
       </motion.div>
 
-      <ModalWindow isOpen={isOpen} label="group" onRequestClose={closeModal}>
-        <main>context</main>
-        <Button onClick={closeModal}>Close</Button>
+      <ModalWindow
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        label="assets modal"
+      >
+        <div className="flex flex-col items-center justify-between max-w-24">
+          <main className="w-[15rem] border-y-[0.01rem] border-slate-500/75 py-1  mb-2 overflow-scroll text-wrap max-h-44 no-scrollbar ">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            nostrum facilis quis provident iste culpa maxime ea pariatur
+            corporis, dolores ab, cum vitae laudantium, saepe voluptatum at hic.
+            Necessitatibus, molestias?
+          </main>
+          <Button onClick={closeModal}>Close</Button>
+        </div>
       </ModalWindow>
     </>
   );
