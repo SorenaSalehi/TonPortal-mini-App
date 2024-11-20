@@ -12,8 +12,8 @@ export default function PagesSlider() {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "scale-125 delay-200 text-slate-500/55 hover:cursor-none"
-              : ""
+              ? "scale-125 delay-200 text-slate-100 hover:cursor-none"
+              : "text-slate-300/55"
           }
         >
           <FaHome />
@@ -24,8 +24,8 @@ export default function PagesSlider() {
           to="/groups"
           className={({ isActive }) =>
             isActive
-              ? "scale-125 delay-200 text-slate-500/50 hover:cursor-none"
-              : ""
+              ? "scale-150 delay-200 text-slate-100 hover:cursor-none"
+              : "text-slate-300/55"
           }
         >
           <FaPeopleGroup />

@@ -50,16 +50,19 @@ export default function Navbar() {
         isOpen={isWalletModalOpen}
         label="walletModal"
         onRequestClose={() => dispatch(walletModal())}
+        height="16rem"
       >
-        <p className="mb-16">
-          do you want to disconnect <br /> your wallet?
-        </p>
-        <Button onClick={handleDisconnectedWallet}>
-          <span className="text-xl font-semibold text-rose-600">
-            <TbPlugConnectedX />
-          </span>
-          Disconnect Wallet
-        </Button>
+        <div className="flex flex-col items-center">
+          <p className="mb-16 border-[0.01rem] px-3 py-2 rounded-lg border-slate-300/25 shadow-2xl backdrop-brightness-200">
+            do you want to disconnect <br /> your wallet?
+          </p>
+          <Button onClick={handleDisconnectedWallet}>
+            <span className="text-xl font-semibold text-rose-600">
+              <TbPlugConnectedX />
+            </span>
+            Disconnect Wallet
+          </Button>
+        </div>
       </ModalWindow>
     </div>
   );

@@ -49,11 +49,20 @@ export default function AssetItem({
   const Balance = type === "ton" ? balance : convertedBalance;
   const TotalPrice = type === "ton" ? tonTotalPrice : jettonTotalPrice;
 
+  const content = (
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
+      consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
+      eos maxime, doloremque quae quis est magnam veritatis ex repellendus
+      pariatur eligendi.
+    </p>
+  );
+
   return (
     <>
       <motion.div
         whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0, x: -100 }}
+        initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
         onClick={openModal}
         className="border-[0.01rem] border-slate-700 rounded-xl p-2 flex justify-between primary-shadow cursor-pointer"
@@ -85,17 +94,9 @@ export default function AssetItem({
         isOpen={isOpen}
         onRequestClose={closeModal}
         label="assets modal"
-      >
-        <div className="flex flex-col items-center justify-between max-w-24">
-          <main className="w-[15rem] border-y-[0.01rem] border-slate-500/75 py-1  mb-2 overflow-scroll text-wrap max-h-44 no-scrollbar ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-            nostrum facilis quis provident iste culpa maxime ea pariatur
-            corporis, dolores ab, cum vitae laudantium, saepe voluptatum at hic.
-            Necessitatibus, molestias?
-          </main>
-          <Button onClick={closeModal}>Close</Button>
-        </div>
-      </ModalWindow>
+        content={content}
+        onClose={closeModal}
+      />
     </>
   );
 }

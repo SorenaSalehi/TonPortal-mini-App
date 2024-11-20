@@ -34,7 +34,9 @@ export default function AddGroup() {
       <ModalWindow
         isOpen={isOpen}
         onRequestClose={handleCloseModal}
-        label="add group modal"
+        label="addGroup"
+        onClose={handleCloseModal}
+        height="18rem"
       >
         <div className="flex flex-col items-start px-3 py-2 border-2 rounded-lg border-indigo-950/85">
           <p className="text-rose-400/85 animate-pulse">Prompt</p>
@@ -55,7 +57,6 @@ export default function AddGroup() {
             </span>
           </button>
         </div>
-        <Button onClick={handleCloseModal}>Close</Button>
       </ModalWindow>
     </>
   );
