@@ -5,7 +5,11 @@ import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 
 import { convertWalletAddress } from "../../utils/helpers";
-import { walletModal, walletDisconnected } from "./navbarSlice";
+import {
+  walletModal,
+  walletDisconnected,
+  walletSettingClicked,
+} from "./navbarSlice";
 import ModalWindow from "../ModalWindow";
 import Button from "../Button";
 import { TbPlugConnectedX } from "react-icons/tb";
@@ -14,13 +18,12 @@ import { useTonConnectUI } from "@tonconnect/ui-react";
 import AppName from "../AppName";
 
 export default function Navbar() {
-  const [tonConnectUI] = useTonConnectUI();
-  const { isWalletModalOpen, isWalletConnected, userAddress } = useSelector(
+  const { isWalletModalOpen, isWalletConnected } = useSelector(
     (store) => store.navbar
   );
-  const dispatch = useDispatch();
+  const [tonConnectUI] = useTonConnectUI();
   const navigate = useNavigate();
-  const walletAddress = convertWalletAddress(userAddress || "");
+  const dispatch = useDispatch();
   async function handleDisconnectedWallet() {
     await tonConnectUI.disconnect();
     navigate("/");
@@ -36,19 +39,7 @@ export default function Navbar() {
       </motion.button>
 
       {/* //*wallet */}
-      {isWalletConnected && (
-        <div
-          onClick={() => dispatch(walletModal())}
-          className="flex items-center gap-2 px-2 py-1 rounded-2xl bg-white/10 "
-        >
-          <span className="text-sm">
-            {walletAddress === "..." ? "Connect" : walletAddress}
-          </span>
-          <div className="w-5 ">
-            <img src="wallet1.png" />
-          </div>
-        </div>
-      )}
+      {isWalletConnected && <WalletOptions />}
 
       {/* //*modal */}
       <ModalWindow

@@ -3,11 +3,21 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "motion/react";
 
-import { closeWalletSetting, walletSettingClicked } from "./navbarSlice";
+import {
+  closeWalletSetting,
+  walletModal,
+  walletSettingClicked,
+} from "./navbarSlice";
+
+import { convertWalletAddress } from "../../utils/helpers";
 
 export default function WalletOptions({ onClick }) {
-  const { isWalletSettingOpen } = useSelector((store) => store.navbar);
+  const { isWalletSettingOpen, userAddress } = useSelector(
+    (store) => store.navbar
+  );
+
   const dispatch = useDispatch();
+  const walletAddress = convertWalletAddress(userAddress);
 
   function handleWalletSetting() {
     dispatch(walletSettingClicked());
@@ -15,18 +25,16 @@ export default function WalletOptions({ onClick }) {
   }
 
   return (
-    <div class="relative inline-block text-left ">
-      <motion.button
-        whileTap={{ rotate: 90 }}
+    <div class="relative inline-block text-left cursor-pointer">
+      <div
         onClick={handleWalletSetting}
-        type="button"
-        className="text-lg"
-        id="menu-button"
-        aria-expanded="true"
-        aria-haspopup="true"
+        className="flex items-center gap-2 px-2 py-3 rounded-2xl bg-white/10"
       >
-        <SlOptionsVertical />
-      </motion.button>
+        <span className="text-sm">{walletAddress}</span>
+        <div className="w-5 ">
+          <img src="wallet1.png" />
+        </div>
+      </div>
 
       <div
         onClick={onClick}
@@ -40,6 +48,7 @@ export default function WalletOptions({ onClick }) {
       >
         <motion.ul role="menu">
           <motion.li
+            onClick={() => dispatch(walletModal())}
             transition={{ duration: 0.1, delay: 0.3, ease: "linear" }}
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
