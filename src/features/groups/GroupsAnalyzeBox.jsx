@@ -30,7 +30,7 @@ export default function GroupsAnalyzeBox() {
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      className="relative flex flex-col items-center justify-between w-[65%]  h-32 p-1 mx-auto overflow-hidden rounded-lg text-slate-100"
+      className="relative flex flex-col items-center justify-between w-[95%]  h-32 p-1 mx-auto overflow-hidden rounded-lg text-slate-100"
     >
       <video
         autoPlay
@@ -41,7 +41,7 @@ export default function GroupsAnalyzeBox() {
       >
         <source src="box2.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-black/5 -z-10 backdrop-blur-[0.5px]" />
+      <div className="absolute inset-0 bg-black/5 -z-10 " />
       <p className="mt-4 text-xs text-slate-300/55">
         Get All Your Groups
         <br /> News in a Glass

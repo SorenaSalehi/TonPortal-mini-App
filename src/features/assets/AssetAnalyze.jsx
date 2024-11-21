@@ -29,10 +29,20 @@ export default function AssetAnalyze() {
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      className=" 0 flex flex-col justify-between items-center mx-auto w-9/12 h-32 bg-[url('/public/analyze4.jpg')] opacity-85 bg-contain   p-1  rounded-lg "
+      className="relative flex flex-col items-center justify-center gap-6 w-[85%]  h-32 mx-auto overflow-hidden rounded-2xl "
     >
-      <p className="mt-4 text-xs font-semibold text-slate-300/75">
-        Get All Your Assets News in a Glass
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute object-cover w-full h-full shadow rounded-2xl -z-10"
+      >
+        <source src="box2.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/5 -z-10 " />
+      <p className="mt-6 text-xs text-slate-300/55">
+        Get All Your Groups News in a Glans
       </p>
 
       <Button onClick={openModal}>Open</Button>
