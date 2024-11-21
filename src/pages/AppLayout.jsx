@@ -18,7 +18,7 @@ export default function AppLayout() {
         <source src="mainBg.mp4" type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-black/50 -z-10 backdrop-blur-3xl" />
+      <div className="absolute inset-0 bg-black/30 -z-10 backdrop-blur-3xl" />
       <Navbar />
 
       <div className="overflow-auto no-scrollbar">

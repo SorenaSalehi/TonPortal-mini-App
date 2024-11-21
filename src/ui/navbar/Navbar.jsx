@@ -58,7 +58,7 @@ export default function Navbar() {
         height="16rem"
       >
         <div className="flex flex-col items-center">
-          <p className="mb-16 border-[0.01rem] px-3 py-2 rounded-lg border-slate-300/25 shadow-2xl backdrop-brightness-200">
+          <p className="px-3 py-2 my-8 rounded-lg shadow-2xl bg-white/10 backdrop-brightness-200">
             do you want to disconnect <br /> your wallet?
           </p>
           <Button onClick={handleDisconnectedWallet}>

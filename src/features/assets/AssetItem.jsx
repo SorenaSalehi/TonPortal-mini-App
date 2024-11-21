@@ -29,14 +29,14 @@ export default function AssetItem({
 
   const tonTotalPrice =
     type === "ton" && balance && tokenPrice
-      ? `$${(balance * tokenPrice).toFixed(2)}`
+      ? `${(balance * tokenPrice).toFixed(2)}`
       : "Uncertain!";
 
   const convertedBalance = convertJettonBalance(+balance, decimals);
 
   const jettonTotalPrice =
     type !== "ton" && balance && tokenPrice
-      ? `$${calcJettonTotalPrice(convertedBalance, tokenPrice)}`
+      ? `${calcJettonTotalPrice(convertedBalance, tokenPrice)}`
       : "0.00";
 
   const Icon = type === "ton" ? "ton_symbol.png" : icon;
@@ -44,7 +44,7 @@ export default function AssetItem({
   const TokenPrice =
     tokenPrice === 0
       ? ``
-      : `$${type === "ton" ? tokenPrice : parseFloat(tokenPrice).toFixed(10)}`;
+      : `${type === "ton" ? tokenPrice : parseFloat(tokenPrice).toFixed(10)}`;
 
   const Balance = type === "ton" ? balance : convertedBalance;
   const TotalPrice = type === "ton" ? tonTotalPrice : jettonTotalPrice;
@@ -71,10 +71,13 @@ export default function AssetItem({
           <p className="w-12 h-12 row-span-2 overflow-hidden rounded-full">
             <img src={Icon} alt="icon" loading="lazy" />
           </p>
-          <p className="font-semibold uppercase text-slate-300 justify-self-start">
+          <p className="font-semibold tracking-wider text-blue-400 uppercase justify-self-start">
             {Symbol}
           </p>
-          <p className="tracking-wider text-slate-100/55">{TokenPrice}</p>
+          <p className="tracking-wider text-slate-100/55">
+            <span className="text-xs mr-[0.2rem]">$</span>
+            {TokenPrice}
+          </p>
         </div>
 
         <div className="flex flex-col items-end gap-2">
@@ -84,7 +87,10 @@ export default function AssetItem({
           </div>
           <div className="flex items-center gap-1">
             <span className="text-xs text-slate-200/25">Total</span>
-            <p className="text-orange-300/85">{TotalPrice}</p>
+            <p>
+              <span className="mr-[0.2rem] text-xs">$</span>
+              {TotalPrice}
+            </p>
           </div>
         </div>
       </motion.div>
