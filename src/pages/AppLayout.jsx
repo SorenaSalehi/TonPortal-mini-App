@@ -1,20 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router";
+import { motion } from "motion/react";
 
 import PagesSlider from "../ui/PagesSlider";
 import Navbar from "../ui/navbar/Navbar";
-import { useDispatch } from "react-redux";
-import { closeWalletSetting } from "../ui/navbar/navbarSlice";
 
 export default function AppLayout() {
+  const [bgLoaded, setBgLoaded] = useState(false);
+
+  useEffect(() => {
+    const video = document.createElement("video");
+    video.src = "mainBg.mp4";
+    video.onloadeddata = () => setBgLoaded(true);
+
+    return () => {
+      // Clean up video element to prevent memory leaks
+      video.onloadeddata = null;
+    };
+  }, []);
+
   return (
-    <div className="box-border relative flex flex-col p-2 h-dvh w-dvw bg-black bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-violet-900/50 via-black to-black text-slate-100 justify-evenly scroll-smooth">
+    <div
+      className={`${
+        !bgLoaded && "bg-color "
+      }box-border relative flex flex-col justify-start px-3 overflow-hidden h-dvh w-dvw text-slate-100 scroll-smooth`}
+    >
+      {bgLoaded && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 object-cover w-full h-full -z-10 backdrop-blur-3xl"
+        >
+          <source src="mainBg.mp4" type="video/mp4" />
+        </video>
+      )}
+      <div className="absolute inset-0 bg-black/30 -z-10 backdrop-blur-3xl" />
       <Navbar />
-
-      <main className="overflow-auto no-scrollbar scroll-smooth">
+      <div className="overflow-auto no-scrollbar">
         <Outlet />
-      </main>
-
+      </div>
       <PagesSlider />
     </div>
   );

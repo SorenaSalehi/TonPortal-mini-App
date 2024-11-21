@@ -2,61 +2,63 @@ import React from "react";
 import { FaWallet } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { motion } from "motion/react";
 
 import { convertWalletAddress } from "../../utils/helpers";
-import { walletActions, walletDisconnected } from "./navbarSlice";
+import {
+  walletModal,
+  walletDisconnected,
+  walletSettingClicked,
+} from "./navbarSlice";
 import ModalWindow from "../ModalWindow";
 import Button from "../Button";
 import { TbPlugConnectedX } from "react-icons/tb";
 import WalletOptions from "./WalletOptions";
+import { useTonConnectUI } from "@tonconnect/ui-react";
+import AppName from "../AppName";
 
 export default function Navbar() {
-  const { isWalletModalOpen, isWalletConnected, userAddress } = useSelector(
+  const { isWalletModalOpen, isWalletConnected } = useSelector(
     (store) => store.navbar
   );
-  const dispatch = useDispatch();
+  const [tonConnectUI] = useTonConnectUI();
   const navigate = useNavigate();
-  console.log(userAddress);
-  const wallet = convertWalletAddress(
-    "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc"
-  );
-
-  function handleDisconnectedWallet() {
-    dispatch(walletDisconnected());
-    dispatch(walletActions());
+  const dispatch = useDispatch();
+  async function handleDisconnectedWallet() {
+    await tonConnectUI.disconnect();
     navigate("/");
+    dispatch(walletDisconnected());
+    dispatch(walletModal());
   }
 
   return (
-    <div role="navbar" className="flex justify-between px-2 py-4 text-2xl ">
-      <p className="text-2xl font-extrabold tracking-widest text-transparent uppercase bg-gradient-to-b from-indigo-800 to-purple-900 bg-clip-text">
-        PORTFOLIO-AI
-      </p>
-      <div className="flex items-center gap-2 p-2 rounded-lg bg-glass">
-        <span className="text-sm">{wallet}</span>
-        <FaWallet />
-        <span>
-          <WalletOptions onClick={() => dispatch(walletActions())} />
-        </span>
-      </div>
+    <div role="navbar" className="flex justify-between px-2 py-4 text-2xl">
+      {/* //*logo */}
+      <motion.button onClick={() => navigate("/")} whileTap={{ scale: 0.9 }}>
+        <AppName />
+      </motion.button>
+
+      {/* //*wallet */}
+      {isWalletConnected && <WalletOptions />}
 
       {/* //*modal */}
       <ModalWindow
         isOpen={isWalletModalOpen}
         label="walletModal"
-        onRequestClose={() => dispatch(walletActions())}
+        onRequestClose={() => dispatch(walletModal())}
+        height="16rem"
       >
-        <h1>logo</h1>
-
-        <p>
-          do you want to disconnect <br /> your wallet?
-        </p>
-        <Button onClick={handleDisconnectedWallet}>
-          <span className="text-xl font-semibold text-rose-600">
-            <TbPlugConnectedX />
-          </span>
-          Disconnect Wallet
-        </Button>
+        <div className="flex flex-col items-center">
+          <p className="px-3 py-2 my-8 rounded-lg shadow-2xl bg-white/10 backdrop-brightness-200">
+            do you want to disconnect <br /> your wallet?
+          </p>
+          <Button onClick={handleDisconnectedWallet}>
+            <span className="text-xl font-semibold text-rose-600">
+              <TbPlugConnectedX />
+            </span>
+            Disconnect Wallet
+          </Button>
+        </div>
       </ModalWindow>
     </div>
   );

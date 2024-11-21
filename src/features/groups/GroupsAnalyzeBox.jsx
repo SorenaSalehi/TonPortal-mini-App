@@ -1,10 +1,34 @@
-import React, { useState } from "react";
-import ReactModal from "react-modal";
+import React, { useEffect, useState } from "react";
+import { motion } from "motion/react";
+
 import Button from "../../ui/Button";
 import ModalWindow from "../../ui/ModalWindow";
 
 export default function GroupsAnalyzeBox() {
   const [isOpen, setIsOpen] = useState(false);
+  const [bgLoaded, setBgLoaded] = useState(false);
+
+  useEffect(() => {
+    const video = document.createElement("video");
+    video.src = "BoxBg1.mp4";
+    video.onloadeddata = () => setBgLoaded(true);
+
+    return () => {
+      // Clean up video element to prevent memory leaks
+      video.onloadeddata = null;
+    };
+  }, []);
+  const content = (
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
+      consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
+      eos maxime, doloremque quae quis est magnam veritatis ex repellendus
+      pariatur eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing
+      elit. Aliquam, consequatur nisi iure, adipisci cupiditate libero maiores
+      placeat veniam eos maxime, doloremque quae quis est magnam veritatis ex
+      repellendus pariatur eligendi.
+    </p>
+  );
 
   function openModal() {
     setIsOpen(true);
@@ -14,8 +38,28 @@ export default function GroupsAnalyzeBox() {
     setIsOpen(false);
   }
   return (
-    <div className=" text-slate-100 flex flex-col justify-between items-center mx-auto w-9/12 h-32 bg-[url('/public/groups5.jpg')] bg-black/85 bg-contain bg-no-repeat  p-1  rounded-lg overflow-hidden">
-      <p className="mt-4 text-xs">Get All Your Groups News in a Glass</p>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      className="relative flex flex-col items-center justify-center gap-6 w-[85%]  h-32 mx-auto overflow-hidden rounded-2xl "
+    >
+      {bgLoaded && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute object-cover w-full h-full rounded-2xl -z-10"
+        >
+          <source src="BoxBg1.mp4" type="video/mp4" />
+        </video>
+      )}
+      <div className="absolute inset-0 bg-black/5 -z-10 " />
+      <p className="mt-4 text-xs text-slate-300/55">
+        Get All Your Groups
+        <br /> News in a Glass
+      </p>
 
       <Button onClick={openModal}>Check Out</Button>
 
@@ -23,18 +67,9 @@ export default function GroupsAnalyzeBox() {
         isOpen={isOpen}
         onRequestClose={closeModal}
         label="assets modal"
-      >
-        <div className="flex flex-col items-center justify-center max-w-24 ">
-          <h1>logo</h1>
-          <main className="w-[14rem] py-4 overflow-auto text-wrap max-h-80 no-scrollbar">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-            nostrum facilis quis provident iste culpa maxime ea pariatur
-            corporis, dolores ab, cum vitae laudantium, saepe voluptatum at hic.
-            Necessitatibus, molestias?
-          </main>
-          <Button onClick={closeModal}>Close</Button>
-        </div>
-      </ModalWindow>
-    </div>
+        content={content}
+        onClose={closeModal}
+      />
+    </motion.div>
   );
 }

@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { SlOptionsVertical } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { closeWalletSetting, walletSettingClicked } from "./navbarSlice";
+import { motion } from "motion/react";
+
+import {
+  closeWalletSetting,
+  walletModal,
+  walletSettingClicked,
+} from "./navbarSlice";
+
+import { convertWalletAddress } from "../../utils/helpers";
 
 export default function WalletOptions({ onClick }) {
-  const { isWalletSettingOpen } = useSelector((store) => store.navbar);
+  const { isWalletSettingOpen, userAddress } = useSelector(
+    (store) => store.navbar
+  );
+
   const dispatch = useDispatch();
+  const walletAddress = convertWalletAddress(userAddress);
 
   function handleWalletSetting() {
     dispatch(walletSettingClicked());
@@ -13,17 +25,16 @@ export default function WalletOptions({ onClick }) {
   }
 
   return (
-    <div class="relative inline-block text-left ">
-      <button
+    <div class="relative inline-block text-left cursor-pointer">
+      <div
         onClick={handleWalletSetting}
-        type="button"
-        className="inline-flex w-full justify-center gap-x-1.5 rounded-md  p-1 text-sm font-semibold text-stone-300 shadow-sm hover:text-lg transition-all delay-500"
-        id="menu-button"
-        aria-expanded="true"
-        aria-haspopup="true"
+        className="flex items-center gap-2 px-2 py-3 rounded-2xl bg-white/10"
       >
-        <SlOptionsVertical />
-      </button>
+        <span className="text-sm">{walletAddress}</span>
+        <div className="w-5 ">
+          <img src="wallet1.png" />
+        </div>
+      </div>
 
       <div
         onClick={onClick}
@@ -35,17 +46,21 @@ export default function WalletOptions({ onClick }) {
         aria-labelledby="menu-button"
         tabindex="-1"
       >
-        <div role="none">
-          <a
+        <motion.ul role="menu">
+          <motion.li
+            onClick={() => dispatch(walletModal())}
+            transition={{ duration: 0.1, delay: 0.3, ease: "linear" }}
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
             href="#"
-            className="block px-3 py-2 text-xs font-semibold text-center text-slate-900"
+            className="block px-3 py-2 text-xs font-semibold text-center cursor-pointer text-slate-900"
             role="menuitem"
             tabindex="-1"
             id="menu-item-0"
           >
             Disconnect Wallet
-          </a>
-        </div>
+          </motion.li>
+        </motion.ul>
       </div>
     </div>
   );

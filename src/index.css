@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .bg-color {
-  /* background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); */
+  background: linear-gradient(120deg, #05053c, #420816);
 
   /* background: linear-gradient(120deg, #0d0d0d, #1a1a1a, #2e2e2e); */
   /* background: linear-gradient(140deg, #141e30, #243b55); */
-  background: linear-gradient(120deg, #000000, #0f2027, #203a43);
+  /* background: linear-gradient(120deg, #000000, #0f2027, #203a43); */
   /* background: linear-gradient(135deg, #232526, #414345); */
 }
 
