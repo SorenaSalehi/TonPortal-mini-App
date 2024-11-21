@@ -7,7 +7,7 @@ import Navbar from "../ui/navbar/Navbar";
 
 export default function AppLayout() {
   return (
-    <div className="box-border relative flex flex-col justify-between px-3 overflow-hidden h-dvh w-dvw text-slate-100 scroll-smooth">
+    <div className="box-border relative flex flex-col justify-start px-3 overflow-hidden h-dvh w-dvw text-slate-100 scroll-smooth">
       <video
         autoPlay
         muted

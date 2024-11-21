@@ -6,11 +6,10 @@ export default function Button({ children, onClick, type }) {
     <motion.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="flex items-center gap-2 px-4 py-2 text-xs font-extrabold uppercase rounded-lg bg-slate-100 text-slate-800 btn-shadow max-w-max"
+      className="flex items-center gap-2 px-3 py-2 text-xs font-extrabold uppercase rounded-2xl bg-white/20 text-slate-200 btn-shadow max-w-max"
       onClick={onClick}
     >
       {children}
     </motion.button>
   );
-  
 }

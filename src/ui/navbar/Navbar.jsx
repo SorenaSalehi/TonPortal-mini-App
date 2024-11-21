@@ -36,17 +36,19 @@ export default function Navbar() {
       </motion.button>
 
       {/* //*wallet */}
-      <div
-        onClick={() => dispatch(walletModal())}
-        className="flex items-center gap-2 px-2 py-1 rounded-2xl bg-white/10 "
-      >
-        <span className="text-sm">
-          {walletAddress === "..." ? "Connect" : walletAddress}
-        </span>
-        <div className="w-5 ">
-          <img src="wallet1.png" />
+      {isWalletConnected && (
+        <div
+          onClick={() => dispatch(walletModal())}
+          className="flex items-center gap-2 px-2 py-1 rounded-2xl bg-white/10 "
+        >
+          <span className="text-sm">
+            {walletAddress === "..." ? "Connect" : walletAddress}
+          </span>
+          <div className="w-5 ">
+            <img src="wallet1.png" />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* //*modal */}
       <ModalWindow

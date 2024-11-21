@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 export default function PagesSlider() {
   return (
-    <motion.ul className="sticky bottom-0 z-10 flex justify-between px-4 py-2 text-2xl transform -translate-x-1/2 -translate-y-1/2 rounded-md w-28 left-1/2 right-1/2 bg-slate-300/25 text-slate-300 btn-shadow backdrop-blur-3xl">
+    <motion.ul className="sticky top-[100%] z-10 flex justify-between px-4 py-2 text-2xl transform -translate-x-1/2 -translate-y-1/2 rounded-md w-28 left-1/2 right-1/2 bg-slate-300/25 text-slate-300 btn-shadow backdrop-blur-3xl">
       <motion.li whileTap={{ y: -10 }}>
         <NavLink
           to="/"

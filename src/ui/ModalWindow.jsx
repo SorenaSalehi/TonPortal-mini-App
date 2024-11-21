@@ -43,7 +43,7 @@ export default function ModalWindow({
           flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "center",
-          gap: "2.2rem",
+          gap: "0.2rem",
           margin: "0 auto",
           width: "max-content",
           maxWidth: "20rem",
@@ -59,12 +59,16 @@ export default function ModalWindow({
         {label === "addGroup" || label === "walletModal" ? (
           <div className="flex flex-col gap-2">{children}</div>
         ) : (
-          <main className="overflow-auto h-80 w-64 no-scrollbar border-y-[0.01rem] border-slate-200/35 rounded-lg text-pretty py-2 shadow-2xl backdrop-brightness-150 px-3">
+          <main className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty ">
             {content}
           </main>
         )}
 
-        {label !== "walletModal" && <Button onClick={onClose}>Close</Button>}
+        {/* {label !== "walletModal" && (
+          <div className="mt-auto">
+            <Button onClick={onClose}>Close</Button>
+          </div>
+        )} */}
       </motion.div>
     </ReactModal>
   );
