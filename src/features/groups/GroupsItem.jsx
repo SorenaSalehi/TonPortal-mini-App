@@ -31,6 +31,7 @@ export default function GroupsItem() {
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}
         whileTap={{ scale: 0.9 }}
+        viewport={{ once: true }}
         onClick={openModal}
         className="flex justify-between px-12 py-6 cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl"
       >

@@ -64,6 +64,7 @@ export default function AssetItem({
         whileTap={{ scale: 0.9 }}
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
         onClick={openModal}
         className="flex justify-between p-2 cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl"
       >

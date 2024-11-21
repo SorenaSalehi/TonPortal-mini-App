@@ -49,7 +49,7 @@ export default function Assets() {
         <AiFillPropertySafety />
         Assets
       </p>
-      <div className="flex flex-col gap-2 overflow-auto no-scrollbar">
+      <div className="flex flex-col gap-2 overflow-auto overflow-x-hidden no-scrollbar">
         {tonDataLoading || tonPriceLoading || jettonsLoading ? (
           <Loader />
         ) : (
