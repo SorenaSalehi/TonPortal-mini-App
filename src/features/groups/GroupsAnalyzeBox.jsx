@@ -39,7 +39,7 @@ export default function GroupsAnalyzeBox() {
         playsInline
         className="absolute object-cover w-full h-full rounded-2xl -z-10"
       >
-        <source src="box2.mp4" type="video/mp4" />
+        <source src="BoxBg.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/5 -z-10 " />
       <p className="mt-4 text-xs text-slate-300/55">
