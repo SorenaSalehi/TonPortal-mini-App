@@ -28,7 +28,7 @@ export default function AddGroup() {
   return (
     <>
       <Toaster />
-      <Button onClick={handleOpenModal}>
+      <Button onClick={handleOpenModal} textSize=" xl ">
         <AiOutlineUsergroupAdd />
       </Button>
       <ModalWindow

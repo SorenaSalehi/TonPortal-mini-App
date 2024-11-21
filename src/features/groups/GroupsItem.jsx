@@ -33,11 +33,11 @@ export default function GroupsItem() {
         whileTap={{ scale: 0.9 }}
         viewport={{ once: true }}
         onClick={openModal}
-        className="flex justify-between px-12 py-6 cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl"
+        className="flex justify-between px-4 py-5 mx-5 font-semibold cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl text-slate-300"
       >
         <div className="flex items-baseline gap-2">
           <FaUserGroup className="text-2xl" />
-          <p className="mb-auto">group name</p>
+          <p className="mb-auto capitalize">group name</p>
         </div>
       </motion.div>
 

@@ -24,7 +24,6 @@ const queryClient = new QueryClient({
 
 export default function App() {
   const { isWalletConnected } = useSelector((store) => store.navbar);
-  console.log(isWalletConnected);
 
   const userUsingMobile = true;
 

@@ -76,7 +76,7 @@ export default function AssetItem({
             {Symbol}
           </p>
           <p className="tracking-wider text-slate-100/55">
-            <span className="text-xs mr-[0.2rem]">$</span>
+            <span className="text-xs mr-[0.1rem]">$</span>
             {TokenPrice}
           </p>
         </div>
@@ -89,7 +89,7 @@ export default function AssetItem({
           <div className="flex items-center gap-1">
             <span className="text-xs text-slate-200/25">Total</span>
             <p>
-              <span className="mr-[0.2rem] text-xs">$</span>
+              <span className="mr-[0.1rem] text-xs">$</span>
               {TotalPrice}
             </p>
           </div>
