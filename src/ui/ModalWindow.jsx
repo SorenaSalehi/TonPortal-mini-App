@@ -11,14 +11,13 @@ export default function ModalWindow({
   label,
   onRequestClose,
   content,
-  onClose,
+
   children,
   height = "30rem",
 }) {
   const [isScrollable, setIsScrollable] = useState(false);
   const contentRef = useRef(null);
 
-  console.log(isScrollable);
   useEffect(() => {
     const checkScrollable = () => {
       if (contentRef.current) {
