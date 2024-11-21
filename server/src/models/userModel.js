@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
-    first_name: String,
-    telegramId: { type: Number, unique: true },
-    language_code: String,
-    last_name: String,
-    photo_url: String,
-    username: String,
-    groups: Object,
+    firstName: String,
+    userId: { type: Number, unique: true },
+    languageCode: String,
+    lastName: String,
+    photoUrl: String,
+    userName: String,
+    groups: [Number],
     credits: { type: Number, default: 0 },
+    isPremium: Boolean,
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date}
 });
