@@ -38,12 +38,12 @@ export default function AddGroup() {
         onClose={handleCloseModal}
         height="18rem"
       >
-        <p className="flex flex-col items-start px-3 py-2 border-2 rounded-lg my-7 border-indigo-950/85">
+        <p className="flex flex-col items-start px-4 py-2 text-center rounded-2xl backdrop-brightness-150 bg-white/10 my-7 ">
           Copy Robot Address,
           <br /> then Add it to Your Groups
         </p>
 
-        <div className="px-3 rounded-lg bg-indigo-900/35">
+        <div className="px-3 rounded-2xl backdrop-brightness-150 bg-white/10">
           <button
             className="flex items-center gap-5 p-1"
             onClick={copyToClipboard}
