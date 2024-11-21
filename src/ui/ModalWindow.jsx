@@ -21,7 +21,7 @@ export default function ModalWindow({
       onRequestClose={onRequestClose}
       style={{
         overlay: {
-          backgroundColor: "rgba(1, 1, 1, 0.5)",
+          backgroundColor: "rgba(255, 255, 255, 0.1)",
           backdropFilter: "blur(2px)",
           zIndex: "90",
         },
@@ -59,7 +59,7 @@ export default function ModalWindow({
         {label === "addGroup" || label === "walletModal" ? (
           <div className="flex flex-col gap-2">{children}</div>
         ) : (
-          <main className="w-[17rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty ">
+          <main className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty ">
             {content}
           </main>
         )}

@@ -30,7 +30,7 @@ export default function GroupsAnalyzeBox() {
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      className="relative flex flex-col items-center justify-between w-[95%]  h-32 p-1 mx-auto overflow-hidden rounded-lg text-slate-100"
+      className="relative flex flex-col items-center justify-center gap-6 w-[85%]  h-32 mx-auto overflow-hidden rounded-2xl "
     >
       <video
         autoPlay

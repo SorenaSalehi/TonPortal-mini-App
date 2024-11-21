@@ -65,10 +65,10 @@ export default function AssetItem({
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
         onClick={openModal}
-        className="flex justify-between p-2 cursor-pointer  bg-black/10 backdrop-brightness-150 rounded-xl"
+        className="flex justify-between p-2 cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl"
       >
         <div className="grid w-32 grid-cols-2 grid-rows-2 gap-2 cursor-pointer">
-          <p className="w-12 row-span-2 overflow-hidden rounded-full">
+          <p className="w-12 h-12 row-span-2 overflow-hidden rounded-full">
             <img src={Icon} alt="icon" loading="lazy" />
           </p>
           <p className="font-semibold uppercase text-slate-300 justify-self-start">
