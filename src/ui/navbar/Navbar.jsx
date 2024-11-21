@@ -30,19 +30,22 @@ export default function Navbar() {
 
   return (
     <div role="navbar" className="flex justify-between px-2 py-4 text-2xl">
+      {/* //*logo */}
       <motion.button onClick={() => navigate("/")} whileTap={{ scale: 0.9 }}>
         <AppName />
       </motion.button>
-      <div className="flex items-center gap-2 p-2 rounded-lg bg-glass">
+
+      {/* //*wallet */}
+      <div
+        onClick={() => dispatch(walletModal())}
+        className="flex items-center gap-2 px-2 py-1 rounded-2xl bg-white/10 "
+      >
         <span className="text-sm">
-          {walletAddress === "..." ? "wallet Not Connected" : walletAddress}
+          {walletAddress === "..." ? "Connect" : walletAddress}
         </span>
-        <FaWallet />
-        {isWalletConnected && (
-          <span>
-            <WalletOptions onClick={() => dispatch(walletModal())} />
-          </span>
-        )}
+        <div className="w-5 ">
+          <img src="wallet1.png" />
+        </div>
       </div>
 
       {/* //*modal */}

@@ -30,8 +30,18 @@ export default function GroupsAnalyzeBox() {
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      className=" text-slate-100 flex flex-col justify-between items-center mx-auto w-9/12 h-32 bg-[url('/public/groups5.jpg')] bg-black/85 bg-contain bg-no-repeat  p-1  rounded-lg overflow-hidden"
+      className="relative flex flex-col items-center justify-between w-[65%]  h-32 p-1 mx-auto overflow-hidden rounded-lg text-slate-100"
     >
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 object-cover w-full h-full -z-10 "
+      >
+        <source src="box2.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-black/5 -z-10 backdrop-blur-[1px]" />
       <p className="mt-4 text-xs">Get All Your Groups News in a Glass</p>
 
       <Button onClick={openModal}>Check Out</Button>

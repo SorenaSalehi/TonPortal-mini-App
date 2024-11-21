@@ -27,18 +27,18 @@ export default function GroupsItem() {
 
   return (
     <>
+    
       <motion.div
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}
         whileTap={{ scale: 0.9 }}
         onClick={openModal}
-        className="flex justify-between px-4 py-6 cursor-pointer rounded-xl bg-blue-950/35 backdrop-blur-2xl  border-b-[0.01rem] border-slate-800"
+        className="flex justify-between px-4 py-6 cursor-pointer rounded-xl bg-slate-950/35 backdrop-blur-2xl "
       >
         <div className="flex items-baseline gap-2">
           <FaUserGroup className="text-2xl" />
           <p className="mb-auto">group name</p>
         </div>
-        <p className="text-rose-500">+99</p>
       </motion.div>
 
       <ModalWindow
