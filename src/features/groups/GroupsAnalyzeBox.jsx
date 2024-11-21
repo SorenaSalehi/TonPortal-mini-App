@@ -37,12 +37,15 @@ export default function GroupsAnalyzeBox() {
         muted
         loop
         playsInline
-        className="absolute inset-0 object-cover w-full h-full -z-10 "
+        className="absolute object-cover w-full h-full rounded-2xl -z-10"
       >
         <source src="box2.mp4" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-black/5 -z-10 backdrop-blur-[1px]" />
-      <p className="mt-4 text-xs">Get All Your Groups News in a Glass</p>
+      <div className="absolute inset-0 bg-black/5 -z-10 backdrop-blur-[0.5px]" />
+      <p className="mt-4 text-xs text-slate-300/55">
+        Get All Your Groups
+        <br /> News in a Glass
+      </p>
 
       <Button onClick={openModal}>Check Out</Button>
 
