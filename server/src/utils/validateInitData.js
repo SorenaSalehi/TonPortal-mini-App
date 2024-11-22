@@ -17,4 +17,4 @@ export const validateInitData = (InitData)=> {
     const calculatedHash = createHmac('sha256', secret.digest()).update(dataCheckString).digest('hex');
   
     return calculatedHash === hash;
-  }
+  } 
