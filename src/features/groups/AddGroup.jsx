@@ -3,42 +3,35 @@ import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FaCopy } from "react-icons/fa";
 import { MdGroupAdd } from "react-icons/md";
+import { useModal } from "../../hooks/useModal";
 
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 const Button = lazy(() => import("../../ui/Button"));
 
 export default function AddGroup() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
 
   const botAddress = "a3s1ascasc3a51ac3a5c1";
 
   const copyToClipboard = async () => {
-    setIsOpen(false);
+    closeModal();
     await navigator.clipboard.writeText(botAddress);
     toast.success("Address cpoied to Clipboard");
   };
 
-  function handleOpenModal() {
-    setIsOpen(true);
-  }
-
-  function handleCloseModal() {
-    setIsOpen(false);
-  }
-
   return (
     <>
       <Toaster />
-      <Button onClick={handleOpenModal} textSize=" xl ">
+      <Button onClick={openModal} textSize=" xl ">
         <div className="w-6">
           <img src="addGroup.png" loading="lazy" />
         </div>
       </Button>
       <ModalWindow
         isOpen={isOpen}
-        onRequestClose={handleCloseModal}
+        onRequestClose={closeModal}
         label="addGroup"
-        onClose={handleCloseModal}
+        onClose={closeModal}
         height="18rem"
       >
         <p className="flex flex-col items-start px-4 py-2 text-center rounded-2xl backdrop-brightness-150 bg-white/10 my-7 ">

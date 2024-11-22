@@ -40,8 +40,15 @@ export default function Assets() {
     queryFn: () => getJettons(userAddress),
   });
 
-  if (tonDataError || tonPriceError || jettonsError)
-    return <Error error={tonDataError || tonPriceError || jettonsError} />;
+  //* if ton data or jettons error
+  if (tonDataError || jettonsError)
+    return (
+      <Error
+        message={
+          "Can Not Receive Data!! please Check your Connection or Refresh The App."
+        }
+      />
+    );
 
   return (
     <>
@@ -51,14 +58,25 @@ export default function Assets() {
       </p>
       <div className="flex flex-col gap-2 overflow-auto overflow-x-hidden no-scrollbar">
         {tonDataLoading || tonPriceLoading || jettonsLoading ? (
+          //* main loading
           <Loader />
         ) : (
           <>
-            <AssetItem
-              type="ton"
-              balance={tonData.balance}
-              tokenPrice={tonPrice}
-            />
+            {!tonPriceError ? (
+              <AssetItem
+                type="ton"
+                balance={tonData.balance}
+                tokenPrice={tonPrice}
+              />
+            ) : (
+              //* in case the ton data error
+              <p className="p-2 cursor-none bg-black/10 backdrop-brightness-150 rounded-xl">
+                Ton Data could not Receive! Please Check Your connection or
+                Refresh the Page
+              </p>
+            )}
+
+            {/* jettons data  */}
             {jettonsData.map((token) => (
               <AssetItem
                 balance={token.balance}

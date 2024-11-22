@@ -11,7 +11,6 @@ export default function ModalWindow({
   label,
   onRequestClose,
   content,
-
   children,
   height = "30rem",
 }) {

@@ -15,9 +15,7 @@ export default function Navigation() {
           to="/"
           className={({ isActive }) =>
             `flex items-center justify-center w-6 ${
-              isActive
-                ? "scale-150 delay-200 text-slate-100"
-                : "text-slate-300/95"
+              isActive ? "scale-150 delay-200 " : "opacity-50"
             }`
           }
         >
@@ -32,9 +30,7 @@ export default function Navigation() {
           to="/groups"
           className={({ isActive }) =>
             `flex items-center justify-center w-6 ${
-              isActive
-                ? "scale-150 delay-200 text-slate-100"
-                : "text-slate-300/95"
+              isActive ? "scale-150 delay-200 " : "opacity-50"
             }`
           }
         >

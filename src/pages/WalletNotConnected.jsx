@@ -35,11 +35,11 @@ export default function WalletNotConnectedPage() {
       <TonConnectButton />
 
       {/* Display user's address if connected */}
-      {userAddress && (
+      {/* {userAddress && (
         <p className="text-green-500">
           Connected: {userAddress.slice(0, 6)}...{userAddress.slice(-4)}
         </p>
-      )}
+      )} */}
     </div>
   );
 }

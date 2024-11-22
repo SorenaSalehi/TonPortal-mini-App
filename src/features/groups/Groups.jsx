@@ -4,7 +4,8 @@ import AddGroup from "./AddGroup";
 import { useSelector } from "react-redux";
 
 export default function Groups() {
-  const { isGroupAdded } = useSelector((store) => store.group);
+  // const { isGroupAdded } = useSelector((store) => store.group);
+  const isGroupAdded = true;
 
   return (
     <>
