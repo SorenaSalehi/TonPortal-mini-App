@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import WalletNotConnectedPage from "./pages/WalletNotConnected";
 import Suspense from "./ui/Suspense";
+import { authenticateUser } from "./services/telAuth";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,27 +34,30 @@ export default function App() {
     // Initialize Telegram WebApp
     webapp.ready();
 
-    async function authenticateUser() {
-      try {
-        const response = await fetch(
-          "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start",
-          {
-            method: "GET",
-            headers: {
-              authorization: webapp.initData,
-              "ngrok-skip-browser-warning": "true",
-            },
-          }
-        );
-        console.log(response);
+    const results = authenticateUser(webapp);
+    console.log(results);
+    // async function authenticateUser() {
 
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error("Authentication failed:", error);
-      }
-    }
-    authenticateUser();
+    //   try {
+    //     const response = await fetch(
+    //       "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start",
+    //       {
+    //         method: "GET",
+    //         headers: {
+    //           authorization: webapp.initData,
+    //           "ngrok-skip-browser-warning": "true",
+    //         },
+    //       }
+    //     );
+    //     console.log(response);
+
+    //     const data = await response.json();
+    //     console.log(data);
+    //   } catch (error) {
+    //     console.error("Authentication failed:", error);
+    //   }
+    // }
+    // authenticateUser();
   }, []);
 
   const router = createBrowserRouter([
