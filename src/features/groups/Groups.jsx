@@ -2,7 +2,13 @@ import React, { useEffect } from "react";
 import GroupsItem from "./GroupsItem";
 import AddGroup from "./AddGroup";
 import { useDispatch, useSelector } from "react-redux";
-import { groupLoadingAction, userGroupsReceived } from "./groupSlice";
+import {
+  analyzeLoadingAction,
+  clearAnalyze,
+  groupLoadingAction,
+  singleAnalyzeReceive,
+  userGroupsReceived,
+} from "./groupSlice";
 import { authenticateUser } from "../../services/apiTel";
 import Loader from "../../ui/Loader";
 
@@ -22,9 +28,8 @@ import Loader from "../../ui/Loader";
 // ];
 
 export default function Groups() {
-  const { isGroupAdded, userGroups, groupLoading } = useSelector(
-    (store) => store.group
-  );
+  const { isGroupAdded, userGroups, groupLoading, singleAnalyzeId } =
+    useSelector((store) => store.group);
 
   console.log(userGroups);
 
@@ -37,7 +42,7 @@ export default function Groups() {
     // Initialize Telegram WebApp
     webapp.ready();
 
-    async function initializeAuth() {
+    async function getUserGroups() {
       try {
         dispatch(groupLoadingAction());
         const data = await authenticateUser(webapp, "group");
@@ -52,9 +57,35 @@ export default function Groups() {
       }
     }
 
-    initializeAuth();
+    getUserGroups();
   }, []);
 
+  //*get single analyze
+  useEffect(() => {
+    // Initialize Telegram WebApp
+    webapp.ready();
+
+    async function getSingleAnalyze() {
+      try {
+        dispatch(analyzeLoadingAction());
+        const data = await authenticateUser(
+          webapp,
+          `groups/id=${singleAnalyzeId}`
+        );
+
+        console.log("single analyze:", data);
+
+        dispatch(singleAnalyzeReceive(data.data));
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        dispatch(clearAnalyze());
+        dispatch(analyzeLoadingAction());
+      }
+    }
+
+    getSingleAnalyze();
+  }, [singleAnalyzeId]);
   // const isGroupAdded = true;
 
   if (!isGroupAdded)
@@ -76,8 +107,18 @@ export default function Groups() {
 
       <div className="flex flex-col gap-2 overflow-auto no-scrollbar">
         {userGroups.map((group) => (
-          <GroupsItem name={group.groupName} img={group.PhotoUrl} />
+          <GroupsItem
+            name={group.groupName}
+            img={group.PhotoUrl}
+            id={group.groupId}
+          />
         ))}
+        <GroupsItem
+          id={"-4513586841"}
+          img={
+            "https://api.telegram.org/file/bot7562008800:AAGnJiP2Hz23YEA7nPbwQ1LW7OQGKbw3qkk/profile_photos/file_2.jpg"
+          }
+        />
         {/* <GroupsItem />
         <GroupsItem />
         <GroupsItem />

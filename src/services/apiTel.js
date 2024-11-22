@@ -4,8 +4,6 @@
 // Mamad, [11/22/2024 4:44 PM]
 //* https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/group
 
-// Mamad, [11/22/2024 4:44 PM]
-//* https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/analysis/groups
 
 //* https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/analysis/groups?id=-4522670141
 

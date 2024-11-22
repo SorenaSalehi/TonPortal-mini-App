@@ -5,8 +5,10 @@ import ReactModal from "react-modal";
 import AppName from "./AppName";
 import Button from "./Button";
 import { FaChevronDown } from "react-icons/fa";
+import Loader from "./Loader";
 
 export default function ModalWindow({
+  isDataLoading,
   isOpen,
   label,
   onRequestClose,
@@ -82,7 +84,7 @@ export default function ModalWindow({
               ref={contentRef}
               className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty"
             >
-              {content}
+              {isDataLoading ? <Loader /> : content}
               {isScrollable && (
                 <div className="absolute p-1 rounded-full right-2 bg-white/15 bottom-2 animate-bounce">
                   <FaChevronDown className="text-blue-500 " />
