@@ -34,30 +34,27 @@ export default function App() {
     // Initialize Telegram WebApp
     webapp.ready();
 
-    const results = authenticateUser(webapp);
-    console.log(results);
-    // async function authenticateUser() {
+    async function authenticateUser() {
+      try {
+        const response = await fetch(
+          "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start",
+          {
+            method: "GET",
+            headers: {
+              authorization: webapp.initData,
+              "ngrok-skip-browser-warning": "true",
+            },
+          }
+        );
+        console.log(response);
 
-    //   try {
-    //     const response = await fetch(
-    //       "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start",
-    //       {
-    //         method: "GET",
-    //         headers: {
-    //           authorization: webapp.initData,
-    //           "ngrok-skip-browser-warning": "true",
-    //         },
-    //       }
-    //     );
-    //     console.log(response);
-
-    //     const data = await response.json();
-    //     console.log(data);
-    //   } catch (error) {
-    //     console.error("Authentication failed:", error);
-    //   }
-    // }
-    // authenticateUser();
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Authentication failed:", error);
+      }
+    }
+    authenticateUser();
   }, []);
 
   const router = createBrowserRouter([
