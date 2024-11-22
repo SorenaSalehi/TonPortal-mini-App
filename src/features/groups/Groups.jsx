@@ -79,7 +79,7 @@ export default function Groups() {
       } catch (error) {
         console.error(error.message);
       } finally {
-        dispatch(clearAnalyze());
+        // dispatch(clearAnalyze());
         dispatch(analyzeLoadingAction());
       }
     }
