@@ -1,17 +1,18 @@
 import React, { lazy, useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
+import { authenticateUser } from "./services/apiTel";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import NotMobileUser from "./pages/NotMobileUser";
 import AppLayout from "./pages/AppLayout";
+import Suspense from "./ui/Suspense";
+import WalletNotConnectedPage from "./pages/WalletNotConnected";
+import { userAuthenticated } from "./features/userSlice";
 const Home = lazy(() => import("./pages/Home"));
 const GroupsPage = lazy(() => import("./pages/GroupsPage"));
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import WalletNotConnectedPage from "./pages/WalletNotConnected";
-import Suspense from "./ui/Suspense";
-import { authenticateUser } from "./services/telAuth";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,39 +23,32 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
-  const [user, setUser] = useState(null); // State for authenticated user
-  console.log(user);
+  //telegram auth
   const webapp = window.Telegram.WebApp;
-
+  const { userId } = useSelector((store) => store.user);
+  console.log(userId);
   const { isWalletConnected } = useSelector((store) => store.navbar);
 
+  const dispatch = useDispatch();
   const userUsingMobile = true;
 
   useEffect(() => {
     // Initialize Telegram WebApp
     webapp.ready();
 
-    async function authenticateUser() {
+    async function initializeAuth() {
       try {
-        const response = await fetch(
-          "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/group",
-          {
-            method: "GET",
-            headers: {
-              authorization: webapp.initData,
-              "ngrok-skip-browser-warning": "true",
-            },
-          }
-        );
-        console.log(response);
+        const data = await authenticateUser(webapp, "start");
 
-        const data = await response.json();
-        console.log(data);
+        console.log("Authenticated user data:", data);
+
+        dispatch(userAuthenticated(data.data.id));
       } catch (error) {
-        console.error("Authentication failed:", error);
+        setAuthError(error.message);
       }
     }
-    authenticateUser();
+
+    initializeAuth();
   }, []);
 
   const router = createBrowserRouter([
