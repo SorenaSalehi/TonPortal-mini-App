@@ -26,12 +26,12 @@ export default function App() {
   //telegram auth
   const webapp = window.Telegram.WebApp;
   const { userId } = useSelector((store) => store.user);
-  console.log(userId);
   const { isWalletConnected } = useSelector((store) => store.navbar);
 
   const dispatch = useDispatch();
   const userUsingMobile = true;
 
+  //*authentication
   useEffect(() => {
     // Initialize Telegram WebApp
     webapp.ready();

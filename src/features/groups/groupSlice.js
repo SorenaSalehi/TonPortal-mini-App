@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isGroupAdded: false,
+  isGroupAdded: true,
+  userGroups: [],
 };
 
 const groupSlice = createSlice({
@@ -11,9 +12,12 @@ const groupSlice = createSlice({
     groupAdded(state) {
       state.isGroupAdded = true;
     },
+    userGroupsReceived(state, action) {
+      state.userGroups = action.payload;
+    },
   },
 });
 
-export const { groupAdded } = groupSlice.actions;
+export const { groupAdded, userGroupsReceived } = groupSlice.actions;
 
 export default groupSlice.reducer;
