@@ -3,12 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isGroupAdded: true,
   userGroups: [],
+  groupLoading: false,
 };
 
 const groupSlice = createSlice({
   name: "group",
   initialState,
   reducers: {
+    groupLoadingAction(state) {
+      state.groupLoading = !state.groupLoading;
+    },
     groupAdded(state) {
       state.isGroupAdded = true;
     },
@@ -18,6 +22,7 @@ const groupSlice = createSlice({
   },
 });
 
-export const { groupAdded, userGroupsReceived } = groupSlice.actions;
+export const { groupAdded, userGroupsReceived, groupLoadingAction } =
+  groupSlice.actions;
 
 export default groupSlice.reducer;

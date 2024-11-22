@@ -4,9 +4,8 @@ import { motion } from "motion/react";
 import { useModal } from "../../hooks/useModal";
 
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
-const Button = lazy(() => import("../../ui/Button"));
 
-export default function GroupsItem() {
+export default function GroupsItem({ name, img }) {
   const { isOpen, openModal, closeModal } = useModal();
 
   const content = (
@@ -26,11 +25,13 @@ export default function GroupsItem() {
         whileTap={{ scale: 0.9 }}
         viewport={{ once: true }}
         onClick={openModal}
-        className="flex justify-between px-4 py-5 font-semibold cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl text-slate-300"
+        className="flex justify-between px-4 py-3 font-semibold cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl text-slate-300"
       >
-        <div className="flex items-baseline gap-2">
-          <FaUserGroup className="text-2xl " />
-          <p className="mb-auto capitalize">group name</p>
+        <div className="flex items-center gap-2">
+          <div className="overflow-hidden rounded-full w-14 h-14">
+            <img src={img} />
+          </div>
+          <p className="text-xl capitalize">{name}</p>
         </div>
       </motion.div>
 
