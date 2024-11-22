@@ -3,21 +3,16 @@ import { motion } from "motion/react";
 
 import Button from "../../ui/Button";
 import ModalWindow from "../../ui/ModalWindow";
+import { useSelector } from "react-redux";
+import AnalyzeBox from "../../ui/AnalyzeBox";
+import { useModal } from "../../hooks/useModal";
 
 export default function GroupsAnalyzeBox() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [bgLoaded, setBgLoaded] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
 
-  useEffect(() => {
-    const video = document.createElement("video");
-    video.src = "BoxBg1.mp4";
-    video.onloadeddata = () => setBgLoaded(true);
+  // const { isGroupAdded } = useSelector((store) => store.group);
+  const isGroupAdded = true;
 
-    return () => {
-      // Clean up video element to prevent memory leaks
-      video.onloadeddata = null;
-    };
-  }, []);
   const content = (
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
@@ -30,46 +25,32 @@ export default function GroupsAnalyzeBox() {
     </p>
   );
 
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      className="relative flex flex-col items-center justify-center gap-6 w-[85%]  h-32 mx-auto overflow-hidden rounded-2xl "
-    >
-      {bgLoaded && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute object-cover w-full h-full rounded-2xl -z-10"
-        >
-          <source src="BoxBg1.mp4" type="video/mp4" />
-        </video>
+    <AnalyzeBox>
+      {isGroupAdded ? (
+        <>
+          <p className="mt-4 text-xs text-slate-300/55">
+            Get All Your Groups
+            <br /> News in a Glass
+          </p>
+
+          <Button onClick={openModal}>Check Out</Button>
+
+          <ModalWindow
+            isOpen={isOpen}
+            onRequestClose={closeModal}
+            label="GroupsModal"
+            content={content}
+            onClose={closeModal}
+          />
+        </>
+      ) : (
+        <p className="text-lg text-center text-slate-300/55">
+          Inactive
+          <br />
+          Unless There is a Group!
+        </p>
       )}
-      <div className="absolute inset-0 bg-black/5 -z-10 " />
-      <p className="mt-4 text-xs text-slate-300/55">
-        Get All Your Groups
-        <br /> News in a Glass
-      </p>
-
-      <Button onClick={openModal}>Check Out</Button>
-
-      <ModalWindow
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        label="assets modal"
-        content={content}
-        onClose={closeModal}
-      />
-    </motion.div>
+    </AnalyzeBox>
   );
 }

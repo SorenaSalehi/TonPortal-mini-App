@@ -10,6 +10,9 @@ import { convertTonBalance, filterJettons } from "../utils/helpers";
 export default async function getTonData(userAddress) {
   try {
     const res = await fetch(`https://tonapi.io/v2/accounts/${userAddress}`);
+
+    if (!res.ok) throw new Error("Ton Data could not receive!!");
+
     const data = await res.json();
 
     if (!data) throw new Error("Wallet ton balance can not fetch!!");
@@ -17,7 +20,7 @@ export default async function getTonData(userAddress) {
     const balance = convertTonBalance(data.balance);
     return { data, balance };
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
   }
 }
 
@@ -26,6 +29,8 @@ export async function getTonPrice() {
     const res = await fetch(
       `https://tonapi.io/v2/rates?tokens=ton&currencies=usd`
     );
+
+    if (!res.ok) throw new Error("Ton Data could not receive!!");
     const data = await res.json();
 
     if (data) {
@@ -44,6 +49,9 @@ export async function getJettons(userAddress) {
     const res = await fetch(
       `https://tonapi.io/v2/accounts/${userAddress}/jettons?currencies=usd`
     );
+
+    if (!res.ok) throw new Error("Ton Data could not receive!!");
+
     const data = await res.json();
 
     if (!data) throw new Error("Wallet jettons balance can not fetch!!");

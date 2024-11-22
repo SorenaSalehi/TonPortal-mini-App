@@ -7,7 +7,7 @@ const GroupsAnalyzeBox = lazy(() =>
 
 export default function GroupsPage() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <GroupsAnalyzeBox />
       <Groups />
     </div>

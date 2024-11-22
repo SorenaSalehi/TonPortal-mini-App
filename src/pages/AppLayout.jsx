@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import { Outlet } from "react-router";
-import { motion } from "motion/react";
 
-import PagesSlider from "../ui/PagesSlider";
-import Navbar from "../ui/navbar/Navbar";
+const Navbar = lazy(() => import("../ui/navbar/Navbar"));
+const Navigation = lazy(() => import("../ui/Navigation"));
 
 export default function AppLayout() {
   const [bgLoaded, setBgLoaded] = useState(false);
 
   useEffect(() => {
     const video = document.createElement("video");
-    video.src = "mainBg.mp4";
+    video.src = "/mainBg.mp4";
     video.onloadeddata = () => setBgLoaded(true);
 
     return () => {
@@ -38,10 +37,10 @@ export default function AppLayout() {
       )}
       <div className="absolute inset-0 bg-black/30 -z-10 backdrop-blur-3xl" />
       <Navbar />
-      <div className="overflow-auto no-scrollbar">
+      <div className="px-1 overflow-auto no-scrollbar">
         <Outlet />
       </div>
-      <PagesSlider />
+      <Navigation />
     </div>
   );
 }

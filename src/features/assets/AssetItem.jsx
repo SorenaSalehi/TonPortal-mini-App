@@ -2,52 +2,36 @@ import React, { lazy, useState } from "react";
 import { motion } from "motion/react";
 
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
-const Button = lazy(() => import("../../ui/Button"));
 
 import {
   calcJettonTotalPrice,
   convertJettonBalance,
-  sortJettonsByTotalPrice,
 } from "../../utils/helpers";
+import { useModal } from "../../hooks/useModal";
+import { useAssetCalculations } from "../../hooks/useAssetCalculations";
 
 export default function AssetItem({
   type,
-  symbol,
-  icon,
   tokenPrice,
   balance,
   decimals,
+  symbol,
+  icon,
 }) {
   //modal state
-  const [isOpen, setIsOpen] = useState(false);
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
+  const { isOpen, openModal, closeModal } = useModal();
 
-  const tonTotalPrice =
-    type === "ton" && balance && tokenPrice
-      ? `${(balance * tokenPrice).toFixed(2)}`
-      : "Uncertain!";
-
-  const convertedBalance = convertJettonBalance(+balance, decimals);
-
-  const jettonTotalPrice =
-    type !== "ton" && balance && tokenPrice
-      ? `${calcJettonTotalPrice(convertedBalance, tokenPrice)}`
-      : "0.00";
+  //balance
+  const { formattedTokenPrice, finalBalance, finalTotalPrice } =
+    useAssetCalculations({
+      type,
+      balance,
+      tokenPrice,
+      decimals,
+    });
 
   const Icon = type === "ton" ? "ton_symbol.png" : icon;
   const Symbol = type === "ton" ? "Toncoin" : symbol;
-  const TokenPrice =
-    tokenPrice === 0
-      ? ``
-      : `${type === "ton" ? tokenPrice : parseFloat(tokenPrice).toFixed(10)}`;
-
-  const Balance = type === "ton" ? balance : convertedBalance;
-  const TotalPrice = type === "ton" ? tonTotalPrice : jettonTotalPrice;
 
   const content = (
     <p>
@@ -75,22 +59,22 @@ export default function AssetItem({
           <p className="font-semibold tracking-wider text-blue-400 uppercase justify-self-start">
             {Symbol}
           </p>
-          <p className="tracking-wider text-slate-100/55">
-            <span className="text-xs mr-[0.1rem]">$</span>
-            {TokenPrice}
+          <p className="text-xs tracking-tight text-slate-100/55">
+            <span className="text-[0.55rem] mr-[0.1rem]">$</span>
+            {formattedTokenPrice}
           </p>
         </div>
 
         <div className="flex flex-col items-end gap-2">
           <div className="flex items-center gap-1">
             <span className="text-xs text-slate-200/25">Balance</span>
-            <p>{Balance}</p>
+            <p>{finalBalance}</p>
           </div>
           <div className="flex items-center gap-1">
             <span className="text-xs text-slate-200/25">Total</span>
             <p>
               <span className="mr-[0.1rem] text-xs">$</span>
-              {TotalPrice}
+              {finalTotalPrice}
             </p>
           </div>
         </div>

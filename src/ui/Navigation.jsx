@@ -4,9 +4,9 @@ import { FaHome } from "react-icons/fa";
 import { FaMoneyBillTransfer, FaPeopleGroup } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 
-export default function PagesSlider() {
+export default function Navigation() {
   return (
-    <motion.ul className="fixed z-10 flex justify-between px-4 py-2 overflow-hidden text-2xl transform -translate-x-1/2 rounded-2xl bottom-4 left-1/2 w-28 bg-stone-700/95 text-slate-100 btn-shadow">
+    <motion.ul className="fixed z-10 flex justify-between px-6 py-2 space-x-10 overflow-hidden text-2xl transform -translate-x-1/2 shadow-lg bg-stone-800 rounded-2xl bottom-4 left-1/2 text-slate-100 ">
       <motion.li
         whileTap={{ scale: 0.9 }}
         className="flex items-center justify-center"
@@ -14,14 +14,12 @@ export default function PagesSlider() {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `flex items-center justify-center ${
-              isActive
-                ? "scale-125 delay-200 text-slate-100"
-                : "text-slate-300/95"
+            `flex items-center justify-center w-5 ${
+              isActive ? "scale-150 delay-200 " : "opacity-50"
             }`
           }
         >
-          <FaHome />
+          <img src="home.png" loading="lazy" />
         </NavLink>
       </motion.li>
       <motion.li
@@ -31,14 +29,12 @@ export default function PagesSlider() {
         <NavLink
           to="/groups"
           className={({ isActive }) =>
-            `flex items-center justify-center ${
-              isActive
-                ? "scale-150 delay-200 text-slate-100"
-                : "text-slate-300/95"
+            `flex items-center justify-center w-5 ${
+              isActive ? "scale-150 delay-200 " : "opacity-50"
             }`
           }
         >
-          <FaPeopleGroup />
+          <img src="group.png" loading="lazy" />
         </NavLink>
       </motion.li>
     </motion.ul>
