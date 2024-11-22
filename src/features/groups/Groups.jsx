@@ -3,6 +3,7 @@ import GroupsItem from "./GroupsItem";
 import AddGroup from "./AddGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { userGroupsReceived } from "./groupSlice";
+import { authenticateUser } from "../../services/apiTel";
 
 export default function Groups() {
   const { isGroupAdded, userGroups } = useSelector((store) => store.group);
@@ -26,7 +27,7 @@ export default function Groups() {
 
         dispatch(userGroupsReceived(data));
       } catch (error) {
-        setAuthError(error.message);
+        console.error(error.message);
       }
     }
 

@@ -44,7 +44,7 @@ export default function App() {
 
         dispatch(userAuthenticated(data.data.id));
       } catch (error) {
-        setAuthError(error.message);
+        console.error(error.message);
       }
     }
 
