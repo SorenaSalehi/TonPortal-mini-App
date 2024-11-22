@@ -15,13 +15,24 @@ export default function WalletOptions({ onClick }) {
   const { isWalletSettingOpen, userAddress } = useSelector(
     (store) => store.navbar
   );
-
+  const [timeoutId, setTimeoutId] = useState(null);
   const dispatch = useDispatch();
   const walletAddress = convertWalletAddress(userAddress);
 
   function handleWalletSetting() {
     dispatch(walletSettingClicked());
-    setTimeout(() => dispatch(closeWalletSetting()), 3000);
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
+
+    const newId = setTimeout(() => {
+      dispatch(closeWalletSetting());
+      setTimeoutId(null);
+    }, 3000);
+
+    setTimeoutId(newId);
   }
 
   return (

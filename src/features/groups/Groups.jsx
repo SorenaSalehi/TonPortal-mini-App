@@ -6,7 +6,7 @@ import { FaUserGroup } from "react-icons/fa6";
 export default function Groups() {
   return (
     <>
-      <div className="flex items-center justify-between px-5 text-2xl font-semibold">
+      <div className="flex items-center justify-between text-2xl font-semibold">
         <p className="text-xs text-slate-100/55">GROUPS</p>
         <AddGroup />
       </div>

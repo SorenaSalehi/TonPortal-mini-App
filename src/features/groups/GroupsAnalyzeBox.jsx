@@ -6,18 +6,7 @@ import ModalWindow from "../../ui/ModalWindow";
 
 export default function GroupsAnalyzeBox() {
   const [isOpen, setIsOpen] = useState(false);
-  const [bgLoaded, setBgLoaded] = useState(false);
 
-  useEffect(() => {
-    const video = document.createElement("video");
-    video.src = "BoxBg1.mp4";
-    video.onloadeddata = () => setBgLoaded(true);
-
-    return () => {
-      // Clean up video element to prevent memory leaks
-      video.onloadeddata = null;
-    };
-  }, []);
   const content = (
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
@@ -44,17 +33,16 @@ export default function GroupsAnalyzeBox() {
       viewport={{ once: true }}
       className="relative flex flex-col items-center justify-center gap-6 w-[85%]  h-32 mx-auto overflow-hidden rounded-2xl "
     >
-      {bgLoaded && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute object-cover w-full h-full rounded-2xl -z-10"
-        >
-          <source src="BoxBg1.mp4" type="video/mp4" />
-        </video>
-      )}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute object-cover w-full h-full rounded-2xl -z-10"
+      >
+        <source src="BoxBg1.mp4" type="video/mp4" />
+      </video>
+
       <div className="absolute inset-0 bg-black/5 -z-10 " />
       <p className="mt-4 text-xs text-slate-300/55">
         Get All Your Groups

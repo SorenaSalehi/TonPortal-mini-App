@@ -38,7 +38,7 @@ export default function AppLayout() {
       )}
       <div className="absolute inset-0 bg-black/30 -z-10 backdrop-blur-3xl" />
       <Navbar />
-      <div className="overflow-auto no-scrollbar">
+      <div className="px-2 overflow-auto no-scrollbar">
         <Outlet />
       </div>
       <PagesSlider />

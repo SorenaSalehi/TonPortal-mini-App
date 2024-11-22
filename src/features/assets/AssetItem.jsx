@@ -75,7 +75,7 @@ export default function AssetItem({
           <p className="font-semibold tracking-wider text-blue-400 uppercase justify-self-start">
             {Symbol}
           </p>
-          <p className="tracking-wider text-slate-100/55">
+          <p className="text-sm tracking-tight text-slate-100/55">
             <span className="text-xs mr-[0.1rem]">$</span>
             {TokenPrice}
           </p>
