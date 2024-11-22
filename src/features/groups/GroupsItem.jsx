@@ -28,8 +28,12 @@ export default function GroupsItem({ name, img }) {
         className="flex justify-between px-4 py-3 font-semibold cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl text-slate-300"
       >
         <div className="flex items-center gap-2">
-          <div className="overflow-hidden rounded-full w-14 h-14">
-            <img src={!img && "/groupImg.webp"} />
+          <div
+            className={`${
+              img ? "" : "opacity-50"
+            }overflow-hidden rounded-full w-14 h-14`}
+          >
+            <img src={img ? img : "/groupImg.webp"} />
           </div>
           <p className="text-xl capitalize">{name}</p>
         </div>
