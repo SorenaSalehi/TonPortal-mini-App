@@ -9,7 +9,7 @@
 export async function authenticateUser(webapp, type) {
   try {
     const response = await fetch(
-      `https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/analysis/groups/id=-4513586841`,
+      `https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/${type}`,
       {
         method: "GET",
         headers: {
