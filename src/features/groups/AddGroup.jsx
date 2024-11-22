@@ -2,6 +2,7 @@ import React, { lazy, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { FaCopy } from "react-icons/fa";
+import { MdGroupAdd } from "react-icons/md";
 
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 const Button = lazy(() => import("../../ui/Button"));
@@ -29,7 +30,9 @@ export default function AddGroup() {
     <>
       <Toaster />
       <Button onClick={handleOpenModal} textSize=" xl ">
-        <AiOutlineUsergroupAdd />
+        <div className="w-6">
+          <img src="addGroup.png" />
+        </div>
       </Button>
       <ModalWindow
         isOpen={isOpen}
