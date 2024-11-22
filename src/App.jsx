@@ -3,10 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
-import Loader from "./ui/Loader";
-import { isMobile } from "react-device-detect";
 import NotMobileUser from "./pages/NotMobileUser";
-import WalletNotConnected from "./pages/WalletNotConnected";
 import AppLayout from "./pages/AppLayout";
 const Home = lazy(() => import("./pages/Home"));
 const GroupsPage = lazy(() => import("./pages/GroupsPage"));
@@ -24,6 +21,13 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
+  const webapp = window.Telegram.Webapp;
+  webapp.ready();
+
+  console.log(webapp.initData);
+
+  console.log(webapp.initData);
+
   const { isWalletConnected } = useSelector((store) => store.navbar);
 
   const userUsingMobile = true;
