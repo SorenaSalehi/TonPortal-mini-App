@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
@@ -21,16 +21,38 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
-  const webapp = window.Telegram.Webapp;
-  webapp.ready();
-
-  console.log(webapp.initData);
-
-  console.log(webapp.initData);
+  const [user, setUser] = useState(null); // State for authenticated user
+  console.log(user);
+  const webapp = window.Telegram.WebApp;
 
   const { isWalletConnected } = useSelector((store) => store.navbar);
 
   const userUsingMobile = true;
+
+  useEffect(() => {
+    // Initialize Telegram WebApp
+    webapp.ready();
+
+    // Extract and send `initData` to backend
+    const initData = webapp.initData;
+
+    fetch("https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start", {
+      method: "GET",
+      headers: {
+        authorization: webapp.initData,
+        "ngrok-skip-browser-warning": "true",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.valid) {
+          setUser(data.user); // Set authenticated user
+        } else {
+          console.error("Invalid Telegram authentication data.");
+        }
+      })
+      .catch((err) => console.error("Error verifying Telegram auth:", err));
+  }, []);
 
   const router = createBrowserRouter([
     {
