@@ -70,7 +70,7 @@ export default function Groups() {
         dispatch(analyzeLoadingAction());
         const data = await authenticateUser(
           webapp,
-          `/analysis/groups/id=${singleAnalyzeId}`
+          `analysis/groups/id=${singleAnalyzeId}`
         );
 
         console.log("single analyze:", data);
@@ -79,7 +79,7 @@ export default function Groups() {
       } catch (error) {
         console.error(error.message);
       } finally {
-        // dispatch(clearAnalyze());
+        dispatch(clearAnalyze());
         dispatch(analyzeLoadingAction());
       }
     }
