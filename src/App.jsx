@@ -37,7 +37,7 @@ export default function App() {
     async function authenticateUser() {
       try {
         const response = await fetch(
-          "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start",
+          "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/group",
           {
             method: "GET",
             headers: {
