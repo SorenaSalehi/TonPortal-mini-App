@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Navigation() {
   return (
-    <motion.ul className="fixed z-10 flex justify-between px-4 py-2 space-x-6 overflow-hidden text-2xl transform -translate-x-1/2 shadow-lg bg-stone-800 rounded-2xl bottom-4 left-1/2 text-slate-100 ">
+    <motion.ul className="fixed z-10 flex justify-between px-4 py-2 space-x-10 overflow-hidden text-2xl transform -translate-x-1/2 shadow-lg bg-stone-800 rounded-2xl bottom-4 left-1/2 text-slate-100 ">
       <motion.li
         whileTap={{ scale: 0.9 }}
         className="flex items-center justify-center"
@@ -14,7 +14,7 @@ export default function Navigation() {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `flex items-center justify-center w-6 ${
+            `flex items-center justify-center w-8 ${
               isActive ? "scale-150 delay-200 " : "opacity-50"
             }`
           }
@@ -29,7 +29,7 @@ export default function Navigation() {
         <NavLink
           to="/groups"
           className={({ isActive }) =>
-            `flex items-center justify-center w-6 ${
+            `flex items-center justify-center w-8 ${
               isActive ? "scale-150 delay-200 " : "opacity-50"
             }`
           }
