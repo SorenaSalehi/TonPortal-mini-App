@@ -33,9 +33,6 @@ export default function App() {
     // Initialize Telegram WebApp
     webapp.ready();
 
-    // Extract and send `initData` to backend
-    const initData = webapp.initData;
-
     async function authenticateUser() {
       try {
         const response = await fetch(
@@ -48,11 +45,12 @@ export default function App() {
             },
           }
         );
+        console.log(response);
 
         const data = await response.json();
         console.log(data);
       } catch (error) {
-        console.log("Authentication failed:", error);
+        console.error("Authentication failed:", error);
       }
     }
     authenticateUser();
