@@ -13,6 +13,7 @@ const GroupsPage = lazy(() => import("./pages/GroupsPage"));
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import WalletNotConnectedPage from "./pages/WalletNotConnected";
+import Suspense from "./ui/Suspense";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,7 +51,7 @@ export default function App() {
   ]);
 
   return (
-    <React.Suspense fallback={<Loader />}>
+    <React.Suspense fallback={<Suspense />}>
       <TonConnectUIProvider manifestUrl="https://portal-mini-app.netlify.app/tonconnect-manifest.json">
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />

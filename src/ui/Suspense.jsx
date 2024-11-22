@@ -3,15 +3,9 @@ import AppName from "./AppName";
 
 export default function Suspense() {
   return (
-    <div className="flex flex-col items-center justify-center bg-slate-800 h-dvh text-slate-100">
-      <AppName />
-      <div className="loader">
-        <div className="loader__bar"></div>
-        <div className="loader__bar"></div>
-        <div className="loader__bar"></div>
-        <div className="loader__bar"></div>
-        <div className="loader__bar"></div>
-        <div className="loader__ball"></div>
+    <div className="flex flex-col items-center justify-center bg-color h-dvh text-slate-100">
+      <div className="w-24 text-wrap animate-pulse">
+        <img src="Webp.png" />
       </div>
     </div>
   );

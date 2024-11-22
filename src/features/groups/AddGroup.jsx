@@ -31,7 +31,7 @@ export default function AddGroup() {
       <Toaster />
       <Button onClick={handleOpenModal} textSize=" xl ">
         <div className="w-6">
-          <img src="addGroup.png" />
+          <img src="addGroup.png" loading="lazy" />
         </div>
       </Button>
       <ModalWindow

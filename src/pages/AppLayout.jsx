@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import { Outlet } from "react-router";
-import { motion } from "motion/react";
 
-import Navbar from "../ui/navbar/Navbar";
-import Navigation from "../ui/Navigation";
+const Navbar = lazy(() => import("../ui/navbar/Navbar"));
+const Navigation = lazy(() => import("../ui/Navigation"));
 
 export default function AppLayout() {
   const [bgLoaded, setBgLoaded] = useState(false);

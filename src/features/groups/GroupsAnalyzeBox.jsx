@@ -3,9 +3,11 @@ import { motion } from "motion/react";
 
 import Button from "../../ui/Button";
 import ModalWindow from "../../ui/ModalWindow";
+import { useSelector } from "react-redux";
 
 export default function GroupsAnalyzeBox() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isGroupAdded } = useSelector((store) => store.group);
 
   const content = (
     <p>
@@ -44,20 +46,30 @@ export default function GroupsAnalyzeBox() {
       </video>
 
       <div className="absolute inset-0 bg-black/5 -z-10 " />
-      <p className="mt-4 text-xs text-slate-300/55">
-        Get All Your Groups
-        <br /> News in a Glass
-      </p>
+      {isGroupAdded ? (
+        <>
+          <p className="mt-4 text-xs text-slate-300/55">
+            Get All Your Groups
+            <br /> News in a Glass
+          </p>
 
-      <Button onClick={openModal}>Check Out</Button>
+          <Button onClick={openModal}>Check Out</Button>
 
-      <ModalWindow
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        label="assets modal"
-        content={content}
-        onClose={closeModal}
-      />
+          <ModalWindow
+            isOpen={isOpen}
+            onRequestClose={closeModal}
+            label="assets modal"
+            content={content}
+            onClose={closeModal}
+          />
+        </>
+      ) : (
+        <p className="text-lg text-center text-slate-300/55">
+          Inactive
+          <br />
+          Unless There is a Group!
+        </p>
+      )}
     </motion.div>
   );
 }

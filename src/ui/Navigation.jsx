@@ -16,12 +16,12 @@ export default function Navigation() {
           className={({ isActive }) =>
             `flex items-center justify-center w-6 ${
               isActive
-                ? "scale-125 delay-200 text-slate-100"
+                ? "scale-150 delay-200 text-slate-100"
                 : "text-slate-300/95"
             }`
           }
         >
-          <img src="home.png" />
+          <img src="home.png" loading="lazy" />
         </NavLink>
       </motion.li>
       <motion.li
@@ -38,7 +38,7 @@ export default function Navigation() {
             }`
           }
         >
-          <img src="group.png" />
+          <img src="group.png" loading="lazy" />
         </NavLink>
       </motion.li>
     </motion.ul>
