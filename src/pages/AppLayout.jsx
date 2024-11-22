@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import { motion } from "motion/react";
 
-import PagesSlider from "../ui/PagesSlider";
 import Navbar from "../ui/navbar/Navbar";
+import Navigation from "../ui/Navigation";
 
 export default function AppLayout() {
   const [bgLoaded, setBgLoaded] = useState(false);
@@ -41,7 +41,7 @@ export default function AppLayout() {
       <div className="px-2 overflow-auto no-scrollbar">
         <Outlet />
       </div>
-      <PagesSlider />
+      <Navigation />
     </div>
   );
 }

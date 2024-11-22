@@ -4,9 +4,9 @@ import { FaHome } from "react-icons/fa";
 import { FaMoneyBillTransfer, FaPeopleGroup } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 
-export default function PagesSlider() {
+export default function Navigation() {
   return (
-    <motion.ul className="fixed z-10 flex justify-between px-4 py-2 space-x-6 overflow-hidden text-2xl transform -translate-x-1/2 rounded-2xl bottom-4 left-1/2 bg-stone-700/95 text-slate-100 ">
+    <motion.ul className="fixed z-10 flex justify-between px-4 py-2 space-x-6 overflow-hidden text-2xl transform -translate-x-1/2 bg-gray-800 shadow-lg rounded-2xl bottom-4 left-1/2 text-slate-100 ">
       <motion.li
         whileTap={{ scale: 0.9 }}
         className="flex items-center justify-center"

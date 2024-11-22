@@ -84,12 +84,12 @@ export default function ModalWindow({
               className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty"
             >
               {content}
+              {isScrollable && (
+                <div className="absolute right-0 p-1 rounded-full bg-white/15 bottom-2 animate-bounce">
+                  <FaChevronDown className="text-blue-500 " />
+                </div>
+              )}
             </main>
-            {isScrollable && (
-              <div className="absolute right-0 p-1 rounded-full bg-white/75 bottom-2 animate-bounce">
-                <FaChevronDown className="text-blue-500 " />
-              </div>
-            )}
           </div>
         )}
       </motion.div>
