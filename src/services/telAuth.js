@@ -13,7 +13,7 @@
 export async function authenticateUser(webapp) {
   try {
     const response = await fetch(
-      "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start",
+      "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/group",
       {
         method: "GET",
         headers: {
@@ -30,7 +30,6 @@ export async function authenticateUser(webapp) {
     if (data.status !== "success")
       throw new Error("user data could not receive!!");
 
-    
     return data;
   } catch (error) {
     console.error("Authentication failed:", error);
