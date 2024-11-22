@@ -59,7 +59,7 @@ export default function Groups() {
 
     getUserGroups();
   }, []);
-
+  console.log(singleAnalyzeId);
   //*get single analyze
   useEffect(() => {
     // Initialize Telegram WebApp
@@ -79,7 +79,7 @@ export default function Groups() {
       } catch (error) {
         console.error(error.message);
       } finally {
-        dispatch(clearAnalyze());
+        // dispatch(clearAnalyze());
         dispatch(analyzeLoadingAction());
       }
     }
