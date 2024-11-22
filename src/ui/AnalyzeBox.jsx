@@ -14,9 +14,9 @@ export default function AnalyzeBox({ children }) {
         muted
         loop
         playsInline
-        className="absolute object-cover w-full h-full rounded-2xl -z-10"
+        className="absolute object-cover w-[100%] h-[100%] rounded-2xl -z-10"
       >
-        <source src="BoxBg1.mp4" type="video/mp4" />
+        <source src="/BoxBg1.mp4" type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-black/5 -z-10 " />

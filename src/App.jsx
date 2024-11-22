@@ -36,22 +36,26 @@ export default function App() {
     // Extract and send `initData` to backend
     const initData = webapp.initData;
 
-    fetch("https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start", {
-      method: "GET",
-      headers: {
-        authorization: webapp.initData,
-        "ngrok-skip-browser-warning": "true",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.valid) {
-          setUser(data.user); // Set authenticated user
-        } else {
-          console.error("Invalid Telegram authentication data.");
-        }
-      })
-      .catch((err) => console.error("Error verifying Telegram auth:", err));
+    async function authenticateUser() {
+      try {
+        const response = await fetch(
+          "https://e0ed-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/start",
+          {
+            method: "GET",
+            headers: {
+              authorization: webapp.initData,
+              "ngrok-skip-browser-warning": "true",
+            },
+          }
+        );
+
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.log("Authentication failed:", error);
+      }
+    }
+    authenticateUser();
   }, []);
 
   const router = createBrowserRouter([

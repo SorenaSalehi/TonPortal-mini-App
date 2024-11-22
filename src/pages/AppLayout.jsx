@@ -9,7 +9,7 @@ export default function AppLayout() {
 
   useEffect(() => {
     const video = document.createElement("video");
-    video.src = "mainBg.mp4";
+    video.src = "/mainBg.mp4";
     video.onloadeddata = () => setBgLoaded(true);
 
     return () => {
