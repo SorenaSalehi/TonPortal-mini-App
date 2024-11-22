@@ -29,7 +29,7 @@ export default function GroupsItem({ name, img }) {
       >
         <div className="flex items-center gap-2">
           <div className="overflow-hidden rounded-full w-14 h-14">
-            <img src={img} />
+            <img src={img && "/groupImg.webp"} />
           </div>
           <p className="text-xl capitalize">{name}</p>
         </div>
