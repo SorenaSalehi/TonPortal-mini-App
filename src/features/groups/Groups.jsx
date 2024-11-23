@@ -80,34 +80,32 @@ export default function Groups() {
   console.log(singleAnalyzeId);
 
   //*get single analyze
-  // useEffect(() => {
-  //   // webapp.ready();
+  useEffect(() => {
+    //* when modal open
+    async function getSingleAnalyze() {
+      console.log(singleAnalyzeId);
+      try {
+        dispatch(analyzeLoadingAction());
+        const data = await authenticateUser(
+          webapp,
+          `analysis/groups/id=-4513586841`
+        );
 
-  //   //* when modal open
-  //   async function getSingleAnalyze() {
-  //     console.log(singleAnalyzeId);
-  //     try {
-  //       dispatch(analyzeLoadingAction());
-  //       const data = await authenticateUser(
-  //         webapp,
-  //         `analysis/groups/id=${singleAnalyzeId}`
-  //       );
+        console.log("single analyze:", data);
 
-  //       console.log("single analyze:", data);
+        if (data) dispatch(singleAnalyzeReceive(data.data));
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        dispatch(clearAnalyze());
+        dispatch(analyzeLoadingAction());
+      }
+    }
 
-  //       if (data) dispatch(singleAnalyzeReceive(data.data));
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     } finally {
-  //       dispatch(clearAnalyze());
-  //       dispatch(analyzeLoadingAction());
-  //     }
-  //   }
+    getSingleAnalyze();
 
-  //   getSingleAnalyze();
-
-  //   //* when modal open
-  // }, [isOpen]);
+    //* when modal open
+  }, []);
   // const isGroupAdded = true;
 
   if (!isGroupAdded)
@@ -128,7 +126,7 @@ export default function Groups() {
       </div>
 
       <div className="flex flex-col gap-2 overflow-auto no-scrollbar">
-        {userGroups.map((group) => (
+        {userGroups?.map((group) => (
           <GroupsItem
             name={group.groupName}
             img={group.PhotoUrl}
