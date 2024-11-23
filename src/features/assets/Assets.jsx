@@ -66,9 +66,9 @@ export default function Assets() {
       />
     );
 
-  if (!jettonsLoading && jettonsData) {
-    dispatch(allTokenSymbols(getAllTokensName(jettonsData)));
-  }
+  // if (!jettonsLoading && jettonsData) {
+  //   dispatch(allTokenSymbols(getAllTokensName(jettonsData)));
+  // }
 
   return (
     <>
