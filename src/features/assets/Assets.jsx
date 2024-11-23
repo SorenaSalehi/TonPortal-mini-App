@@ -56,30 +56,30 @@ export default function Assets() {
 
   const webapp = window.Telegram.WebApp;
 
-  //* when modal open
-  useEffect(() => {
-    webapp.ready();
+  // //* when modal open
+  // useEffect(() => {
+  //   webapp.ready();
 
-    async function getSingleAnalyze() {
-      try {
-        dispatch(assetsAnalyzeLoadingAction());
-        const data = await getTokenAnalyze(webapp, `${singleAnalyzeToken}`);
+  //   async function getSingleAnalyze() {
+  //     try {
+  //       dispatch(assetsAnalyzeLoadingAction());
+  //       const data = await getTokenAnalyze(webapp, `${singleAnalyzeToken}`);
 
-        console.log("single analyze:", data);
+  //       console.log("single analyze:", data);
 
-        if (data) dispatch(oneAssetAnalyzeReceive(data.data));
-      } catch (error) {
-        console.error(error.message);
-      } finally {
-        dispatch(clearAssetsAnalyze());
-        dispatch(assetsAnalyzeLoadingAction());
-      }
-    }
+  //       if (data) dispatch(oneAssetAnalyzeReceive(data.data));
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     } finally {
+  //       dispatch(clearAssetsAnalyze());
+  //       dispatch(assetsAnalyzeLoadingAction());
+  //     }
+  //   }
 
-    getSingleAnalyze();
+  //   getSingleAnalyze();
 
-    //* when modal open
-  }, [isOpen]);
+  //   //* when modal open
+  // }, [isOpen]);
 
   //* if ton data or jettons error
   if (tonDataError || jettonsError)

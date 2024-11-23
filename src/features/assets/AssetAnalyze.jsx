@@ -17,33 +17,33 @@ export default function AssetAnalyze() {
 
   const { allAssetsToken, allAssetsContent, assetsAnalyzeLoading } =
     useSelector((store) => store.asset);
-  const webapp = window.Telegram.WebApp;
+  // const webapp = window.Telegram.WebApp;
 
   const dispatch = useDispatch();
   //*get all analyze
-  useEffect(() => {
-    webapp.ready();
-    //* when modal open
-    async function getAllAssetsAnalyze() {
-      try {
-        dispatch(assetsAnalyzeLoadingAction());
-        const data = await getTokenAnalyze(webapp, `${allAssetsToken}`);
+  // useEffect(() => {
+  //   webapp.ready();
+  //   //* when modal open
+  //   async function getAllAssetsAnalyze() {
+  //     try {
+  //       dispatch(assetsAnalyzeLoadingAction());
+  //       const data = await getTokenAnalyze(webapp, `${allAssetsToken}`);
 
-        console.log("all token analyze:", data);
+  //       console.log("all token analyze:", data);
 
-        if (data) dispatch(allAssetsAnalyzeReceive(data.data));
-      } catch (error) {
-        console.error(error.message);
-      } finally {
-        dispatch(clearAssetsAnalyze());
-        dispatch(assetsAnalyzeLoadingAction());
-      }
-    }
+  //       if (data) dispatch(allAssetsAnalyzeReceive(data.data));
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     } finally {
+  //       dispatch(clearAssetsAnalyze());
+  //       dispatch(assetsAnalyzeLoadingAction());
+  //     }
+  //   }
 
-    getAllAssetsAnalyze();
+  //   getAllAssetsAnalyze();
 
-    //* when modal open
-  }, [isOpen]);
+  //   //* when modal open
+  // }, [isOpen]);
 
   return (
     <AnalyzeBox>

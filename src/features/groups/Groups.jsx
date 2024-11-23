@@ -15,6 +15,7 @@ import Loader from "../../ui/Loader";
 import { getAllUserGroupsId } from "../../utils/helpers";
 import { useModal } from "../../hooks/useModal";
 import ModalWindow from "../../ui/ModalWindow";
+import { webapp } from "../../App";
 
 // const groups = [
 //   {
@@ -44,14 +45,14 @@ export default function Groups() {
 
   console.log(userGroups);
 
-  const webapp = window.Telegram.WebApp;
+  // const webapp = window.Telegram.WebApp;
 
   const dispatch = useDispatch();
 
   //*get group
   useEffect(() => {
     // Initialize Telegram WebApp
-    webapp.ready();
+    // webapp.ready();
 
     async function getUserGroups() {
       try {
@@ -79,34 +80,34 @@ export default function Groups() {
   console.log(singleAnalyzeId);
 
   //*get single analyze
-  useEffect(() => {
-    webapp.ready();
+  // useEffect(() => {
+  //   // webapp.ready();
 
-    //* when modal open
-    async function getSingleAnalyze() {
-      console.log(singleAnalyzeId);
-      try {
-        dispatch(analyzeLoadingAction());
-        const data = await authenticateUser(
-          webapp,
-          `analysis/groups/id=${singleAnalyzeId}`
-        );
+  //   //* when modal open
+  //   async function getSingleAnalyze() {
+  //     console.log(singleAnalyzeId);
+  //     try {
+  //       dispatch(analyzeLoadingAction());
+  //       const data = await authenticateUser(
+  //         webapp,
+  //         `analysis/groups/id=${singleAnalyzeId}`
+  //       );
 
-        console.log("single analyze:", data);
+  //       console.log("single analyze:", data);
 
-        if (data) dispatch(singleAnalyzeReceive(data.data));
-      } catch (error) {
-        console.error(error.message);
-      } finally {
-        dispatch(clearAnalyze());
-        dispatch(analyzeLoadingAction());
-      }
-    }
+  //       if (data) dispatch(singleAnalyzeReceive(data.data));
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     } finally {
+  //       dispatch(clearAnalyze());
+  //       dispatch(analyzeLoadingAction());
+  //     }
+  //   }
 
-    getSingleAnalyze();
+  //   getSingleAnalyze();
 
-    //* when modal open
-  }, [isOpen]);
+  //   //* when modal open
+  // }, [isOpen]);
   // const isGroupAdded = true;
 
   if (!isGroupAdded)
