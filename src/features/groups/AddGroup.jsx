@@ -44,7 +44,7 @@ export default function AddGroup() {
             className="flex items-center gap-5 p-1"
             onClick={copyToClipboard}
           >
-            a3s1ascasc3a51ac3a5c1
+            @tonportalprobot
             <span className="text-sm text-green-500/55 animate-pulse">
               <FaCopy />
             </span>
