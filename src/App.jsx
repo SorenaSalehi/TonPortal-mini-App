@@ -25,15 +25,15 @@ const queryClient = new QueryClient({
     },
   },
 });
-export const webapp = window.Telegram.WebApp;
 
+export const webapp = window.Telegram.WebApp;
+webapp.ready();
 export default function App() {
   //telegram auth
   const { userId } = useSelector((store) => store.user);
   const { isWalletConnected } = useSelector((store) => store.navbar);
 
   const dispatch = useDispatch();
-  webapp.ready();
 
   const userUsingMobile = true;
   //*authentication
