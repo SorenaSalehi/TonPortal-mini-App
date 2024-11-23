@@ -21,11 +21,6 @@ export default function WalletNotConnectedPage() {
     dispatch(walletConnected(userAddress));
   }
 
-  // useEffect(() => {
-  //   if (wallet && userAddress) {
-  //     dispatch(walletConnected(userAddress));
-  //   }
-  // }, [wallet, dispatch, userAddress]);
 
   return (
     <div className="flex flex-col items-center p-4 text-slate-100 h-dvh justify-evenly">
