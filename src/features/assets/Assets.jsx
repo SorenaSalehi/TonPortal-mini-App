@@ -69,8 +69,6 @@ export default function Assets() {
 
   if (jettonsData) {
     const tokens = getAllTokensName(jettonsData);
-    console.log("tokens", tokens);
-    console.log("tokensArr", tokens.join(","));
     dispatch(allTokenSymbols(tokens.join(",")));
   }
 

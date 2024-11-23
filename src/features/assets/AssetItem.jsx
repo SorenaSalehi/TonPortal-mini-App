@@ -39,7 +39,6 @@ export default function AssetItem({
       dispatch(analyzeOneToken(symbol));
 
       const data = await getTokenAnalyze(webapp, symbol);
-      console.log("one token ", data);
       if (data.status === "success") {
         dispatch(oneAssetAnalyzeReceive(data?.data));
       }

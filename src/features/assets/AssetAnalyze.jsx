@@ -26,10 +26,8 @@ export default function AssetAnalyze() {
     try {
       dispatch(assetsAnalyzeLoadingAction());
       openModal();
-      console.log("all asset", allAssetsToken);
       // Make the API call
       const data = await getTokenAnalyze(webapp, allAssetsToken);
-      console.log("all assets content:", data);
 
       if (data?.status === "success") {
         dispatch(allAssetsAnalyzeReceive(data?.data));
