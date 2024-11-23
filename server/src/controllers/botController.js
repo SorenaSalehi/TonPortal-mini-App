@@ -56,6 +56,7 @@ export const newAddsHandler = async (msg, bot) => {
 // get group meassages and seva to buffer
 const messageBuffer = new Map();
 export const NewMessagesHandler = async (msg) => {
+    console.log(msg)
     if (!msg.text) return
     const groupId = msg.chat.id;
 
