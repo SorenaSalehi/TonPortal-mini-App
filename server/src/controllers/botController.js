@@ -2,7 +2,7 @@ import Group from './../models/groupModel.js'
 import User from './../models/userModel.js'
 import bot from './../app.js';
 const saveToDbInterval = 20 * 1000;
-const messageLimit = 5
+const messageLimit = 50
 
 
 // get bot new group and seva to db
