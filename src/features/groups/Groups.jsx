@@ -33,6 +33,8 @@ import { webapp } from "../../App";
 // ];
 
 export default function Groups() {
+  const webapp = window.Telegram.WebApp;
+
   const {
     isGroupAdded,
     userGroups,

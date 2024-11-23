@@ -13,8 +13,10 @@ import { webapp } from "../../App";
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 
 export default function GroupsItem({ name, img, id, openModal }) {
+  const webapp = window.Telegram.WebApp;
+
   const dispatch = useDispatch();
-  
+
   async function handleClick() {
     try {
       dispatch(analyzeLoadingAction());

@@ -14,6 +14,8 @@ import { authenticateUser } from "../../services/apiTel";
 import { webapp } from "../../App";
 
 export default function GroupsAnalyzeBox() {
+  const webapp = window.Telegram.WebApp;
+
   const { isOpen, openModal, closeModal } = useModal();
 
   const { analyzeLoading, allGroupsId, allGroupsContent } = useSelector(
