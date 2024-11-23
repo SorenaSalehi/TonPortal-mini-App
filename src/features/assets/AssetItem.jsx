@@ -1,9 +1,6 @@
 import React, { lazy, useState } from "react";
 import { motion } from "motion/react";
 
-const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
-
-import { useModal } from "../../hooks/useModal";
 import { useAssetCalculations } from "../../hooks/useAssetCalculations";
 import { useDispatch } from "react-redux";
 import {
