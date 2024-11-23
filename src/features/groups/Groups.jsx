@@ -45,13 +45,10 @@ export default function Groups() {
 
   console.log(userGroups);
 
-
   const dispatch = useDispatch();
 
   //*get group
   useEffect(() => {
-    
-
     async function getUserGroups() {
       try {
         dispatch(groupLoadingAction());
@@ -75,8 +72,6 @@ export default function Groups() {
 
     getUserGroups();
   }, []);
-
-
 
   if (!isGroupAdded)
     return (
@@ -105,6 +100,7 @@ export default function Groups() {
           />
         ))}
       </div>
+      <div>{!analyzeLoading && singleAnalyzeContent}</div>
       <ModalWindow
         isOpen={isOpen}
         onRequestClose={closeModal}

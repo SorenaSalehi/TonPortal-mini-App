@@ -30,7 +30,7 @@ export default function GroupsItem({ name, img, id, openModal }) {
       console.log("single analyze:", data);
 
       if (data) {
-        dispatch(singleAnalyzeReceive(data));
+        dispatch(singleAnalyzeReceive(data.data));
       }
     } catch (error) {
       console.error(error.message);
