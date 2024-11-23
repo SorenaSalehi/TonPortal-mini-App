@@ -11,7 +11,7 @@ export default function ModalWindow({
   isOpen,
   label,
   onRequestClose,
-  content,
+  content = "something went Wrong!!",
   children,
   height = "30rem",
 }) {

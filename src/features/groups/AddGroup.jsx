@@ -11,7 +11,7 @@ const Button = lazy(() => import("../../ui/Button"));
 export default function AddGroup() {
   const { isOpen, openModal, closeModal } = useModal();
 
-  const botAddress = "a3s1ascasc3a51ac3a5c1";
+  const botAddress = "@tonportalprobot";
 
   const copyToClipboard = async () => {
     closeModal();
