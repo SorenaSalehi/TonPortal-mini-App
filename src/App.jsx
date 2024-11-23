@@ -26,15 +26,58 @@ const queryClient = new QueryClient({
   },
 });
 
+// Custom hook for authentication
+function useAuth() {
+  const webapp = window.Telegram.WebApp;
+  const dispatch = useDispatch();
+
+  return useQuery({
+    queryKey: ["auth"],
+    queryFn: async () => {
+      webapp.ready();
+      const data = await authenticateUser(webapp, "start");
+      dispatch(userAuthenticated(data.data.id));
+      return data;
+    },
+    // Don't refetch on window focus or network reconnection
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    // Error handling
+    onError: (error) => {
+      console.error("Authentication error:", error.message);
+    },
+  });
+}
+
 export default function App() {
   //telegram auth
-  const webapp = window.Telegram.WebApp;
-  webapp.ready();
-
+  // const webapp = window.Telegram.WebApp;
   const { userId } = useSelector((store) => store.user);
   const { isWalletConnected } = useSelector((store) => store.navbar);
 
+  // const dispatch = useDispatch();
+  // webapp.ready();
+
   const userUsingMobile = true;
+  //*authentication
+  // useEffect(() => {
+  //   // Initialize Telegram WebApp
+  //   webapp.ready();
+
+  //   async function initializeAuth() {
+  //     try {
+  //       const data = await authenticateUser(webapp, "start");
+
+  //       console.log("Authenticated user data:", data);
+
+  //       dispatch(userAuthenticated(data.data.id));
+  //     } catch (error) {
+  //       console.error(error.message);
+  //     }
+  //   }
+
+  //   initializeAuth();
+  // }, []);
 
   const router = createBrowserRouter([
     {
@@ -60,8 +103,8 @@ export default function App() {
 
   return (
     <React.Suspense fallback={<Suspense />}>
-      <QueryClientProvider client={queryClient}>
-        <TonConnectUIProvider manifestUrl="https://portal-mini-app.netlify.app/tonconnect-manifest.json">
+      <TonConnectUIProvider manifestUrl="https://portal-mini-app.netlify.app/tonconnect-manifest.json">
+        <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <RouterProvider
             router={router}
@@ -69,8 +112,8 @@ export default function App() {
               v7_skipActionErrorRevalidation: true,
             }}
           />
-        </TonConnectUIProvider>
-      </QueryClientProvider>
+        </QueryClientProvider>
+      </TonConnectUIProvider>
     </React.Suspense>
   );
 }
