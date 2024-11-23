@@ -17,7 +17,6 @@ export default function ModalWindow({
 }) {
   const [isScrollable, setIsScrollable] = useState(false);
   const contentRef = useRef(null);
-  console.log("Modal content:", content);
 
   useEffect(() => {
     const checkScrollable = () => {
@@ -82,10 +81,10 @@ export default function ModalWindow({
           <div className="relative">
             <main
               ref={contentRef}
-              className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty"
+              className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty text-blue-500 font-mono font-semibold"
             >
               {/* after loading display the analyze */}
-              {isDataLoading ? <Loader /> : content}
+              {isDataLoading ? <Loader /> : content.replaceAll('"', "")}
 
               {/* show to user for scroll to see more content  */}
               {isScrollable && (

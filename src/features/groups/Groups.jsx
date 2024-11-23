@@ -85,7 +85,6 @@ export default function Groups() {
 
   return (
     <>
-      <div className="z-30">{singleAnalyzeContent}</div>
       <div className="flex items-center justify-between text-2xl font-semibold">
         {isGroupAdded && <p className="text-xs text-slate-100/55">GROUPS</p>}
         <AddGroup />
