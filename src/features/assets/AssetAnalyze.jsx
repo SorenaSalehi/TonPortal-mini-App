@@ -14,8 +14,6 @@ import { getTokenAnalyze } from "../../services/apiTel";
 import { webapp } from "../../App";
 
 export default function AssetAnalyze() {
-  const webapp = window.Telegram.WebApp;
-
   const { isOpen, openModal, closeModal } = useModal();
 
   const { allAssetsToken, allAssetsContent, assetsAnalyzeLoading } =

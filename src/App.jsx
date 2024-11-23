@@ -26,9 +26,10 @@ const queryClient = new QueryClient({
   },
 });
 
+export const webapp = window.Telegram.WebApp;
+webapp.ready();
 export default function App() {
   //telegram auth
-  const webapp = window.Telegram.WebApp;
   const { userId } = useSelector((store) => store.user);
   const { isWalletConnected } = useSelector((store) => store.navbar);
 
@@ -37,7 +38,6 @@ export default function App() {
   //*authentication
   useEffect(() => {
     // Initialize Telegram WebApp
-    webapp.ready();
 
     async function initializeAuth() {
       try {

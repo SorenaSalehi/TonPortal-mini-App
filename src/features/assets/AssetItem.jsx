@@ -24,8 +24,6 @@ export default function AssetItem({
   openModal,
   tokenName,
 }) {
-  const webapp = window.Telegram.WebApp;
-
   const dispatch = useDispatch();
 
   //balance

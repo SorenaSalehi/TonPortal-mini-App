@@ -17,8 +17,6 @@ import ModalWindow from "../../ui/ModalWindow";
 import { getAllTokensName } from "../../utils/helpers";
 
 export default function Assets() {
-  const webapp = window.Telegram.WebApp;
-
   const { userAddress } = useSelector((store) => store.navbar);
   const { assetsAnalyzeLoading, singleAnalyzeContent, singleAnalyzeToken } =
     useSelector((store) => store.asset);
