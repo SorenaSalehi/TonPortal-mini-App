@@ -6,7 +6,7 @@ export default function AppName({ type }) {
       <div className={type === "modal" ? "w-4" : `w-8`}>
         <img src="Webp.png" className="w-full h-auto" />
       </div>
-      <p className={type === "modal" ? "text-xs" : `text-lg`}>Portal</p>
+      <p className={type === "modal" ? "text-xs" : `text-lg`}>ortal</p>
     </p>
   );
 }
