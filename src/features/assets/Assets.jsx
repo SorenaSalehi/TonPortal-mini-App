@@ -54,33 +54,6 @@ export default function Assets() {
     queryFn: () => getJettons(userAddress),
   });
 
-  const webapp = window.Telegram.WebApp;
-
-  // //* when modal open
-  // useEffect(() => {
-  //   webapp.ready();
-
-  //   async function getSingleAnalyze() {
-  //     try {
-  //       dispatch(assetsAnalyzeLoadingAction());
-  //       const data = await getTokenAnalyze(webapp, `${singleAnalyzeToken}`);
-
-  //       console.log("single analyze:", data);
-
-  //       if (data) dispatch(oneAssetAnalyzeReceive(data.data));
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     } finally {
-  //       dispatch(clearAssetsAnalyze());
-  //       dispatch(assetsAnalyzeLoadingAction());
-  //     }
-  //   }
-
-  //   getSingleAnalyze();
-
-  //   //* when modal open
-  // }, [isOpen]);
-
   //* if ton data or jettons error
   if (tonDataError || jettonsError)
     return (
@@ -130,6 +103,7 @@ export default function Assets() {
                 symbol={token.jetton.symbol}
                 key={token.jetton.name}
                 isModalOpen={openModal}
+                tokenName={token.jetton.name}
               />
             ))}
           </>

@@ -79,7 +79,7 @@ export default function App() {
 
   return (
     <React.Suspense fallback={<Suspense />}>
-      <TonConnectUIProvider manifestUrl="https://portal-mini-app.netlify.app/tonconnect-manifest.json">
+      <TonConnectUIProvider manifestUrl="https://tonportal.pro/tonconnect-manifest.json">
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <RouterProvider

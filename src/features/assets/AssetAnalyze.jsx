@@ -11,39 +11,34 @@ import {
   clearAssetsAnalyze,
 } from "./assetsSlice";
 import { getTokenAnalyze } from "../../services/apiTel";
+import { webapp } from "../../App";
 
 export default function AssetAnalyze() {
   const { isOpen, openModal, closeModal } = useModal();
 
   const { allAssetsToken, allAssetsContent, assetsAnalyzeLoading } =
     useSelector((store) => store.asset);
-  // const webapp = window.Telegram.WebApp;
 
   const dispatch = useDispatch();
-  //*get all analyze
-  // useEffect(() => {
-  //   webapp.ready();
-  //   //* when modal open
-  //   async function getAllAssetsAnalyze() {
-  //     try {
-  //       dispatch(assetsAnalyzeLoadingAction());
-  //       const data = await getTokenAnalyze(webapp, `${allAssetsToken}`);
 
-  //       console.log("all token analyze:", data);
+  async function handleClick() {
+    try {
+      dispatch(assetsAnalyzeLoadingAction());
+      openModal();
 
-  //       if (data) dispatch(allAssetsAnalyzeReceive(data.data));
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     } finally {
-  //       dispatch(clearAssetsAnalyze());
-  //       dispatch(assetsAnalyzeLoadingAction());
-  //     }
-  //   }
+      // Make the API call
+      const data = await getTokenAnalyze(webapp, allAssetsToken);
+      console.log("all assets:", data);
 
-  //   getAllAssetsAnalyze();
-
-  //   //* when modal open
-  // }, [isOpen]);
+      if (data?.status === "success") {
+        dispatch(allAssetsAnalyzeReceive(data?.data));
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      dispatch(assetsAnalyzeLoadingAction());
+    }
+  }
 
   return (
     <AnalyzeBox>
@@ -51,7 +46,7 @@ export default function AssetAnalyze() {
         Get All Your Groups News in a Glans
       </p>
 
-      <Button onClick={openModal}>Open</Button>
+      <Button onClick={handleClick}>Open</Button>
 
       <ModalWindow
         isOpen={isOpen}

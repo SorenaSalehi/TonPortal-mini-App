@@ -6,7 +6,13 @@ const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 import { useModal } from "../../hooks/useModal";
 import { useAssetCalculations } from "../../hooks/useAssetCalculations";
 import { useDispatch } from "react-redux";
-import { analyzeOneToken } from "./assetsSlice";
+import {
+  analyzeOneToken,
+  assetsAnalyzeLoadingAction,
+  oneAssetAnalyzeReceive,
+} from "./assetsSlice";
+import { getTokenAnalyze } from "../../services/apiTel";
+import { webapp } from "../../App";
 
 export default function AssetItem({
   type,
@@ -29,9 +35,22 @@ export default function AssetItem({
       decimals,
     });
 
-  function handleClick() {
-    openModal();
-    dispatch(analyzeOneToken(tokenName));
+  async function handleClick() {
+    try {
+      dispatch(assetsAnalyzeLoadingAction());
+      openModal();
+      dispatch(analyzeOneToken(tokenName));
+
+      const data = await getTokenAnalyze(webapp, tokenName);
+
+      if (data.status === "success") {
+        dispatch(oneAssetAnalyzeReceive(data));
+      }
+    } catch (err) {
+      console.error("can not receive token data!!");
+    } finally {
+      dispatch(assetsAnalyzeLoadingAction());
+    }
   }
 
   const Icon = type === "ton" ? "ton_symbol.png" : icon;

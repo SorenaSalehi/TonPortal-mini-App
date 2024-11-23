@@ -34,6 +34,7 @@ export default function GroupsAnalyzeBox() {
         webapp,
         `analysis/groups?id=${allGroupsId.join(",")}`
       );
+      console.log(allGroupsId.join(","));
       console.log("all analyz:", data);
       if (data?.status === "success") {
         dispatch(allAnalyzeReceive(data?.data));

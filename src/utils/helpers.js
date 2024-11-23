@@ -55,9 +55,8 @@ export function getAllUserGroupsId(data) {
 }
 
 export function getAllTokensName(data) {
-  const allData = data.map((data) => data.jetton.symbol);
-  console.log(["toncoin", ...allData]);
-  return ["toncoin", ...allData];
+  const allTokens = data.map((data) => data.jetton.symbol);
+  return ["toncoin", allTokens.join(",")];
 }
 
 // {
