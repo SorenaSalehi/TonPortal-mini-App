@@ -54,3 +54,40 @@ export function getAllUserGroupsId(data) {
   const ids = data.map((group) => group.groupId);
   return ids.split(",");
 }
+
+export function getAllTokensName(data) {
+  const allData = data.map((data) => data.jetton.symbol);
+  console.log(["toncoin", ...allData]);
+  return ["toncoin", ...allData];
+}
+
+// {
+//   "balance": "0",
+//   "price": {
+//       "prices": {
+//           "USD": 0.0000070311553513569245
+//       },
+//       "diff_24h": {
+//           "USD": "−3.78%"
+//       },
+//       "diff_7d": {
+//           "USD": "0.00%"
+//       },
+//       "diff_30d": {
+//           "USD": "0.00%"
+//       }
+//   },
+//   "wallet_address": {
+//       "address": "0:2ebb16533d26b20c08f058ab6d59ca825eb9593613407111c487b01db86f7304",
+//       "is_scam": false,
+//       "is_wallet": false
+//   },
+//   "jetton": {
+//       "address": "0:83ee5aebc6939cab903947a9d32de17592e21b97504a09ee4e9da9c67b7701e0",
+//       "name": "RabBitcoin",
+//       "symbol": "RBTC",
+//       "decimals": 9,
+//       "image": "https://cache.tonapi.io/imgproxy/ov0e9-NpM7QE-QAWix44xTepBkPSRRHWkrdnHrOb3nI/rs:fill:200:200:1/g:no/aHR0cHM6Ly9jZG4ucm9ja3lyYWJiaXQuaW8vcmJ0Yy1pY29uLzUxMng1MTIucG5n.webp",
+//       "verification": "whitelist"
+//   }
+// },

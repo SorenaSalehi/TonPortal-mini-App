@@ -84,6 +84,7 @@ export default function Groups() {
 
     //* when modal open
     async function getSingleAnalyze() {
+      console.log(singleAnalyzeId);
       try {
         dispatch(analyzeLoadingAction());
         const data = await authenticateUser(

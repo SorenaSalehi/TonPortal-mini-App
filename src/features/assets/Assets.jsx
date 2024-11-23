@@ -2,9 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import AssetItem from "./AssetItem";
 import getTonData, { getJettons, getTonPrice } from "../../services/apiTon";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../hooks/useModal";
 import {
+  allTokenSymbols,
   assetsAnalyzeLoadingAction,
   clearAssetsAnalyze,
   oneAssetAnalyzeReceive,
@@ -13,12 +14,15 @@ import { getTokenAnalyze } from "../../services/apiTel";
 import { useEffect } from "react";
 import Loader from "../../ui/Loader";
 import ModalWindow from "../../ui/ModalWindow";
+import { getAllTokensName } from "../../utils/helpers";
 
 export default function Assets() {
   const { userAddress } = useSelector((store) => store.navbar);
-  const { analyzeLoading, singleAnalyzeContent, singleAnalyzeToken } =
+  const { assetsAnalyzeLoading, singleAnalyzeContent, singleAnalyzeToken } =
     useSelector((store) => store.asset);
   const { isOpen, openModal, closeModal } = useModal();
+
+  const dispatch = useDispatch();
 
   //ton data
   const {
@@ -29,7 +33,7 @@ export default function Assets() {
     queryKey: ["userTonBalance"],
     queryFn: () => getTonData(userAddress),
   });
-  console.log(tonData);
+
   //ton price
   const {
     data: tonPrice,
@@ -59,10 +63,7 @@ export default function Assets() {
     async function getSingleAnalyze() {
       try {
         dispatch(assetsAnalyzeLoadingAction());
-        const data = await getTokenAnalyze(
-          webapp,
-          `analysis/groups/id=${singleAnalyzeToken}`
-        );
+        const data = await getTokenAnalyze(webapp, `${singleAnalyzeToken}`);
 
         console.log("single analyze:", data);
 
@@ -89,6 +90,10 @@ export default function Assets() {
         }
       />
     );
+
+  if (!jettonsLoading) {
+    return dispatch(allTokenSymbols(getAllTokensName(jettonsData)));
+  }
 
   return (
     <>
@@ -136,7 +141,7 @@ export default function Assets() {
         label="assets modal"
         content={singleAnalyzeContent}
         onClose={closeModal}
-        isDataLoading={analyzeLoading}
+        isDataLoading={assetsAnalyzeLoading}
       />
     </>
   );

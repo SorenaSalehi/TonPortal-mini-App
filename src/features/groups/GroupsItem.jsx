@@ -12,8 +12,8 @@ export default function GroupsItem({ name, img, id, openModal }) {
   const dispatch = useDispatch();
 
   function handleClick() {
+    dispatch(analyzeOneGroup(id));
     openModal();
-    dispatch(analyzeOneGroup(String(id)));
   }
 
   return (

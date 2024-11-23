@@ -14,7 +14,7 @@ export default function Navigation() {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `flex items-center justify-center w-5 ${
+            `flex items-center justify-center w-6 ${
               isActive ? "scale-150 delay-200 " : "opacity-50"
             }`
           }
@@ -29,7 +29,7 @@ export default function Navigation() {
         <NavLink
           to="/groups"
           className={({ isActive }) =>
-            `flex items-center justify-center w-5 ${
+            `flex items-center justify-center w-6 ${
               isActive ? "scale-150 delay-200 " : "opacity-50"
             }`
           }

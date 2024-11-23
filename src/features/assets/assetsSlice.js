@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   assetLoading: false,
-  analyzeLoading: false,
+  assetsAnalyzeLoading: false,
   singleAnalyzeLoading: false,
   singleAnalyzeToken: "",
   singleAnalyzeContent: "",
@@ -19,10 +19,16 @@ const assetsSlice = createSlice({
     analyzeOneToken(state, action) {
       state.singleAnalyzeToken = action.payload;
     },
+    allTokenSymbols(state, action) {
+      state.allAssetsToken = action.payload;
+    },
+    analyzeAllToken(state, action) {
+      state.allAssetsToken = action.payload;
+    },
     oneAssetAnalyzeReceive(state, action) {
       state.singleAnalyzeContent = action.payload;
     },
-    allAssetsAnalyze(state, action) {
+    allAssetsAnalyzeReceive(state, action) {
       state.allAssetsContent = action.payload;
     },
     clearAssetsAnalyze(state) {
@@ -35,9 +41,11 @@ const assetsSlice = createSlice({
 export const {
   assetsAnalyzeLoadingAction,
   oneAssetAnalyzeReceive,
-  allAssetsAnalyze,
+  allAssetsAnalyzeReceive,
   clearAssetsAnalyze,
   analyzeOneToken,
+  analyzeAllToken,
+  allTokenSymbols,
 } = assetsSlice.actions;
 
 export default assetsSlice.reducer;

@@ -1,5 +1,3 @@
-
-
 export async function authenticateUser(webapp, type) {
   try {
     const response = await fetch(
