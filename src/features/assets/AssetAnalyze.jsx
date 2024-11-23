@@ -22,13 +22,14 @@ export default function AssetAnalyze() {
   const dispatch = useDispatch();
 
   async function handleClick() {
+    if (!allAssetsToken) return;
     try {
       dispatch(assetsAnalyzeLoadingAction());
       openModal();
-
+      console.log("all asset", allAssetsToken);
       // Make the API call
       const data = await getTokenAnalyze(webapp, allAssetsToken);
-      console.log("all assets:", data);
+      console.log("all assets content:", data);
 
       if (data?.status === "success") {
         dispatch(allAssetsAnalyzeReceive(data?.data));

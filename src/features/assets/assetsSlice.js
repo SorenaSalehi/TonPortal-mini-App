@@ -22,9 +22,6 @@ const assetsSlice = createSlice({
     allTokenSymbols(state, action) {
       state.allAssetsToken = action.payload;
     },
-    analyzeAllToken(state, action) {
-      state.allAssetsToken = action.payload;
-    },
     oneAssetAnalyzeReceive(state, action) {
       state.singleAnalyzeContent = action.payload;
     },

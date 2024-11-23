@@ -51,12 +51,11 @@ export function filterJettons(data) {
 }
 
 export function getAllUserGroupsId(data) {
-  return data?.map((group) => group.groupId);
+  return data?.map((group) => group?.groupId);
 }
 
 export function getAllTokensName(data) {
-  const allTokens = data.map((data) => data.jetton.symbol);
-  return ["toncoin", allTokens.join(",")];
+  return data?.map((data) => data?.jetton?.symbol);
 }
 
 // {

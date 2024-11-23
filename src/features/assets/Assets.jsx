@@ -67,9 +67,12 @@ export default function Assets() {
       />
     );
 
-  // if (jettonsData) {
-  //   dispatch(allTokenSymbols(getAllTokensName(jettonsData)));
-  // }
+  if (jettonsData) {
+    const tokens = getAllTokensName(jettonsData);
+    console.log("tokens", tokens);
+    console.log("tokensArr", tokens.join(","));
+    dispatch(allTokenSymbols(tokens.join(",")));
+  }
 
   return (
     <>
