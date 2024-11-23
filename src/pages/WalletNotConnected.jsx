@@ -16,10 +16,10 @@ export default function WalletNotConnectedPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (wallet) {
+    if (wallet && userAddress) {
       dispatch(walletConnected(userAddress));
     }
-  }, [wallet, dispatch]);
+  }, [wallet, dispatch, userAddress]);
 
   return (
     <div className="flex flex-col items-center p-4 text-slate-100 h-dvh justify-evenly">
@@ -35,11 +35,11 @@ export default function WalletNotConnectedPage() {
       <TonConnectButton />
 
       {/* Display user's address if connected */}
-      {/* {userAddress && (
+      {userAddress && (
         <p className="text-green-500">
           Connected: {userAddress.slice(0, 6)}...{userAddress.slice(-4)}
         </p>
-      )} */}
+      )}
     </div>
   );
 }
