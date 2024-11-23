@@ -81,7 +81,7 @@ export default function ModalWindow({
           <div className="relative">
             <main
               ref={contentRef}
-              className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty text-blue-500 font-mono font-semibold"
+              className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-left text-blue-500 font-mono font-semibold"
             >
               {/* after loading display the analyze */}
               {isDataLoading ? <Loader /> : content}
