@@ -18,6 +18,38 @@ export default function ModalWindow({
 }) {
   const [isScrollable, setIsScrollable] = useState(false);
   const contentRef = useRef(null);
+  const webapp = window.Telegram.Webapp;
+
+  useEffect(() => {
+    webapp.ready();
+
+    async function getTokenAnalyze(webapp, token) {
+      try {
+        const response = await fetch(
+          `https://463c-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/analysis/groups/id=-4513586841`,
+          {
+            method: "GET",
+            headers: {
+              authorization: webapp.initData,
+              "ngrok-skip-browser-warning": "true",
+            },
+          }
+        );
+
+        if (!response.ok) throw new Error("no response");
+
+        const data = await response.json();
+
+        if (data.status !== "success")
+          throw new Error("token data could not receive!!");
+
+        return data;
+      } catch (error) {
+        console.error("Token Analyze failed:", error);
+      }
+    }
+    getTokenAnalyze();
+  }, []);
 
   useEffect(() => {
     const checkScrollable = () => {
@@ -84,10 +116,8 @@ export default function ModalWindow({
               ref={contentRef}
               className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty"
             >
-
               {/* after loading display the analyze */}
               {isDataLoading ? <Loader /> : content}
-
 
               {/* show to user for scroll to see more content  */}
               {isScrollable && (
