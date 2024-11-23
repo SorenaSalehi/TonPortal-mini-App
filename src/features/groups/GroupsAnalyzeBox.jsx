@@ -31,9 +31,9 @@ export default function GroupsAnalyzeBox() {
       // Make the API call
       const data = await authenticateUser(
         webapp,
-        `analysis/groups?id=${allGroupsId}`
+        `analysis/groups?id=${allGroupsId.join(",")}`
       );
-
+      console.log("all analyz:", data);
       if (data?.status === "success") {
         dispatch(allAnalyzeReceive(data?.data));
       }
