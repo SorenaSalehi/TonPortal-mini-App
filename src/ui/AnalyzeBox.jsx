@@ -9,6 +9,7 @@ export default function AnalyzeBox({ children }) {
       viewport={{ once: true }}
       className="relative flex flex-col items-center justify-center gap-6 w-[85%]  h-32 mx-auto overflow-hidden rounded-2xl "
     >
+      <div className="absolute bg-black/55 w-[100%] h-[100%] rounded-2xl -z-10" />
       <video
         autoPlay
         muted

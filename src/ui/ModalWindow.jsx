@@ -86,7 +86,7 @@ export default function ModalWindow({
             >
               {isDataLoading ? <Loader /> : content}
               {isScrollable && (
-                <div className="absolute p-1 rounded-full right-2 bg-white/15 bottom-2 animate-bounce">
+                <div className="absolute p-1 rounded-full right-2 bg-white/15 bottom-2 ">
                   <FaChevronDown className="text-blue-500 " />
                 </div>
               )}
