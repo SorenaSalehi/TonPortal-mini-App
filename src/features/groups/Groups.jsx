@@ -19,13 +19,11 @@ export default function Groups() {
     isGroupAdded,
     userGroups,
     groupLoading,
-    allGroupsId,
     singleAnalyzeContent,
     analyzeLoading,
   } = useSelector((store) => store.group);
   const { isOpen, openModal, closeModal } = useModal();
 
-  console.log(userGroups);
   const dispatch = useDispatch();
 
   //*get group
