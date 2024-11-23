@@ -7,6 +7,8 @@ const initialState = {
   analyzeLoading: false,
   singleAnalyzeId: "",
   singleAnalyzeContent: "",
+  allGroupsId: "",
+  allGroupsContent: "",
 };
 
 const groupSlice = createSlice({
@@ -26,14 +28,23 @@ const groupSlice = createSlice({
       state.analyzeLoading = !state.analyzeLoading;
     },
     analyzeOneGroup(state, action) {
+      //* from group item
       state.singleAnalyzeId = action.payload;
     },
     clearAnalyze(state) {
       state.singleAnalyzeId = "";
+      state.allGroupsId = "";
       state.singleAnalyzeContent = "";
+      state.allGroupsContent = "";
     },
     singleAnalyzeReceive(state, action) {
-      state.singleAnalyze = action.payload;
+      state.singleAnalyzeContent = action.payload;
+    },
+    receiveAllGroupsAll(state, action) {
+      state.allGroupsId = action.payload;
+    },
+    allAnalyzeReceive(state, action) {
+      state.allGroupsContent = action.payload;
     },
   },
 });
@@ -46,6 +57,8 @@ export const {
   analyzeOneGroup,
   clearAnalyze,
   singleAnalyzeReceive,
+  receiveAllGroupsAll,
+  allAnalyzeReceive,
 } = groupSlice.actions;
 
 export default groupSlice.reducer;

@@ -1,29 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "motion/react";
 
 import Button from "../../ui/Button";
 import ModalWindow from "../../ui/ModalWindow";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AnalyzeBox from "../../ui/AnalyzeBox";
 import { useModal } from "../../hooks/useModal";
+import {
+  allAnalyzeReceive,
+  analyzeLoadingAction,
+  clearAnalyze,
+} from "./groupSlice";
+import { authenticateUser } from "../../services/apiTel";
+import { webapp } from "../../App";
 
 export default function GroupsAnalyzeBox() {
   const { isOpen, openModal, closeModal } = useModal();
 
-  // const { isGroupAdded } = useSelector((store) => store.group);
+  const { analyzeLoading, allGroupsId, allGroupsContent } = useSelector(
+    (store) => store.group
+  );
   const isGroupAdded = true;
 
-  const content = (
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
-      consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
-      eos maxime, doloremque quae quis est magnam veritatis ex repellendus
-      pariatur eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing
-      elit. Aliquam, consequatur nisi iure, adipisci cupiditate libero maiores
-      placeat veniam eos maxime, doloremque quae quis est magnam veritatis ex
-      repellendus pariatur eligendi.
-    </p>
-  );
+  const dispatch = useDispatch();
+
+  async function handleClick() {
+    try {
+      dispatch(analyzeLoadingAction());
+
+      openModal();
+
+      // Make the API call
+      const data = await authenticateUser(
+        webapp,
+        `analysis/groups?id=${allGroupsId.join(",")}`
+      );
+      console.log(allGroupsId.join(","));
+      console.log("all analyz:", data);
+      if (data?.status === "success") {
+        dispatch(allAnalyzeReceive(data?.data));
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      dispatch(analyzeLoadingAction());
+    }
+  }
 
   return (
     <AnalyzeBox>
@@ -34,14 +55,15 @@ export default function GroupsAnalyzeBox() {
             <br /> News in a Glass
           </p>
 
-          <Button onClick={openModal}>Check Out</Button>
+          <Button onClick={handleClick}>Check Out</Button>
 
           <ModalWindow
             isOpen={isOpen}
             onRequestClose={closeModal}
-            label="GroupsModal"
-            content={content}
+            label="assets modal"
+            content={allGroupsContent}
             onClose={closeModal}
+            isDataLoading={analyzeLoading}
           />
         </>
       ) : (

@@ -3,7 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { authenticateUser } from "./services/apiTel";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import NotMobileUser from "./pages/NotMobileUser";
@@ -11,6 +15,7 @@ import AppLayout from "./pages/AppLayout";
 import Suspense from "./ui/Suspense";
 import WalletNotConnectedPage from "./pages/WalletNotConnected";
 import { userAuthenticated } from "./features/userSlice";
+import SwapPage from "./pages/SwapPage";
 const Home = lazy(() => import("./pages/Home"));
 const GroupsPage = lazy(() => import("./pages/GroupsPage"));
 
@@ -22,14 +27,13 @@ const queryClient = new QueryClient({
   },
 });
 
+export const webapp = window.Telegram.WebApp;
 export default function App() {
   //telegram auth
-  const webapp = window.Telegram.WebApp;
   const { userId } = useSelector((store) => store.user);
   const { isWalletConnected } = useSelector((store) => store.navbar);
 
   const dispatch = useDispatch();
-  const userUsingMobile = true;
 
   //*authentication
   useEffect(() => {
@@ -42,7 +46,7 @@ export default function App() {
 
         console.log("Authenticated user data:", data);
 
-        dispatch(userAuthenticated(data.data.id));
+        dispatch(userAuthenticated(data?.data?.id));
       } catch (error) {
         console.error(error.message);
       }
@@ -51,6 +55,7 @@ export default function App() {
     initializeAuth();
   }, []);
 
+  const userUsingMobile = true;
   const router = createBrowserRouter([
     {
       //*if user are mobile user then display page
@@ -64,6 +69,10 @@ export default function App() {
           path: "/groups",
           element: <GroupsPage />,
         },
+        {
+          path: "/swap",
+          element: <SwapPage />,
+        },
       ],
     },
     {
@@ -75,7 +84,7 @@ export default function App() {
 
   return (
     <React.Suspense fallback={<Suspense />}>
-      <TonConnectUIProvider manifestUrl="https://portal-mini-app.netlify.app/tonconnect-manifest.json">
+      <TonConnectUIProvider manifestUrl="https://tonportal.pro/tonconnect-manifest.json">
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <RouterProvider

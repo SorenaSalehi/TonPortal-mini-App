@@ -1,30 +1,37 @@
 import React, { lazy, useState } from "react";
 import { motion } from "motion/react";
-import { useModal } from "../../hooks/useModal";
 import { useDispatch, useSelector } from "react-redux";
-import { analyzeOneGroup } from "./groupSlice";
+import {
+  analyzeLoadingAction,
+  analyzeOneGroup,
+  clearAnalyze,
+  singleAnalyzeReceive,
+} from "./groupSlice";
+import { authenticateUser } from "../../services/apiTel";
+import { webapp } from "../../App";
 
-const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
-
-export default function GroupsItem({ name, img, id }) {
-  const { isOpen, openModal, closeModal } = useModal();
-  const { analyzeLoading } = useSelector((store) => store.group);
-
+export default function GroupsItem({ name, img, id, openModal }) {
   const dispatch = useDispatch();
 
-  function handleClick() {
-    openModal();
-    dispatch(analyzeOneGroup(String(id)));
-  }
+  async function handleClick() {
+    try {
+      dispatch(analyzeLoadingAction());
+      // First dispatch the ID and open modal
+      dispatch(analyzeOneGroup(id));
+      openModal();
 
-  const content = (
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
-      consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
-      eos maxime, doloremque quae quis est magnam veritatis ex repellendus
-      pariatur eligendi.
-    </p>
-  );
+      // Make the API call
+      const data = await authenticateUser(webapp, `analysis/groups?id=${id}`);
+
+      if (data?.status === "success") {
+        dispatch(singleAnalyzeReceive(data?.data));
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      dispatch(analyzeLoadingAction());
+    }
+  }
 
   return (
     <>
@@ -47,15 +54,6 @@ export default function GroupsItem({ name, img, id }) {
           <p className="text-xl capitalize">{name}</p>
         </div>
       </motion.div>
-
-      <ModalWindow
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        label="assets modal"
-        content={content}
-        onClose={closeModal}
-        isDataLoading={analyzeLoading}
-      />
     </>
   );
 }

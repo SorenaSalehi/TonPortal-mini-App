@@ -1,15 +1,29 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import Loader from "../../ui/Loader";
 import AssetItem from "./AssetItem";
 import getTonData, { getJettons, getTonPrice } from "../../services/apiTon";
-import { AiFillPropertySafety } from "react-icons/ai";
-import Error from "../../ui/Error";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useModal } from "../../hooks/useModal";
+import {
+  allTokenSymbols,
+  assetsAnalyzeLoadingAction,
+  clearAssetsAnalyze,
+  oneAssetAnalyzeReceive,
+} from "./assetsSlice";
+import { getTokenAnalyze } from "../../services/apiTel";
+import { useEffect } from "react";
+import Loader from "../../ui/Loader";
+import ModalWindow from "../../ui/ModalWindow";
+import { getAllTokensName } from "../../utils/helpers";
 
 export default function Assets() {
   const { userAddress } = useSelector((store) => store.navbar);
+  const { assetsAnalyzeLoading, singleAnalyzeContent } = useSelector(
+    (store) => store.asset
+  );
+  const { isOpen, openModal, closeModal } = useModal();
+
+  const dispatch = useDispatch();
 
   //ton data
   const {
@@ -19,7 +33,9 @@ export default function Assets() {
   } = useQuery({
     queryKey: ["userTonBalance"],
     queryFn: () => getTonData(userAddress),
+    enabled: !!userAddress, // Only run query if userAddress exists
   });
+
   //ton price
   const {
     data: tonPrice,
@@ -38,6 +54,7 @@ export default function Assets() {
   } = useQuery({
     queryKey: ["jettons"],
     queryFn: () => getJettons(userAddress),
+    enabled: !!userAddress, // Only run query if userAddress exists
   });
 
   //* if ton data or jettons error
@@ -50,12 +67,14 @@ export default function Assets() {
       />
     );
 
+  if (jettonsData) {
+    const tokens = getAllTokensName(jettonsData);
+    dispatch(allTokenSymbols(tokens.join(",")));
+  }
+
   return (
     <>
-      <p className="flex items-center gap-2 font-semibold uppercase">
-        <AiFillPropertySafety />
-        Assets
-      </p>
+      <p className="flex items-center gap-2 font-semibold uppercase">Assets</p>
       <div className="flex flex-col gap-2 overflow-auto overflow-x-hidden no-scrollbar">
         {tonDataLoading || tonPriceLoading || jettonsLoading ? (
           //* main loading
@@ -67,6 +86,8 @@ export default function Assets() {
                 type="ton"
                 balance={tonData.balance}
                 tokenPrice={tonPrice}
+                openModal={openModal}
+                symbol="ton"
               />
             ) : (
               //* in case the ton data error
@@ -85,11 +106,21 @@ export default function Assets() {
                 icon={token.jetton.image}
                 symbol={token.jetton.symbol}
                 key={token.jetton.name}
+                openModal={openModal}
+                tokenName={token.jetton.name}
               />
             ))}
           </>
         )}
       </div>
+      <ModalWindow
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        label="assets modal"
+        content={singleAnalyzeContent}
+        onClose={closeModal}
+        isDataLoading={assetsAnalyzeLoading}
+      />
     </>
   );
 }

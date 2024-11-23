@@ -11,7 +11,7 @@ const Button = lazy(() => import("../../ui/Button"));
 export default function AddGroup() {
   const { isOpen, openModal, closeModal } = useModal();
 
-  const botAddress = "a3s1ascasc3a51ac3a5c1";
+  const botAddress = "@reallyscangroupbot";
 
   const copyToClipboard = async () => {
     closeModal();
@@ -44,7 +44,7 @@ export default function AddGroup() {
             className="flex items-center gap-5 p-1"
             onClick={copyToClipboard}
           >
-            a3s1ascasc3a51ac3a5c1
+            @reallyscangroupbot
             <span className="text-sm text-green-500/55 animate-pulse">
               <FaCopy />
             </span>

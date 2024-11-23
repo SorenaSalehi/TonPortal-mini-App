@@ -6,11 +6,16 @@ import {
   analyzeLoadingAction,
   clearAnalyze,
   groupLoadingAction,
+  receiveAllGroupsAll,
   singleAnalyzeReceive,
   userGroupsReceived,
 } from "./groupSlice";
 import { authenticateUser } from "../../services/apiTel";
 import Loader from "../../ui/Loader";
+import { getAllUserGroupsId } from "../../utils/helpers";
+import { useModal } from "../../hooks/useModal";
+import ModalWindow from "../../ui/ModalWindow";
+import { webapp } from "../../App";
 
 // const groups = [
 //   {
@@ -28,20 +33,23 @@ import Loader from "../../ui/Loader";
 // ];
 
 export default function Groups() {
-  const { isGroupAdded, userGroups, groupLoading, singleAnalyzeId } =
-    useSelector((store) => store.group);
+  const {
+    isGroupAdded,
+    userGroups,
+    groupLoading,
+    singleAnalyzeId,
+    allGroupsId,
+    singleAnalyzeContent,
+    analyzeLoading,
+  } = useSelector((store) => store.group);
+  const { isOpen, openModal, closeModal } = useModal();
 
   console.log(userGroups);
-
-  const webapp = window.Telegram.WebApp;
-
+  console.log("all group id:", allGroupsId);
   const dispatch = useDispatch();
 
   //*get group
   useEffect(() => {
-    // Initialize Telegram WebApp
-    webapp.ready();
-
     async function getUserGroups() {
       try {
         dispatch(groupLoadingAction());
@@ -49,7 +57,13 @@ export default function Groups() {
 
         console.log("user Group:", data);
 
-        dispatch(userGroupsReceived(data.data));
+        if (data) {
+          dispatch(userGroupsReceived(data.data));
+
+          //* for analyze all groups
+          const allIds = getAllUserGroupsId(data.data);
+          dispatch(receiveAllGroupsAll(allIds));
+        }
       } catch (error) {
         console.error(error.message);
       } finally {
@@ -59,34 +73,6 @@ export default function Groups() {
 
     getUserGroups();
   }, []);
-  console.log(singleAnalyzeId);
-  //*get single analyze
-  useEffect(() => {
-    // Initialize Telegram WebApp
-    webapp.ready();
-
-    async function getSingleAnalyze() {
-      try {
-        dispatch(analyzeLoadingAction());
-        const data = await authenticateUser(
-          webapp,
-          `analysis/groups/id=${singleAnalyzeId}`
-        );
-
-        console.log("single analyze:", data);
-
-        dispatch(singleAnalyzeReceive(data.data));
-      } catch (error) {
-        console.error(error.message);
-      } finally {
-        dispatch(clearAnalyze());
-        dispatch(analyzeLoadingAction());
-      }
-    }
-
-    getSingleAnalyze();
-  }, [singleAnalyzeId]);
-  // const isGroupAdded = true;
 
   if (!isGroupAdded)
     return (
@@ -106,29 +92,24 @@ export default function Groups() {
       </div>
 
       <div className="flex flex-col gap-2 overflow-auto no-scrollbar">
-        {userGroups.map((group) => (
+        {userGroups?.map((group) => (
           <GroupsItem
             name={group.groupName}
+            
             img={group.PhotoUrl}
             id={group.groupId}
+            openModal={openModal}
           />
         ))}
-        <GroupsItem
-          id={"-4513586841"}
-          img={
-            "https://api.telegram.org/file/bot7562008800:AAGnJiP2Hz23YEA7nPbwQ1LW7OQGKbw3qkk/profile_photos/file_2.jpg"
-          }
-        />
-        {/* <GroupsItem />
-        <GroupsItem />
-        <GroupsItem />
-        <GroupsItem />
-        <GroupsItem />
-        <GroupsItem />
-        <GroupsItem />
-        <GroupsItem />
-        <GroupsItem /> */}
       </div>
+      <ModalWindow
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        label="assets modal"
+        content={singleAnalyzeContent}
+        onClose={closeModal}
+        isDataLoading={analyzeLoading}
+      />
     </>
   );
 }

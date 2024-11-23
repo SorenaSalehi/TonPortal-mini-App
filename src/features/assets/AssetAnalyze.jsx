@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "motion/react";
 
 import ModalWindow from "../../ui/ModalWindow";
 import Button from "../../ui/Button";
 import AnalyzeBox from "../../ui/AnalyzeBox";
 import { useModal } from "../../hooks/useModal";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  allAssetsAnalyzeReceive,
+  assetsAnalyzeLoadingAction,
+  clearAssetsAnalyze,
+} from "./assetsSlice";
+import { getTokenAnalyze } from "../../services/apiTel";
+import { webapp } from "../../App";
 
 export default function AssetAnalyze() {
   const { isOpen, openModal, closeModal } = useModal();
 
-  const content = (
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
-      consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
-      eos maxime, doloremque quae quis est magnam veritatis ex repellendus
-      pariatur eligendi.
-    </p>
-  );
+  const { allAssetsToken, allAssetsContent, assetsAnalyzeLoading } =
+    useSelector((store) => store.asset);
+
+  const dispatch = useDispatch();
+
+  async function handleClick() {
+    if (!allAssetsToken) return;
+    try {
+      dispatch(assetsAnalyzeLoadingAction());
+      openModal();
+      // Make the API call
+      const data = await getTokenAnalyze(webapp, allAssetsToken);
+
+      if (data?.status === "success") {
+        dispatch(allAssetsAnalyzeReceive(data?.data));
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      dispatch(assetsAnalyzeLoadingAction());
+    }
+  }
 
   return (
     <AnalyzeBox>
@@ -24,14 +45,15 @@ export default function AssetAnalyze() {
         Get All Your Groups News in a Glans
       </p>
 
-      <Button onClick={openModal}>Open</Button>
+      <Button onClick={handleClick}>Open</Button>
 
       <ModalWindow
         isOpen={isOpen}
         onRequestClose={closeModal}
-        label="assetsModal"
-        content={content}
+        label="assets modal"
+        content={allAssetsContent}
         onClose={closeModal}
+        isDataLoading={assetsAnalyzeLoading}
       />
     </AnalyzeBox>
   );
