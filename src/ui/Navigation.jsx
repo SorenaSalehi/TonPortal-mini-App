@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { FaHome } from "react-icons/fa";
 import { FaMoneyBillTransfer, FaPeopleGroup } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
+import { RiSwapFill } from "react-icons/ri";
 
 export default function Navigation() {
   return (
@@ -35,6 +36,21 @@ export default function Navigation() {
           }
         >
           <img src="group.png" loading="lazy" />
+        </NavLink>
+      </motion.li>
+      <motion.li
+        whileTap={{ scale: 0.9 }}
+        className="flex items-center justify-center"
+      >
+        <NavLink
+          to="/swap"
+          className={({ isActive }) =>
+            `flex items-center justify-center w-6 ${
+              isActive ? "scale-150 delay-200 " : "opacity-50"
+            }`
+          }
+        >
+          <RiSwapFill />
         </NavLink>
       </motion.li>
     </motion.ul>

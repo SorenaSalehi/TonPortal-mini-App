@@ -15,6 +15,7 @@ import AppLayout from "./pages/AppLayout";
 import Suspense from "./ui/Suspense";
 import WalletNotConnectedPage from "./pages/WalletNotConnected";
 import { userAuthenticated } from "./features/userSlice";
+import SwapPage from "./pages/SwapPage";
 const Home = lazy(() => import("./pages/Home"));
 const GroupsPage = lazy(() => import("./pages/GroupsPage"));
 
@@ -67,6 +68,10 @@ export default function App() {
         {
           path: "/groups",
           element: <GroupsPage />,
+        },
+        {
+          path: "/swap",
+          element: <SwapPage />,
         },
       ],
     },
