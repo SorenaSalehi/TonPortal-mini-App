@@ -44,7 +44,7 @@ export default function Groups() {
   const { isOpen, openModal, closeModal } = useModal();
 
   console.log(userGroups);
-
+  console.log("Current analyze content:", singleAnalyzeContent);
   const dispatch = useDispatch();
 
   //*get group

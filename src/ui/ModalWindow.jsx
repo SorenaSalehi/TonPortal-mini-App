@@ -17,8 +17,7 @@ export default function ModalWindow({
 }) {
   const [isScrollable, setIsScrollable] = useState(false);
   const contentRef = useRef(null);
-
-
+  console.log("Modal content:", content);
 
   useEffect(() => {
     const checkScrollable = () => {

@@ -28,14 +28,14 @@ export default function GroupsItem({ name, img, id, openModal }) {
 
       console.log("single analyze:", data);
 
-      if (data.status === "success") {
-        dispatch(singleAnalyzeReceive(data.data));
+      if (data?.status === "success") {
+        console.log("Dispatching content:", data.data);
+        dispatch(singleAnalyzeReceive(data?.data));
       }
     } catch (error) {
       console.error(error.message);
       // Optionally dispatch an error action here
     } finally {
-      dispatch(clearAnalyze());
       dispatch(analyzeLoadingAction());
     }
   }
