@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 
 import AppName from "./AppName";
-import Button from "./Button";
 import { FaChevronDown } from "react-icons/fa";
 import Loader from "./Loader";
 
@@ -21,9 +20,7 @@ export default function ModalWindow({
   const webapp = window.Telegram.Webapp;
 
   useEffect(() => {
-    webapp.ready();
-
-    async function getTokenAnalyze(webapp, token) {
+    async function getTokenAnalyze() {
       try {
         const response = await fetch(
           `https://463c-2a0e-97c0-3e3-3f6-00-1.ngrok-free.app/api/v2/analysis/groups/id=-4513586841`,
