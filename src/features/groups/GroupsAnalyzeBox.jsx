@@ -19,38 +19,10 @@ export default function GroupsAnalyzeBox() {
     (store) => store.group
   );
   const isGroupAdded = true;
-  const webapp = window.Telegram.WebApp;
 
   const dispatch = useDispatch();
 
-  //*get all analyze
-  useEffect(() => {
-    webapp.ready();
 
-    //* when modal open
-    async function getAllGroupsAnalyze() {
-      try {
-        dispatch(analyzeLoadingAction());
-        const data = await authenticateUser(
-          webapp,
-          `analysis/groups/id=${allGroupsId}`
-        );
-
-        console.log("all analyze:", data);
-
-        if (data) dispatch(allAnalyzeReceive(data.data));
-      } catch (error) {
-        console.error(error.message);
-      } finally {
-        dispatch(clearAnalyze());
-        dispatch(analyzeLoadingAction());
-      }
-    }
-
-    getAllGroupsAnalyze();
-
-    //* when modal open
-  }, [isOpen]);
 
   return (
     <AnalyzeBox>

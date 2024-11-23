@@ -13,8 +13,6 @@ import { webapp } from "../../App";
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 
 export default function GroupsItem({ name, img, id, openModal }) {
-  // const { analyzeLoading } = useSelector((store) => store.group);
-
   const dispatch = useDispatch();
   async function handleClick() {
     try {
@@ -26,15 +24,11 @@ export default function GroupsItem({ name, img, id, openModal }) {
       // Make the API call
       const data = await authenticateUser(webapp, `analysis/groups?id=${id}`);
 
-      console.log("single analyze:", data);
-
       if (data?.status === "success") {
-        console.log("Dispatching content:", data.data);
         dispatch(singleAnalyzeReceive(data?.data));
       }
     } catch (error) {
       console.error(error.message);
-      // Optionally dispatch an error action here
     } finally {
       dispatch(analyzeLoadingAction());
     }
@@ -61,15 +55,6 @@ export default function GroupsItem({ name, img, id, openModal }) {
           <p className="text-xl capitalize">{name}</p>
         </div>
       </motion.div>
-
-      {/* <ModalWindow
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        label="assets modal"
-        content={content}
-        onClose={closeModal}
-        isDataLoading={analyzeLoading}
-      /> */}
     </>
   );
 }
