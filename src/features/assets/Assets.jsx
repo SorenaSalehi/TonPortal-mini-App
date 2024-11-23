@@ -32,6 +32,7 @@ export default function Assets() {
   } = useQuery({
     queryKey: ["userTonBalance"],
     queryFn: () => getTonData(userAddress),
+    enabled: !!userAddress, // Only run query if userAddress exists
   });
 
   //ton price
@@ -52,6 +53,7 @@ export default function Assets() {
   } = useQuery({
     queryKey: ["jettons"],
     queryFn: () => getJettons(userAddress),
+    enabled: !!userAddress, // Only run query if userAddress exists
   });
 
   //* if ton data or jettons error
