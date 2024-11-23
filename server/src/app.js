@@ -1,5 +1,6 @@
 import express from 'express';
 import TelegramBot from 'node-telegram-bot-api';
+import OpenAI from "openai";
 import mongoose from 'mongoose';
 import cors from 'cors'
 import dotenv from 'dotenv'
@@ -14,12 +15,16 @@ dotenv.config({ path: join(__dirname, '../.env') });
 const port = process.env.PORT
 const uri = process.env.MONGODB_URI
 const botToken = process.env.GROUP_BOT_TOKEN
+const openAiApi = process.env.OPENAI_API
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
+export const openai = new OpenAI({
+    apiKey: openAiApi // Make sure to set this in your environment variables
+  });
 const bot = new TelegramBot(botToken, { 
     polling: {
       interval: 1,
@@ -43,7 +48,7 @@ mongoose
 
 
 
-app.use('/v2/api/', router);
+app.use('/api/v2', router);
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 export default bot

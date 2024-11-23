@@ -3,6 +3,22 @@ import { checkGroupMember } from "./botController.js";
 import User from "./../models/userModel.js";
 import Group from "./../models/groupModel.js";
 
+// get all groupIds and check which groups user is in
+const getUserGroups = async function(userId){
+    try{
+        const userGroups = [];
+        const groupIds = await Group.find({}, { groupId: 1, _id: 0 }).lean()
+        for (const { groupId } of groupIds) {
+            if (await checkGroupMember(groupId, userId)) {
+                userGroups.push(groupId);
+            }
+        }
+        return userGroups
+
+    }catch(err){
+        console.err('Error getting usergroups: ', err)
+    }
+}
 
 
 export const health = async(req, res) => {
@@ -56,15 +72,9 @@ export const groupData = async(req, res) => {
     const urlParams = new URLSearchParams(req.headers.authorization);
     const userData = JSON.parse(decodeURIComponent(urlParams.get('user')));
     const userId = userData.id
-    // get all groups
-    const userGroups = [];
-    const groupIds = await Group.find({}, { groupId: 1, _id: 0 }).lean();
-    // check if user is in
-    for (const { groupId } of groupIds) {
-        if (await checkGroupMember(groupId, userId)) {
-            userGroups.push(groupId);
-        }
-    }
+
+    const userGroups = await getUserGroups(userId)
+
     // get info of user groups
     const groupDetails = await Group.find(
         { groupId: { $in: userGroups } },
@@ -85,3 +95,4 @@ export const groupData = async(req, res) => {
 
 
 }
+
