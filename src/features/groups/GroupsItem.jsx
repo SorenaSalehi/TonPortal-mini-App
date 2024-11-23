@@ -1,6 +1,5 @@
 import React, { lazy, useState } from "react";
 import { motion } from "motion/react";
-import { useModal } from "../../hooks/useModal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   analyzeLoadingAction,
@@ -29,7 +28,7 @@ export default function GroupsItem({ name, img, id, openModal }) {
 
       console.log("single analyze:", data);
 
-      if (data) {
+      if (data.status === "success") {
         dispatch(singleAnalyzeReceive(data.data));
       }
     } catch (error) {
