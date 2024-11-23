@@ -6,9 +6,8 @@ import { analyzeOneGroup } from "./groupSlice";
 
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 
-export default function GroupsItem({ name, img, id }) {
-  const { isOpen, openModal, closeModal } = useModal();
-  const { analyzeLoading } = useSelector((store) => store.group);
+export default function GroupsItem({ name, img, id, openModal }) {
+  // const { analyzeLoading } = useSelector((store) => store.group);
 
   const dispatch = useDispatch();
 
@@ -17,14 +16,14 @@ export default function GroupsItem({ name, img, id }) {
     dispatch(analyzeOneGroup(String(id)));
   }
 
-  const content = (
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
-      consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
-      eos maxime, doloremque quae quis est magnam veritatis ex repellendus
-      pariatur eligendi.
-    </p>
-  );
+  // const content = (
+  //   <p>
+  //     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
+  //     consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
+  //     eos maxime, doloremque quae quis est magnam veritatis ex repellendus
+  //     pariatur eligendi.
+  //   </p>
+  // );
 
   return (
     <>
@@ -48,14 +47,14 @@ export default function GroupsItem({ name, img, id }) {
         </div>
       </motion.div>
 
-      <ModalWindow
+      {/* <ModalWindow
         isOpen={isOpen}
         onRequestClose={closeModal}
         label="assets modal"
         content={content}
         onClose={closeModal}
         isDataLoading={analyzeLoading}
-      />
+      /> */}
     </>
   );
 }

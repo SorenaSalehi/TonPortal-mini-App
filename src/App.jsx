@@ -47,7 +47,7 @@ export default function App() {
 
         console.log("Authenticated user data:", data);
 
-        dispatch(userAuthenticated(data.data.id));
+        dispatch(userAuthenticated(data?.data?.id));
       } catch (error) {
         console.error(error.message);
       }

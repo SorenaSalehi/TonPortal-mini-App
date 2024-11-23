@@ -84,7 +84,12 @@ export default function ModalWindow({
               ref={contentRef}
               className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty"
             >
+
+              {/* after loading display the analyze */}
               {isDataLoading ? <Loader /> : content}
+
+
+              {/* show to user for scroll to see more content  */}
               {isScrollable && (
                 <div className="absolute p-1 rounded-full right-2 bg-white/15 bottom-2 ">
                   <FaChevronDown className="text-blue-500 " />

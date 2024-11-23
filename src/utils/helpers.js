@@ -50,4 +50,7 @@ export function filterJettons(data) {
   return results;
 }
 
-export function sortJettonsByTotalPrice() {}
+export function getAllUserGroupsId(data) {
+  const ids = data.map((group) => group.groupId);
+  return ids.split(",");
+}

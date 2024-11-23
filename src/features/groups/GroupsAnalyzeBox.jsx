@@ -1,29 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "motion/react";
 
 import Button from "../../ui/Button";
 import ModalWindow from "../../ui/ModalWindow";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AnalyzeBox from "../../ui/AnalyzeBox";
 import { useModal } from "../../hooks/useModal";
+import {
+  allAnalyzeReceive,
+  analyzeLoadingAction,
+  clearAnalyze,
+} from "./groupSlice";
+import { authenticateUser } from "../../services/apiTel";
 
 export default function GroupsAnalyzeBox() {
   const { isOpen, openModal, closeModal } = useModal();
 
-  // const { isGroupAdded } = useSelector((store) => store.group);
-  const isGroupAdded = true;
-
-  const content = (
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
-      consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
-      eos maxime, doloremque quae quis est magnam veritatis ex repellendus
-      pariatur eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing
-      elit. Aliquam, consequatur nisi iure, adipisci cupiditate libero maiores
-      placeat veniam eos maxime, doloremque quae quis est magnam veritatis ex
-      repellendus pariatur eligendi.
-    </p>
+  const { analyzeLoading, allGroupsId, allGroupsContent } = useSelector(
+    (store) => store.group
   );
+  const isGroupAdded = true;
+  const webapp = window.Telegram.WebApp;
+
+  const dispatch = useDispatch();
+
+  //*get all analyze
+  useEffect(() => {
+    webapp.ready();
+
+    //* when modal open
+    async function getAllGroupsAnalyze() {
+      try {
+        dispatch(analyzeLoadingAction());
+        const data = await authenticateUser(
+          webapp,
+          `analysis/groups/id=${allGroupsId}`
+        );
+
+        console.log("all analyze:", data);
+
+        if (data) dispatch(allAnalyzeReceive(data.data));
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        dispatch(clearAnalyze());
+        dispatch(analyzeLoadingAction());
+      }
+    }
+
+    getAllGroupsAnalyze();
+
+    //* when modal open
+  }, [isOpen]);
 
   return (
     <AnalyzeBox>
@@ -39,9 +66,10 @@ export default function GroupsAnalyzeBox() {
           <ModalWindow
             isOpen={isOpen}
             onRequestClose={closeModal}
-            label="GroupsModal"
-            content={content}
+            label="assets modal"
+            content={allGroupsContent}
             onClose={closeModal}
+            isDataLoading={analyzeLoading}
           />
         </>
       ) : (
