@@ -18,8 +18,9 @@ import { getAllTokensName } from "../../utils/helpers";
 
 export default function Assets() {
   const { userAddress } = useSelector((store) => store.navbar);
-  const { assetsAnalyzeLoading, singleAnalyzeContent, singleAnalyzeToken } =
-    useSelector((store) => store.asset);
+  const { assetsAnalyzeLoading, singleAnalyzeContent } = useSelector(
+    (store) => store.asset
+  );
   const { isOpen, openModal, closeModal } = useModal();
 
   const dispatch = useDispatch();

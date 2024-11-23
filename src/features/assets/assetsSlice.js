@@ -14,7 +14,7 @@ const assetsSlice = createSlice({
   initialState,
   reducers: {
     assetsAnalyzeLoadingAction(state) {
-      state.analyzeLoading = !state.analyzeLoading;
+      state.assetsAnalyzeLoading = !state.assetsAnalyzeLoading;
     },
     analyzeOneToken(state, action) {
       state.singleAnalyzeToken = action.payload;
