@@ -64,8 +64,8 @@ export default function Assets() {
       />
     );
 
-  if (!jettonsLoading) {
-    return dispatch(allTokenSymbols(getAllTokensName(jettonsData)));
+  if (!jettonsLoading && jettonsData) {
+    dispatch(allTokenSymbols(getAllTokensName(jettonsData)));
   }
 
   return (
@@ -102,7 +102,7 @@ export default function Assets() {
                 icon={token.jetton.image}
                 symbol={token.jetton.symbol}
                 key={token.jetton.name}
-                isModalOpen={openModal}
+                openModal={openModal}
                 tokenName={token.jetton.name}
               />
             ))}

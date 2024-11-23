@@ -95,6 +95,7 @@ export default function Groups() {
         {userGroups?.map((group) => (
           <GroupsItem
             name={group.groupName}
+            
             img={group.PhotoUrl}
             id={group.groupId}
             openModal={openModal}
