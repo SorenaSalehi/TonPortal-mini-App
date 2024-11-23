@@ -15,11 +15,13 @@ export default function WalletNotConnectedPage() {
   const userAddress = useTonAddress();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (wallet && userAddress) {
-      dispatch(walletConnected(userAddress));
-    }
-  }, [wallet, dispatch, userAddress]);
+  console.log(wallet, userAddress);
+  // useEffect(() => {
+  //   if (wallet && userAddress) {
+  //     dispatch(walletConnected(userAddress));
+  //   }
+  // }, [wallet, dispatch, userAddress]);
+  
 
   return (
     <div className="flex flex-col items-center p-4 text-slate-100 h-dvh justify-evenly">
