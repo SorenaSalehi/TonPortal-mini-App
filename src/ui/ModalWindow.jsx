@@ -84,7 +84,7 @@ export default function ModalWindow({
               className="w-[18rem] px-3 py-2 overflow-auto rounded-lg h-[25rem] text-pretty text-blue-500 font-mono font-semibold"
             >
               {/* after loading display the analyze */}
-              {isDataLoading ? <Loader /> : content.replaceAll('"', "")}
+              {isDataLoading ? <Loader /> : content}
 
               {/* show to user for scroll to see more content  */}
               {isScrollable && (

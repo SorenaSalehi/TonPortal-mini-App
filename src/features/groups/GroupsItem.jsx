@@ -10,11 +10,9 @@ import {
 import { authenticateUser } from "../../services/apiTel";
 import { webapp } from "../../App";
 
-const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
-
 export default function GroupsItem({ name, img, id, openModal }) {
   const dispatch = useDispatch();
-  
+
   async function handleClick() {
     try {
       dispatch(analyzeLoadingAction());
