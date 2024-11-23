@@ -1,4 +1,4 @@
-import React, { lazy, useState } from "react";
+import React from "react";
 import { motion } from "motion/react";
 
 import { useAssetCalculations } from "../../hooks/useAssetCalculations";
@@ -19,7 +19,6 @@ export default function AssetItem({
   symbol,
   icon,
   openModal,
-  tokenName,
 }) {
   const dispatch = useDispatch();
 

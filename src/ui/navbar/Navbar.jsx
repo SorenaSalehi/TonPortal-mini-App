@@ -1,10 +1,8 @@
 import React from "react";
-import { FaWallet } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 
-import { convertWalletAddress } from "../../utils/helpers";
 import {
   walletModal,
   walletDisconnected,

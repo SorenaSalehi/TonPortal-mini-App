@@ -8,15 +8,14 @@ import { useModal } from "../../hooks/useModal";
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 const Button = lazy(() => import("../../ui/Button"));
 
+const botAddress = "@reallyscangroupbot";
 export default function AddGroup() {
   const { isOpen, openModal, closeModal } = useModal();
-
-  const botAddress = "@reallyscangroupbot";
 
   const copyToClipboard = async () => {
     closeModal();
     await navigator.clipboard.writeText(botAddress);
-    toast.success("Address cpoied to Clipboard");
+    toast.success("Address copied");
   };
 
   return (

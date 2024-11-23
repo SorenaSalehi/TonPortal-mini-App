@@ -3,11 +3,8 @@ import GroupsItem from "./GroupsItem";
 import AddGroup from "./AddGroup";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  analyzeLoadingAction,
-  clearAnalyze,
   groupLoadingAction,
   receiveAllGroupsAll,
-  singleAnalyzeReceive,
   userGroupsReceived,
 } from "./groupSlice";
 import { authenticateUser } from "../../services/apiTel";
@@ -17,27 +14,11 @@ import { useModal } from "../../hooks/useModal";
 import ModalWindow from "../../ui/ModalWindow";
 import { webapp } from "../../App";
 
-// const groups = [
-//   {
-//     groupId: -4591122303,
-//     PhotoUrl:
-//       "https://api.telegram.org/file/bot7562008800:AAGnJiP2Hz23YEA7nPbwQ1LW7OQGKbw3qkk/profile_photos/file_4.jpg",
-//     groupName: "بات خونه",
-//   },
-//   {
-//     groupId: -4513586841,
-//     PhotoUrl:
-//       "https://api.telegram.org/file/bot7562008800:AAGnJiP2Hz23YEA7nPbwQ1LW7OQGKbw3qkk/profile_photos/file_5.jpg",
-//     groupName: "بات مات",
-//   },
-// ];
-
 export default function Groups() {
   const {
     isGroupAdded,
     userGroups,
     groupLoading,
-    singleAnalyzeId,
     allGroupsId,
     singleAnalyzeContent,
     analyzeLoading,
@@ -45,7 +26,6 @@ export default function Groups() {
   const { isOpen, openModal, closeModal } = useModal();
 
   console.log(userGroups);
-  console.log("all group id:", allGroupsId);
   const dispatch = useDispatch();
 
   //*get group
@@ -54,8 +34,6 @@ export default function Groups() {
       try {
         dispatch(groupLoadingAction());
         const data = await authenticateUser(webapp, "group");
-
-        console.log("user Group:", data);
 
         if (data) {
           dispatch(userGroupsReceived(data.data));
@@ -95,7 +73,6 @@ export default function Groups() {
         {userGroups?.map((group) => (
           <GroupsItem
             name={group.groupName}
-            
             img={group.PhotoUrl}
             id={group.groupId}
             openModal={openModal}

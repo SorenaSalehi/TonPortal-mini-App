@@ -1,11 +1,4 @@
-//ton number
-// https://tonapi.io/v2/accounts/userAddress
-//jetton data
-// https://tonapi.io/v2/accounts/walletAddress/jettons?currencies=usd
-
 import { convertTonBalance, filterJettons } from "../utils/helpers";
-
-// const walletAddress = "UQDU9nluoOuT66p-8YHR2iQBg_NQRAPuphCwJi7fKsirFCdc";
 
 export default async function getTonData(userAddress) {
   try {

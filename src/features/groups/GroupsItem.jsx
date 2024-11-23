@@ -1,10 +1,9 @@
-import React, { lazy, useState } from "react";
+import React from "react";
 import { motion } from "motion/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   analyzeLoadingAction,
   analyzeOneGroup,
-  clearAnalyze,
   singleAnalyzeReceive,
 } from "./groupSlice";
 import { authenticateUser } from "../../services/apiTel";

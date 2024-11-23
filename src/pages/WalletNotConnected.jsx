@@ -21,7 +21,6 @@ export default function WalletNotConnectedPage() {
     dispatch(walletConnected(userAddress));
   }
 
-
   return (
     <div className="flex flex-col items-center p-4 text-slate-100 h-dvh justify-evenly">
       <motion.div

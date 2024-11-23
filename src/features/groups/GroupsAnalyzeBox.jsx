@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Button from "../../ui/Button";
 import ModalWindow from "../../ui/ModalWindow";
 import { useDispatch, useSelector } from "react-redux";
 import AnalyzeBox from "../../ui/AnalyzeBox";
 import { useModal } from "../../hooks/useModal";
-import {
-  allAnalyzeReceive,
-  analyzeLoadingAction,
-  clearAnalyze,
-} from "./groupSlice";
+import { allAnalyzeReceive, analyzeLoadingAction } from "./groupSlice";
 import { authenticateUser } from "../../services/apiTel";
 import { webapp } from "../../App";
 
@@ -34,8 +30,6 @@ export default function GroupsAnalyzeBox() {
         webapp,
         `analysis/groups?id=${allGroupsId.join(",")}`
       );
-      console.log(allGroupsId.join(","));
-      console.log("all analyz:", data);
       if (data?.status === "success") {
         dispatch(allAnalyzeReceive(data?.data));
       }

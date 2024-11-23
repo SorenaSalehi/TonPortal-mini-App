@@ -1,7 +1,5 @@
 import React from "react";
 import { motion } from "motion/react";
-import { FaHome } from "react-icons/fa";
-import { FaMoneyBillTransfer, FaPeopleGroup } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import { RiSwapFill } from "react-icons/ri";
 

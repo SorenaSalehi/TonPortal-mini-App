@@ -4,14 +4,7 @@ import AssetItem from "./AssetItem";
 import getTonData, { getJettons, getTonPrice } from "../../services/apiTon";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../hooks/useModal";
-import {
-  allTokenSymbols,
-  assetsAnalyzeLoadingAction,
-  clearAssetsAnalyze,
-  oneAssetAnalyzeReceive,
-} from "./assetsSlice";
-import { getTokenAnalyze } from "../../services/apiTel";
-import { useEffect } from "react";
+import { allTokenSymbols } from "./assetsSlice";
 import Loader from "../../ui/Loader";
 import ModalWindow from "../../ui/ModalWindow";
 import { getAllTokensName } from "../../utils/helpers";

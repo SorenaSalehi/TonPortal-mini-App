@@ -44,8 +44,6 @@ export default function App() {
       try {
         const data = await authenticateUser(webapp, "start");
 
-        console.log("Authenticated user data:", data);
-
         dispatch(userAuthenticated(data?.data?.id));
       } catch (error) {
         console.error(error.message);

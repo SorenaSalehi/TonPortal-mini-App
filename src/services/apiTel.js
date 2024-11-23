@@ -1,3 +1,4 @@
+//*tel auth,groups analyze and group that user have
 export async function authenticateUser(webapp, type) {
   try {
     const response = await fetch(
@@ -24,6 +25,7 @@ export async function authenticateUser(webapp, type) {
   }
 }
 
+//*tokens analyze
 export async function getTokenAnalyze(webapp, token) {
   try {
     const response = await fetch(

@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   allAssetsAnalyzeReceive,
   assetsAnalyzeLoadingAction,
-  clearAssetsAnalyze,
 } from "./assetsSlice";
 import { getTokenAnalyze } from "../../services/apiTel";
 import { webapp } from "../../App";
