@@ -11,6 +11,7 @@ import {
   clearAnalyze,
 } from "./groupSlice";
 import { authenticateUser } from "../../services/apiTel";
+import { webapp } from "../../App";
 
 export default function GroupsAnalyzeBox() {
   const { isOpen, openModal, closeModal } = useModal();
@@ -31,7 +32,7 @@ export default function GroupsAnalyzeBox() {
       // Make the API call
       const data = await authenticateUser(
         webapp,
-        `analysis/groups?id=-4513586841`
+        `analysis/groups?id=${allGroupsId.join(",")}`
       );
       console.log("all analyz:", data);
       if (data?.status === "success") {
