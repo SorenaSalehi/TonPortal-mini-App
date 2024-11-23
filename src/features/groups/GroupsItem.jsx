@@ -19,23 +19,18 @@ export default function GroupsItem({ name, img, id, openModal }) {
   const dispatch = useDispatch();
   async function handleClick() {
     try {
+      dispatch(analyzeLoadingAction());
       // First dispatch the ID and open modal
       dispatch(analyzeOneGroup(id));
       openModal();
 
-      // Start loading
-      dispatch(analyzeLoadingAction());
-
       // Make the API call
-      const data = await authenticateUser(
-        webapp,
-        `analysis/groups/id=${id}` // Use id directly from props instead of singleAnalyzeId
-      );
+      const data = await authenticateUser(webapp, `analysis/groups?id=${id}`);
 
       console.log("single analyze:", data);
 
       if (data) {
-        dispatch(singleAnalyzeReceive(data.data));
+        dispatch(singleAnalyzeReceive(data));
       }
     } catch (error) {
       console.error(error.message);
@@ -45,40 +40,6 @@ export default function GroupsItem({ name, img, id, openModal }) {
       dispatch(analyzeLoadingAction());
     }
   }
-
-  // useEffect(() => {
-  //   // webapp.ready();
-
-  //   //* when modal open
-  //   async function getSingleAnalyze() {
-  //     console.log(singleAnalyzeId);
-  //     try {
-  //       dispatch(analyzeLoadingAction());
-  //       const data = await authenticateUser(
-  //         webapp,
-  //         `analysis/groups/id=${singleAnalyzeId}`
-  //       );
-
-  //       console.log("single analyze:", data);
-
-  //       if (data) dispatch(singleAnalyzeReceive(data.data));
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     } finally {
-  //       dispatch(clearAnalyze());
-  //       dispatch(analyzeLoadingAction());
-  //     }
-  //   }
-
-  //   getSingleAnalyze();
-
-  //   //* when modal open
-  // }, [isOpen]);
-
-  // function handleClick() {
-
-  //   openModal();
-  // }
 
   return (
     <>

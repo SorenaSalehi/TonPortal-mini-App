@@ -51,7 +51,7 @@ export function filterJettons(data) {
 }
 
 export function getAllUserGroupsId(data) {
-  const ids = data.map((group) => group.groupId);
+  const ids = data?.map((group) => group.groupId);
   return ids.split(",");
 }
 

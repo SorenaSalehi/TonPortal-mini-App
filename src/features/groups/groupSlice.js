@@ -33,7 +33,8 @@ const groupSlice = createSlice({
     },
     clearAnalyze(state) {
       state.singleAnalyzeId = "";
-      (state.allGroupsId = ""), (state.singleAnalyzeContent = "");
+      state.allGroupsId = "";
+      state.singleAnalyzeContent = "";
       state.allGroupsContent = "";
     },
     singleAnalyzeReceive(state, action) {

@@ -45,14 +45,12 @@ export default function Groups() {
 
   console.log(userGroups);
 
-  // const webapp = window.Telegram.WebApp;
 
   const dispatch = useDispatch();
 
   //*get group
   useEffect(() => {
-    // Initialize Telegram WebApp
-    // webapp.ready();
+    
 
     async function getUserGroups() {
       try {
@@ -77,36 +75,8 @@ export default function Groups() {
 
     getUserGroups();
   }, []);
-  console.log(singleAnalyzeId);
 
-  //*get single analyze
-  useEffect(() => {
-    //* when modal open
-    async function getSingleAnalyze() {
-      console.log(singleAnalyzeId);
-      try {
-        dispatch(analyzeLoadingAction());
-        const data = await authenticateUser(
-          webapp,
-          `analysis/groups?id=-4513586841`
-        );
 
-        console.log("single analyze:", data);
-
-        if (data) dispatch(singleAnalyzeReceive(data.data));
-      } catch (error) {
-        console.error(error.message);
-      } finally {
-        dispatch(clearAnalyze());
-        dispatch(analyzeLoadingAction());
-      }
-    }
-
-    getSingleAnalyze();
-
-    //* when modal open
-  }, []);
-  // const isGroupAdded = true;
 
   if (!isGroupAdded)
     return (
