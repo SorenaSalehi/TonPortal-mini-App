@@ -35,7 +35,6 @@ export default function App() {
 
   const dispatch = useDispatch();
 
-  const userUsingMobile = true;
   //*authentication
   useEffect(() => {
     // Initialize Telegram WebApp
@@ -55,6 +54,7 @@ export default function App() {
     initializeAuth();
   }, []);
 
+  const userUsingMobile = true;
   const router = createBrowserRouter([
     {
       //*if user are mobile user then display page
