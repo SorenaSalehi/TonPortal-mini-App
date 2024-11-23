@@ -1,15 +1,24 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import Loader from "../../ui/Loader";
 import AssetItem from "./AssetItem";
 import getTonData, { getJettons, getTonPrice } from "../../services/apiTon";
-import { AiFillPropertySafety } from "react-icons/ai";
-import Error from "../../ui/Error";
 import { useSelector } from "react-redux";
+import { useModal } from "../../hooks/useModal";
+import {
+  assetsAnalyzeLoadingAction,
+  clearAssetsAnalyze,
+  oneAssetAnalyzeReceive,
+} from "./assetsSlice";
+import { getTokenAnalyze } from "../../services/apiTel";
+import { useEffect } from "react";
+import Loader from "../../ui/Loader";
+import ModalWindow from "../../ui/ModalWindow";
 
 export default function Assets() {
   const { userAddress } = useSelector((store) => store.navbar);
+  const { analyzeLoading, singleAnalyzeContent, singleAnalyzeToken } =
+    useSelector((store) => store.asset);
+  const { isOpen, openModal, closeModal } = useModal();
 
   //ton data
   const {
@@ -20,6 +29,7 @@ export default function Assets() {
     queryKey: ["userTonBalance"],
     queryFn: () => getTonData(userAddress),
   });
+  console.log(tonData);
   //ton price
   const {
     data: tonPrice,
@@ -40,6 +50,36 @@ export default function Assets() {
     queryFn: () => getJettons(userAddress),
   });
 
+  const webapp = window.Telegram.WebApp;
+
+  //* when modal open
+  useEffect(() => {
+    webapp.ready();
+
+    async function getSingleAnalyze() {
+      try {
+        dispatch(assetsAnalyzeLoadingAction());
+        const data = await getTokenAnalyze(
+          webapp,
+          `analysis/groups/id=${singleAnalyzeToken}`
+        );
+
+        console.log("single analyze:", data);
+
+        if (data) dispatch(oneAssetAnalyzeReceive(data.data));
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        dispatch(clearAssetsAnalyze());
+        dispatch(assetsAnalyzeLoadingAction());
+      }
+    }
+
+    getSingleAnalyze();
+
+    //* when modal open
+  }, [isOpen]);
+
   //* if ton data or jettons error
   if (tonDataError || jettonsError)
     return (
@@ -52,10 +92,7 @@ export default function Assets() {
 
   return (
     <>
-      <p className="flex items-center gap-2 font-semibold uppercase">
-        <AiFillPropertySafety />
-        Assets
-      </p>
+      <p className="flex items-center gap-2 font-semibold uppercase">Assets</p>
       <div className="flex flex-col gap-2 overflow-auto overflow-x-hidden no-scrollbar">
         {tonDataLoading || tonPriceLoading || jettonsLoading ? (
           //* main loading
@@ -67,6 +104,8 @@ export default function Assets() {
                 type="ton"
                 balance={tonData.balance}
                 tokenPrice={tonPrice}
+                openModal={openModal}
+                tokenName="toncoin"
               />
             ) : (
               //* in case the ton data error
@@ -85,11 +124,20 @@ export default function Assets() {
                 icon={token.jetton.image}
                 symbol={token.jetton.symbol}
                 key={token.jetton.name}
+                isModalOpen={openModal}
               />
             ))}
           </>
         )}
       </div>
+      <ModalWindow
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        label="assets modal"
+        content={singleAnalyzeContent}
+        onClose={closeModal}
+        isDataLoading={analyzeLoading}
+      />
     </>
   );
 }

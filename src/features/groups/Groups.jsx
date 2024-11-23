@@ -134,13 +134,6 @@ export default function Groups() {
             openModal={openModal}
           />
         ))}
-        <GroupsItem
-          id={"-4513586841"}
-          img={
-            "https://api.telegram.org/file/bot7562008800:AAGnJiP2Hz23YEA7nPbwQ1LW7OQGKbw3qkk/profile_photos/file_2.jpg"
-          }
-          openModal={openModal}
-        />
       </div>
       <ModalWindow
         isOpen={isOpen}

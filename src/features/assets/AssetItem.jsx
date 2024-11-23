@@ -3,12 +3,10 @@ import { motion } from "motion/react";
 
 const ModalWindow = lazy(() => import("../../ui/ModalWindow"));
 
-import {
-  calcJettonTotalPrice,
-  convertJettonBalance,
-} from "../../utils/helpers";
 import { useModal } from "../../hooks/useModal";
 import { useAssetCalculations } from "../../hooks/useAssetCalculations";
+import { useDispatch } from "react-redux";
+import { analyzeOneToken } from "./assetsSlice";
 
 export default function AssetItem({
   type,
@@ -17,9 +15,10 @@ export default function AssetItem({
   decimals,
   symbol,
   icon,
+  openModal,
+  tokenName,
 }) {
-  //modal state
-  const { isOpen, openModal, closeModal } = useModal();
+  const dispatch = useDispatch();
 
   //balance
   const { formattedTokenPrice, finalBalance, finalTotalPrice } =
@@ -30,17 +29,13 @@ export default function AssetItem({
       decimals,
     });
 
+  function handleClick() {
+    openModal();
+    dispatch(analyzeOneToken(tokenName));
+  }
+
   const Icon = type === "ton" ? "ton_symbol.png" : icon;
   const Symbol = type === "ton" ? "Toncoin" : symbol;
-
-  const content = (
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
-      consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
-      eos maxime, doloremque quae quis est magnam veritatis ex repellendus
-      pariatur eligendi.
-    </p>
-  );
 
   return (
     <>
@@ -49,7 +44,7 @@ export default function AssetItem({
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
-        onClick={openModal}
+        onClick={handleClick}
         className="flex justify-between p-2 cursor-pointer bg-black/10 backdrop-brightness-150 rounded-xl"
       >
         <div className="grid w-32 grid-cols-2 grid-rows-2 gap-2 cursor-pointer">
@@ -79,14 +74,6 @@ export default function AssetItem({
           </div>
         </div>
       </motion.div>
-
-      <ModalWindow
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        label="assets modal"
-        content={content}
-        onClose={closeModal}
-      />
     </>
   );
 }

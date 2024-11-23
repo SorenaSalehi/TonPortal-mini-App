@@ -16,15 +16,6 @@ export default function GroupsItem({ name, img, id, openModal }) {
     dispatch(analyzeOneGroup(String(id)));
   }
 
-  // const content = (
-  //   <p>
-  //     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
-  //     consequatur nisi iure, adipisci cupiditate libero maiores placeat veniam
-  //     eos maxime, doloremque quae quis est magnam veritatis ex repellendus
-  //     pariatur eligendi.
-  //   </p>
-  // );
-
   return (
     <>
       <motion.div
