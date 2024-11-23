@@ -22,7 +22,27 @@ export default function GroupsAnalyzeBox() {
 
   const dispatch = useDispatch();
 
+  async function handleClick() {
+    try {
+      dispatch(analyzeLoadingAction());
 
+      openModal();
+
+      // Make the API call
+      const data = await authenticateUser(
+        webapp,
+        `analysis/groups?id=${allGroupsId}`
+      );
+
+      if (data?.status === "success") {
+        dispatch(allAnalyzeReceive(data?.data));
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      dispatch(analyzeLoadingAction());
+    }
+  }
 
   return (
     <AnalyzeBox>
@@ -33,7 +53,7 @@ export default function GroupsAnalyzeBox() {
             <br /> News in a Glass
           </p>
 
-          <Button onClick={openModal}>Check Out</Button>
+          <Button onClick={handleClick}>Check Out</Button>
 
           <ModalWindow
             isOpen={isOpen}
