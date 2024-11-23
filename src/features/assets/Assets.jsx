@@ -85,7 +85,7 @@ export default function Assets() {
                 balance={tonData.balance}
                 tokenPrice={tonPrice}
                 openModal={openModal}
-                tokenName="toncoin"
+                symbol="ton"
               />
             ) : (
               //* in case the ton data error
