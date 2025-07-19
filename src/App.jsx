@@ -27,7 +27,7 @@ const queryClient = new QueryClient({
     },
 });
 
-export const webapp = window.Telegram.WebApp;
+// export const webapp = window?.Telegram?.WebApp;
 export default function App() {
     //telegram auth
     const { userId } = useSelector((store) => store.user);

@@ -6,54 +6,54 @@ import AnalyzeBox from "../../ui/AnalyzeBox";
 import { useModal } from "../../hooks/useModal";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  allAssetsAnalyzeReceive,
-  assetsAnalyzeLoadingAction,
+    allAssetsAnalyzeReceive,
+    assetsAnalyzeLoadingAction,
 } from "./assetsSlice";
 import { getTokenAnalyze } from "../../services/apiTel";
-import { webapp } from "../../App";
+// import { webapp } from "../../App";
 
 export default function AssetAnalyze() {
-  const { isOpen, openModal, closeModal } = useModal();
+    const { isOpen, openModal, closeModal } = useModal();
 
-  const { allAssetsToken, allAssetsContent, assetsAnalyzeLoading } =
-    useSelector((store) => store.asset);
+    const { allAssetsToken, allAssetsContent, assetsAnalyzeLoading } =
+        useSelector((store) => store.asset);
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  async function handleClick() {
-    if (!allAssetsToken) return;
-    try {
-      dispatch(assetsAnalyzeLoadingAction());
-      openModal();
-      // Make the API call
-      const data = await getTokenAnalyze(webapp, allAssetsToken);
+    // async function handleClick() {
+    //   if (!allAssetsToken) return;
+    //   try {
+    //     dispatch(assetsAnalyzeLoadingAction());
+    //     openModal();
+    //     // Make the API call
+    //     const data = await getTokenAnalyze(webapp, allAssetsToken);
 
-      if (data?.status === "success") {
-        dispatch(allAssetsAnalyzeReceive(data?.data));
-      }
-    } catch (error) {
-      console.error(error.message);
-    } finally {
-      dispatch(assetsAnalyzeLoadingAction());
-    }
-  }
+    //     if (data?.status === "success") {
+    //       dispatch(allAssetsAnalyzeReceive(data?.data));
+    //     }
+    //   } catch (error) {
+    //     console.error(error.message);
+    //   } finally {
+    //     dispatch(assetsAnalyzeLoadingAction());
+    //   }
+    // }
 
-  return (
-    <AnalyzeBox>
-      <p className="mt-6 text-xs text-slate-100">
-        Get All Your Groups News in a Glans
-      </p>
+    return (
+        <AnalyzeBox>
+            <p className="mt-6 text-xs text-slate-100">
+                Get All Your Groups News in a Glans
+            </p>
 
-      <Button onClick={handleClick}>Open</Button>
+            <Button onClick={handleClick}>Open</Button>
 
-      <ModalWindow
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        label="assets modal"
-        content={allAssetsContent}
-        onClose={closeModal}
-        isDataLoading={assetsAnalyzeLoading}
-      />
-    </AnalyzeBox>
-  );
+            <ModalWindow
+                isOpen={isOpen}
+                onRequestClose={closeModal}
+                label="assets modal"
+                content={allAssetsContent}
+                onClose={closeModal}
+                isDataLoading={assetsAnalyzeLoading}
+            />
+        </AnalyzeBox>
+    );
 }
